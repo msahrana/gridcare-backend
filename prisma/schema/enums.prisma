@@ -1,0 +1,62 @@
+enum UserRole {
+  CUSTOMER
+  OPERATOR
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum ScheduleStatus {
+  DRAFT
+  PUBLISHED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum OutageType {
+  PLANNED
+  UNEXPECTED
+}
+
+enum OutageStatus {
+  REPORTED
+  VERIFIED
+  ASSIGNED
+  IN_PROGRESS
+  RESTORED
+  CLOSED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum TechnicianStatus {
+  AVAILABLE
+  BUSY
+  OFF_DUTY
+  INACTIVE
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentGateway {
+  BKASH
+  STRIPE
+  SSLCOMMERZ
+}

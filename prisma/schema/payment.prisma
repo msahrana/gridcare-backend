@@ -1,0 +1,23 @@
+model Payment {
+  id                    String          @id @default(uuid())
+
+  outageId              String
+  amount                Decimal         @db.Decimal(10, 2)
+  currency              String          @default("BDT")
+
+  gateway               PaymentGateway
+  status                PaymentStatus   @default(PENDING)
+
+  merchantInvoiceNumber String          @unique
+  transactionId         String?         @unique
+
+  outage                Outage          @relation(fields: [outageId], references: [id])
+
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  @@index([outageId])
+  @@index([status])
+
+  @@map("payments")
+}

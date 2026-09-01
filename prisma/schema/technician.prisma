@@ -1,0 +1,22 @@
+model Technician {
+  id          String           @id @default(uuid())
+  name        String
+  phone       String           @unique
+  employeeId  String           @unique
+
+  skills      String?
+  status      TechnicianStatus @default(AVAILABLE)
+
+  zoneId      String?
+  deletedAt   DateTime?
+
+  assignments OutageAssignment[]
+
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([status])
+  @@index([zoneId])
+
+  @@map("technicians")
+}
