@@ -25,6 +25,9 @@ CREATE TYPE "PaymentStatus" AS ENUM ('PENDING', 'PAID', 'FAILED', 'CANCELLED', '
 -- CreateEnum
 CREATE TYPE "PaymentGateway" AS ENUM ('BKASH', 'STRIPE', 'SSLCOMMERZ');
 
+-- CreateEnum
+CREATE TYPE "AuthProvider" AS ENUM ('GOOGLE', 'CREDENTIAL');
+
 -- CreateTable
 CREATE TABLE "areas" (
     "id" TEXT NOT NULL,
@@ -150,13 +153,18 @@ CREATE TABLE "outage_reports" (
 -- CreateTable
 CREATE TABLE "payments" (
     "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "outageId" TEXT NOT NULL,
     "amount" DECIMAL(10,2) NOT NULL,
-    "currency" TEXT NOT NULL DEFAULT 'BDT',
-    "gateway" "PaymentGateway" NOT NULL,
+    "currency" TEXT NOT NULL DEFAULT 'usd',
+    "gateway" "PaymentGateway" NOT NULL DEFAULT 'STRIPE',
     "status" "PaymentStatus" NOT NULL DEFAULT 'PENDING',
     "merchantInvoiceNumber" TEXT NOT NULL,
     "transactionId" TEXT,
+    "stripeSessionId" TEXT,
+    "stripePaymentIntentId" TEXT,
+    "stripeCustomerId" TEXT,
+    "paidAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -215,6 +223,12 @@ CREATE TABLE "users" (
     "password" TEXT,
     "role" "UserRole" NOT NULL DEFAULT 'CUSTOMER',
     "status" "UserStatus" NOT NULL DEFAULT 'ACTIVE',
+    "emailVerified" BOOLEAN NOT NULL DEFAULT false,
+    "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+    "googleId" TEXT,
+    "authProvider" "AuthProvider" NOT NULL DEFAULT 'CREDENTIAL',
+    "imageUrl" TEXT NOT NULL DEFAULT '',
+    "imagePublicId" TEXT NOT NULL DEFAULT '',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deletedAt" TIMESTAMP(3),
@@ -312,10 +326,22 @@ CREATE UNIQUE INDEX "payments_merchantInvoiceNumber_key" ON "payments"("merchant
 CREATE UNIQUE INDEX "payments_transactionId_key" ON "payments"("transactionId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "payments_stripeSessionId_key" ON "payments"("stripeSessionId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payments_stripePaymentIntentId_key" ON "payments"("stripePaymentIntentId");
+
+-- CreateIndex
+CREATE INDEX "payments_userId_idx" ON "payments"("userId");
+
+-- CreateIndex
 CREATE INDEX "payments_outageId_idx" ON "payments"("outageId");
 
 -- CreateIndex
 CREATE INDEX "payments_status_idx" ON "payments"("status");
+
+-- CreateIndex
+CREATE INDEX "payments_createdAt_idx" ON "payments"("createdAt");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "profiles_userId_key" ON "profiles"("userId");
@@ -340,6 +366,9 @@ CREATE INDEX "technicians_zoneId_idx" ON "technicians"("zoneId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_googleId_key" ON "users"("googleId");
 
 -- CreateIndex
 CREATE INDEX "users_email_idx" ON "users"("email");
@@ -396,7 +425,10 @@ ALTER TABLE "outage_reports" ADD CONSTRAINT "outage_reports_outageId_fkey" FOREI
 ALTER TABLE "outage_reports" ADD CONSTRAINT "outage_reports_reporterId_fkey" FOREIGN KEY ("reporterId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "payments" ADD CONSTRAINT "payments_outageId_fkey" FOREIGN KEY ("outageId") REFERENCES "outages"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payments" ADD CONSTRAINT "payments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payments" ADD CONSTRAINT "payments_outageId_fkey" FOREIGN KEY ("outageId") REFERENCES "outages"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

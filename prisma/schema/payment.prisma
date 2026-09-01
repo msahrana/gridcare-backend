@@ -1,23 +1,35 @@
 model Payment {
-  id                    String          @id @default(uuid())
+  id                    String         @id @default(uuid())
+
+  userId                String
+  user                  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   outageId              String
-  amount                Decimal         @db.Decimal(10, 2)
-  currency              String          @default("BDT")
+  outage                Outage         @relation(fields: [outageId], references: [id], onDelete: Cascade)
 
-  gateway               PaymentGateway
-  status                PaymentStatus   @default(PENDING)
+  amount                Decimal        @db.Decimal(10, 2)
+  currency              String         @default("usd")
 
-  merchantInvoiceNumber String          @unique
-  transactionId         String?         @unique
+  gateway               PaymentGateway @default(STRIPE)
+  status                PaymentStatus  @default(PENDING)
 
-  outage                Outage          @relation(fields: [outageId], references: [id])
+  merchantInvoiceNumber String         @unique
 
-  createdAt             DateTime        @default(now())
-  updatedAt             DateTime        @updatedAt
+  transactionId         String?        @unique
 
+  stripeSessionId       String?        @unique
+  stripePaymentIntentId String?        @unique
+  stripeCustomerId      String?
+
+  paidAt                DateTime?
+
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+
+  @@index([userId])
   @@index([outageId])
   @@index([status])
+  @@index([createdAt])
 
   @@map("payments")
 }

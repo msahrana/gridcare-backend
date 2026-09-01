@@ -97,3 +97,11 @@ export const PaymentGateway = {
 } as const
 
 export type PaymentGateway = (typeof PaymentGateway)[keyof typeof PaymentGateway]
+
+
+export const AuthProvider = {
+  GOOGLE: 'GOOGLE',
+  CREDENTIAL: 'CREDENTIAL'
+} as const
+
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]

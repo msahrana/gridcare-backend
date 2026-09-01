@@ -1629,6 +1629,7 @@ export type OutageReportScalarFieldEnum = (typeof OutageReportScalarFieldEnum)[k
 
 export const PaymentScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   outageId: 'outageId',
   amount: 'amount',
   currency: 'currency',
@@ -1636,6 +1637,10 @@ export const PaymentScalarFieldEnum = {
   status: 'status',
   merchantInvoiceNumber: 'merchantInvoiceNumber',
   transactionId: 'transactionId',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentIntentId: 'stripePaymentIntentId',
+  stripeCustomerId: 'stripeCustomerId',
+  paidAt: 'paidAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1694,6 +1699,12 @@ export const UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
+  emailVerified: 'emailVerified',
+  isDeleted: 'isDeleted',
+  googleId: 'googleId',
+  authProvider: 'authProvider',
+  imageUrl: 'imageUrl',
+  imagePublicId: 'imagePublicId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -1963,6 +1974,20 @@ export type EnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'UserStatus[]'
  */
 export type ListEnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AuthProvider'
+ */
+export type EnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider'>
+    
+
+
+/**
+ * Reference to a field of type 'AuthProvider[]'
+ */
+export type ListEnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider[]'>
     
 
 

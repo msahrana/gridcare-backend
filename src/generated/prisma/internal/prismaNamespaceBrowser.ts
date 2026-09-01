@@ -207,6 +207,7 @@ export type OutageReportScalarFieldEnum = (typeof OutageReportScalarFieldEnum)[k
 
 export const PaymentScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   outageId: 'outageId',
   amount: 'amount',
   currency: 'currency',
@@ -214,6 +215,10 @@ export const PaymentScalarFieldEnum = {
   status: 'status',
   merchantInvoiceNumber: 'merchantInvoiceNumber',
   transactionId: 'transactionId',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentIntentId: 'stripePaymentIntentId',
+  stripeCustomerId: 'stripeCustomerId',
+  paidAt: 'paidAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -272,6 +277,12 @@ export const UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
+  emailVerified: 'emailVerified',
+  isDeleted: 'isDeleted',
+  googleId: 'googleId',
+  authProvider: 'authProvider',
+  imageUrl: 'imageUrl',
+  imagePublicId: 'imagePublicId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'

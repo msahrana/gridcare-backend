@@ -2,6 +2,12 @@
 
 ---
 
+## Live URL:
+
+<!-- Live link Here--- -->
+
+---
+
 ## 📌 Project Overview
 
 **GridCare** is a smart electricity distribution and load-shedding management backend designed to connect electricity customers, power operators, and administrators through a structured digital platform.
