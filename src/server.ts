@@ -1,26 +1,24 @@
 import app from './app';
 import config from './app/config';
+import { transporter } from './app/lib/nodemailer';
 import { prisma } from './app/lib/prisma';
 import { redisClient } from './app/lib/redis';
+import { seedAdmin, seedOperator } from './app/utils/seed';
 
 const PORT = config.port;
 
 const main = async () => {
     try {
         await prisma.$connect();
-        console.log('🗃️  Database connected successfully!!!');
+        console.log('🗃️ Database connected successfully!!!');
 
         await redisClient.connect();
-        console.log('🔥 Redis Connected Successfully!!');
 
-        // await transporter.verify();
-        // console.log('⭐ Nodemailer Connected Successfully.');
+        await transporter.verify();
+        console.log('⭐ Nodemailer Connected Successfully.');
 
-        // await seedSuperAdmin();
-        // await seedTesterAdmin();
-        // await seedTesterDoctor();
-
-        // await deleteUnverifiedDoctors();
+        await seedAdmin();
+        await seedOperator();
 
         app.listen(PORT, () => {
             console.log(`🚀 Server is running on port: ${PORT}`);
@@ -28,7 +26,9 @@ const main = async () => {
     } catch (error) {
         console.error('❌ Error starting the server:', error);
 
-        // await prisma.$disconnect();
+        await redisClient.quit().catch(() => {});
+        await prisma.$disconnect().catch(() => {});
+
         process.exit(1);
     }
 };

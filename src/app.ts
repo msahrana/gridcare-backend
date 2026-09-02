@@ -30,369 +30,1179 @@ app.use('/api/v1', router);
 // Basic route
 app.get('/', (_req: Request, res: Response) => {
     res.status(200).send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-            <meta
-                name="description"
-                content="GridCare Backend API Server"
-            />
+            :root {
+                --navy: #102a4c;
+                --navy-dark: #071a31;
+                --blue: #0866d8;
+                --blue-light: #edf6ff;
+                --orange: #ff8a00;
+                --green: #58b816;
+                --muted: #66788f;
+                --border: #e2eaf3;
+                --white: #ffffff;
+            }
 
-            <title>GridCare | Backend Server</title>
+            body {
+                min-height: 100vh;
 
-            <style>
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                }
+                font-family:
+                    Inter,
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    sans-serif;
 
-                html,
-                body {
-                    min-height: 100%;
-                }
+                color: var(--navy);
+                background: #ffffff;
 
-                body {
-                    min-height: 100vh;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 24px;
+                -webkit-font-smoothing: antialiased;
+                text-rendering: optimizeLegibility;
+            }
 
-                    font-family:
-                        Inter,
-                        ui-sans-serif,
-                        system-ui,
-                        -apple-system,
-                        BlinkMacSystemFont,
-                        "Segoe UI",
-                        sans-serif;
+            .gridcare-page {
+                width: 100%;
+                min-height: 100vh;
+                overflow: hidden;
+                background: #ffffff;
+            }
+
+            /* =====================================================
+               HERO
+            ===================================================== */
+
+            .hero {
+                position: relative;
+                min-height: 570px;
+
+                display: flex;
+                align-items: center;
+
+                background:
+                    linear-gradient(
+                        90deg,
+                        rgba(255, 255, 255, 0.98) 0%,
+                        rgba(255, 255, 255, 0.94) 32%,
+                        rgba(255, 255, 255, 0.55) 55%,
+                        rgba(255, 255, 255, 0.10) 80%,
+                        rgba(255, 255, 255, 0) 100%
+                    ),
+                    url("/Banner.png")
+                    center / cover no-repeat;
+
+                border-bottom: 5px solid var(--orange);
+            }
+
+            .hero::after {
+                content: "";
+
+                position: absolute;
+                left: 50%;
+                bottom: -11px;
+
+                width: 340px;
+                height: 16px;
+
+                transform: translateX(-50%);
+
+                background: var(--orange);
+
+                border-radius: 0 0 12px 12px;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+
+                width: min(
+                    1400px,
+                    calc(100% - 48px)
+                );
+
+                margin: 0 auto;
+
+                padding: 65px 0;
+            }
+
+            /* =====================================================
+               BRAND
+            ===================================================== */
+
+            .brand {
+                margin-bottom: 22px;
+
+                font-size: clamp(
+                    58px,
+                    7vw,
+                    94px
+                );
+
+                font-weight: 900;
+
+                letter-spacing: -5px;
+
+                line-height: 0.95;
+            }
+
+            .brand-grid {
+                color: var(--navy-dark);
+            }
+
+            .brand-care {
+                color: var(--orange);
+            }
+
+            /* =====================================================
+               TAGLINE
+            ===================================================== */
+
+            .tagline {
+                display: flex;
+                align-items: center;
+
+                gap: 14px;
+
+                margin-bottom: 40px;
+
+                color: var(--navy);
+
+                font-size: clamp(
+                    14px,
+                    1.5vw,
+                    20px
+                );
+
+                font-weight: 700;
+
+                letter-spacing: 1.4px;
+
+                text-transform: uppercase;
+            }
+
+            .tagline::before,
+            .tagline::after {
+                content: "";
+
+                width: 42px;
+                height: 3px;
+
+                background: var(--orange);
+
+                border-radius: 10px;
+            }
+
+            /* =====================================================
+               HERO FEATURES
+            ===================================================== */
+
+            .hero-features {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(4, 1fr);
+
+                width: min(
+                    760px,
+                    100%
+                );
+            }
+
+            .hero-feature {
+                min-height: 125px;
+
+                display: flex;
+                flex-direction: column;
+
+                align-items: center;
+                justify-content: center;
+
+                padding: 12px 18px;
+
+                text-align: center;
+
+                border-right:
+                    1px solid
+                    rgba(
+                        16,
+                        42,
+                        76,
+                        0.16
+                    );
+
+                transition:
+                    transform 0.25s ease,
+                    background 0.25s ease;
+            }
+
+            .hero-feature:last-child {
+                border-right: none;
+            }
+
+            .hero-feature:hover {
+                transform: translateY(-5px);
+
+                background:
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.30
+                    );
+            }
+
+            .feature-icon {
+                width: 64px;
+                height: 64px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                margin-bottom: 13px;
+
+                color: var(--blue);
+
+                background:
+                    rgba(
+                        237,
+                        246,
+                        255,
+                        0.94
+                    );
+
+                border-radius: 50%;
+
+                font-size: 30px;
+
+                box-shadow:
+                    0 8px 25px
+                    rgba(
+                        8,
+                        102,
+                        216,
+                        0.10
+                    );
+            }
+
+            .hero-feature h3 {
+                color: var(--navy);
+
+                font-size: 14px;
+
+                font-weight: 700;
+
+                line-height: 1.45;
+            }
+
+            /* =====================================================
+               WELCOME
+            ===================================================== */
+
+            .welcome {
+                position: relative;
+
+                padding: 90px 0 105px;
+
+                background:
+                    radial-gradient(
+                        circle at 5% 80%,
+                        rgba(
+                            8,
+                            102,
+                            216,
+                            0.045
+                        ),
+                        transparent 28%
+                    ),
+                    radial-gradient(
+                        circle at 90% 20%,
+                        rgba(
+                            255,
+                            138,
+                            0.045
+                        ),
+                        transparent 25%
+                    ),
+                    #ffffff;
+            }
+
+            .welcome-container {
+                position: relative;
+                z-index: 2;
+
+                width: min(
+                    1400px,
+                    calc(100% - 48px)
+                );
+
+                margin: 0 auto;
+
+                display: grid;
+
+                grid-template-columns:
+                    1.05fr
+                    1.3fr;
+
+                gap: 70px;
+
+                align-items: center;
+            }
+
+            /* =====================================================
+               WELCOME LEFT
+            ===================================================== */
+
+            .welcome-left {
+                padding-right: 20px;
+            }
+
+            .welcome-badge {
+                display: inline-flex;
+
+                align-items: center;
+
+                gap: 12px;
+
+                margin-bottom: 27px;
+
+                padding:
+                    10px
+                    20px
+                    10px
+                    12px;
+
+                color: #ffffff;
+
+                background: var(--orange);
+
+                border-radius: 999px;
+
+                font-size: 14px;
+
+                font-weight: 800;
+
+                letter-spacing: 0.5px;
+
+                text-transform: uppercase;
+
+                box-shadow:
+                    0 8px 25px
+                    rgba(
+                        255,
+                        138,
+                        0,
+                        0.20
+                    );
+            }
+
+            .badge-icon {
+                width: 36px;
+                height: 36px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background:
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.18
+                    );
+
+                border-radius: 50%;
+
+                font-size: 18px;
+            }
+
+            .welcome-title {
+                margin-bottom: 26px;
+
+                color: var(--navy);
+
+                font-size: clamp(
+                    36px,
+                    4vw,
+                    57px
+                );
+
+                font-weight: 800;
+
+                letter-spacing: -2.5px;
+
+                line-height: 1.1;
+            }
+
+            .welcome-title .accent {
+                color: var(--orange);
+            }
+
+            .welcome-divider {
+                width: 100%;
+                height: 1px;
+
+                margin-bottom: 25px;
+
+                background: var(--border);
+            }
+
+            /* =====================================================
+               MESSAGE
+            ===================================================== */
+
+            .welcome-message {
+                display: flex;
+
+                align-items: center;
+
+                gap: 22px;
+            }
+
+            .message-icon {
+                flex: 0 0 auto;
+
+                width: 74px;
+                height: 74px;
+
+                display: flex;
+
+                align-items: center;
+                justify-content: center;
+
+                color: var(--blue);
+
+                background:
+                    var(--blue-light);
+
+                border-radius: 50%;
+
+                font-size: 30px;
+            }
+
+            .welcome-message p {
+                color: var(--navy);
+
+                font-size: 18px;
+
+                line-height: 1.8;
+            }
+
+            .welcome-message strong {
+                color: var(--orange);
+            }
+
+            /* =====================================================
+               VALUES
+            ===================================================== */
+
+            .values {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(4, 1fr);
+
+                gap: 0;
+            }
+
+            .value {
+                min-height: 235px;
+
+                padding: 0 24px;
+
+                text-align: center;
+
+                border-right:
+                    1px solid
+                    var(--border);
+
+                transition:
+                    transform 0.25s ease;
+            }
+
+            .value:last-child {
+                border-right: none;
+            }
+
+            .value:hover {
+                transform: translateY(-5px);
+            }
+
+            .value-icon {
+                width: 82px;
+                height: 82px;
+
+                display: flex;
+
+                align-items: center;
+                justify-content: center;
+
+                margin:
+                    0
+                    auto
+                    22px;
+
+                color: var(--blue);
+
+                background:
+                    var(--blue-light);
+
+                border-radius: 50%;
+
+                font-size: 34px;
+            }
+
+            .value:nth-child(4)
+                .value-icon {
+                color: var(--green);
+
+                background:
+                    #effbe7;
+            }
+
+            .value h3 {
+                margin-bottom: 13px;
+
+                color: var(--navy);
+
+                font-size: 15px;
+
+                font-weight: 800;
+            }
+
+            .value p {
+                color: #4d5f75;
+
+                font-size: 13px;
+
+                line-height: 1.8;
+            }
+
+            /* =====================================================
+               FOOTER
+            ===================================================== */
+
+            .footer {
+                padding: 22px 24px;
+
+                color: #8492a5;
+
+                background: #f8fafc;
+
+                border-top:
+                    1px solid
+                    var(--border);
+
+                text-align: center;
+
+                font-size: 13px;
+            }
+
+            .footer strong {
+                color: var(--navy);
+            }
+
+            .footer .orange {
+                color: var(--orange);
+            }
+
+            /* =====================================================
+               TABLET
+            ===================================================== */
+
+            @media (max-width: 1050px) {
+
+                .hero {
+                    min-height: 530px;
 
                     background:
-                        radial-gradient(
-                            circle at 15% 15%,
-                            rgba(249, 115, 22, 0.10),
-                            transparent 30%
+                        linear-gradient(
+                            90deg,
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.97
+                            ) 0%,
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.85
+                            ) 50%,
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.25
+                            ) 100%
                         ),
-                        radial-gradient(
-                            circle at 85% 85%,
-                            rgba(15, 118, 110, 0.10),
-                            transparent 30%
-                        ),
-                        #f8fafc;
-
-                    color: #0f172a;
+                        url("/Banner.png")
+                        center / cover no-repeat;
                 }
 
-                .page {
-                    width: 100%;
-                    max-width: 850px;
+                .welcome-container {
+                    grid-template-columns: 1fr;
+
+                    gap: 65px;
                 }
 
-                .card {
-                    position: relative;
-                    overflow: hidden;
-
-                    padding: 70px 55px;
+                .welcome-left {
+                    padding-right: 0;
 
                     text-align: center;
-
-                    background: rgba(255, 255, 255, 0.96);
-
-                    border: 1px solid #e2e8f0;
-                    border-radius: 30px;
-
-                    box-shadow:
-                        0 30px 80px rgba(15, 23, 42, 0.08),
-                        0 10px 30px rgba(15, 23, 42, 0.04);
                 }
 
-                /* Decorative top line */
-                .card::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
+                .welcome-message {
+                    justify-content: center;
 
-                    width: 100%;
-                    height: 5px;
-
-                    background: linear-gradient(
-                        90deg,
-                        #111827,
-                        #111827 55%,
-                        #f97316
-                    );
+                    text-align: left;
                 }
 
-                /* Logo */
-                .logo {
-                    margin-bottom: 30px;
-
-                    font-size: clamp(42px, 7vw, 60px);
-                    font-weight: 900;
-                    letter-spacing: -3px;
-                    line-height: 1;
-                }
-
-                .grid {
-                    color: #111827;
-                }
-
-                .care {
-                    color: #f97316;
-                }
-
-                /* Status */
-                .status {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 9px;
-
-                    margin-bottom: 25px;
-                    padding: 9px 17px;
-
-                    color: #047857;
-                    background: #ecfdf5;
-
-                    border: 1px solid #a7f3d0;
-                    border-radius: 999px;
-
-                    font-size: 13px;
-                    font-weight: 700;
-                    letter-spacing: 0.2px;
-                }
-
-                .status-dot {
-                    width: 9px;
-                    height: 9px;
-
-                    background: #10b981;
-                    border-radius: 50%;
-
-                    box-shadow:
-                        0 0 0 4px rgba(16, 185, 129, 0.12);
-                }
-
-                /* Heading */
-                h1 {
-                    margin-bottom: 18px;
-
-                    color: #0f172a;
-
-                    font-size: clamp(30px, 5vw, 46px);
-                    font-weight: 800;
-                    letter-spacing: -1.8px;
-                    line-height: 1.15;
-                }
-
-                /* Description */
-                .description {
-                    max-width: 600px;
+                .values {
+                    max-width: 900px;
 
                     margin: 0 auto;
+                }
+            }
 
-                    color: #64748b;
+            /* =====================================================
+               MOBILE
+            ===================================================== */
 
-                    font-size: 17px;
-                    line-height: 1.75;
+            @media (max-width: 700px) {
+
+                .hero {
+                    min-height: auto;
+
+                    background:
+                        linear-gradient(
+                            180deg,
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.96
+                            ) 0%,
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.90
+                            ) 58%,
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.72
+                            ) 100%
+                        ),
+                        url("/Banner.png")
+                        center / cover no-repeat;
                 }
 
-                /* Information */
-                .info {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 16px;
+                .hero-content {
+                    width:
+                        calc(100% - 32px);
 
-                    margin-top: 42px;
+                    padding:
+                        65px
+                        0
+                        60px;
                 }
 
-                .info-box {
-                    padding: 22px 15px;
+                .brand {
+                    font-size:
+                        clamp(
+                            54px,
+                            16vw,
+                            78px
+                        );
 
-                    background: #f8fafc;
+                    letter-spacing: -4px;
 
-                    border: 1px solid #e2e8f0;
-                    border-radius: 16px;
-
-                    transition:
-                        transform 0.2s ease,
-                        box-shadow 0.2s ease;
+                    text-align: center;
                 }
 
-                .info-box:hover {
-                    transform: translateY(-3px);
+                .tagline {
+                    justify-content: center;
 
-                    box-shadow:
-                        0 10px 25px rgba(15, 23, 42, 0.06);
-                }
-
-                .info-label {
-                    margin-bottom: 8px;
-
-                    color: #94a3b8;
+                    margin-bottom: 34px;
 
                     font-size: 11px;
-                    font-weight: 700;
 
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
+                    letter-spacing: 0.7px;
+
+                    text-align: center;
                 }
 
-                .info-value {
-                    color: #0f172a;
-
-                    font-size: 16px;
-                    font-weight: 750;
+                .tagline::before,
+                .tagline::after {
+                    width: 25px;
                 }
 
-                /* API indicator */
-                .api-status {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
+                .hero-features {
+                    grid-template-columns:
+                        repeat(2, 1fr);
 
-                    margin-top: 35px;
+                    width: 100%;
 
-                    color: #475569;
+                    background:
+                        rgba(
+                            255,
+                            255,
+                            255,
+                            0.60
+                        );
 
-                    font-size: 13px;
+                    border-radius: 20px;
+
+                    backdrop-filter:
+                        blur(6px);
                 }
 
-                .api-status span {
-                    color: #f97316;
-                    font-weight: 700;
+                .hero-feature {
+                    min-height: 125px;
+
+                    padding:
+                        15px
+                        10px;
+
+                    border-right:
+                        1px solid
+                        rgba(
+                            16,
+                            42,
+                            76,
+                            0.12
+                        );
+
+                    border-bottom:
+                        1px solid
+                        rgba(
+                            16,
+                            42,
+                            76,
+                            0.12
+                        );
                 }
 
-                /* Footer */
-                footer {
-                    margin-top: 28px;
-
-                    color: #94a3b8;
-
-                    font-size: 13px;
+                .hero-feature:nth-child(2n) {
+                    border-right: none;
                 }
 
-                footer strong {
-                    color: #64748b;
+                .hero-feature:nth-child(3),
+                .hero-feature:nth-child(4) {
+                    border-bottom: none;
                 }
 
-                /* Responsive */
-                @media (max-width: 650px) {
-                    body {
-                        padding: 16px;
-                    }
+                .feature-icon {
+                    width: 52px;
+                    height: 52px;
 
-                    .card {
-                        padding: 50px 22px;
-                        border-radius: 22px;
-                    }
+                    margin-bottom: 9px;
 
-                    .logo {
-                        margin-bottom: 25px;
-                    }
-
-                    .description {
-                        font-size: 15px;
-                    }
-
-                    .info {
-                        grid-template-columns: 1fr;
-                        gap: 12px;
-                        margin-top: 32px;
-                    }
-
-                    .info-box {
-                        padding: 17px;
-                    }
+                    font-size: 23px;
                 }
-            </style>
-        </head>
 
-        <body>
-            <main class="page">
+                .hero-feature h3 {
+                    font-size: 12px;
+                }
 
-                <section class="card">
+                .hero::after {
+                    width: 190px;
+                }
 
-                    <!-- Brand -->
-                    <div class="logo">
-                        <span class="grid">Grid</span><span class="care">Care</span>
+                /* Welcome */
+
+                .welcome {
+                    padding:
+                        65px
+                        0
+                        80px;
+                }
+
+                .welcome-container {
+                    width:
+                        calc(100% - 32px);
+
+                    gap: 50px;
+                }
+
+                .welcome-badge {
+                    font-size: 12px;
+                }
+
+                .welcome-title {
+                    font-size:
+                        clamp(
+                            34px,
+                            10vw,
+                            46px
+                        );
+
+                    letter-spacing: -1.8px;
+                }
+
+                .welcome-message {
+                    align-items:
+                        flex-start;
+                }
+
+                .message-icon {
+                    width: 58px;
+                    height: 58px;
+
+                    font-size: 24px;
+                }
+
+                .welcome-message p {
+                    font-size: 15px;
+                }
+
+                /* Values */
+
+                .values {
+                    grid-template-columns:
+                        repeat(2, 1fr);
+                }
+
+                .value {
+                    min-height: 220px;
+
+                    padding: 15px;
+
+                    border-right:
+                        1px solid
+                        var(--border);
+
+                    border-bottom:
+                        1px solid
+                        var(--border);
+                }
+
+                .value:nth-child(2n) {
+                    border-right: none;
+                }
+
+                .value:nth-child(3),
+                .value:nth-child(4) {
+                    border-bottom: none;
+                }
+
+                .value-icon {
+                    width: 68px;
+                    height: 68px;
+
+                    margin-bottom: 17px;
+
+                    font-size: 28px;
+                }
+
+                .value p {
+                    font-size: 12px;
+                }
+            }
+
+            /* =====================================================
+               SMALL MOBILE
+            ===================================================== */
+
+            @media (max-width: 420px) {
+
+                .hero-content {
+                    padding-top: 52px;
+                }
+
+                .values {
+                    grid-template-columns: 1fr;
+                }
+
+                .value {
+                    min-height: auto;
+
+                    padding:
+                        25px
+                        20px;
+
+                    border-right:
+                        none !important;
+
+                    border-bottom:
+                        1px solid
+                        var(--border) !important;
+                }
+
+                .value:last-child {
+                    border-bottom:
+                        none !important;
+                }
+            }
+        </style>
+
+
+        <div class="gridcare-page">
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section class="hero">
+
+                <div class="hero-content">
+
+                    <div class="brand">
+                        <span class="brand-grid">
+                            Grid
+                        </span><span class="brand-care">
+                            Care
+                        </span>
                     </div>
 
-                    <!-- Server Status -->
-                    <div class="status">
-                        <span class="status-dot"></span>
-                        Backend Server Online
+
+                    <div class="tagline">
+                        Smart Power Outage Management System
                     </div>
 
-                    <!-- Main Heading -->
-                    <h1>
-                        Welcome to GridCare
-                    </h1>
 
-                    <p class="description">
-                        The GridCare Backend API server is running successfully
-                        and is ready to handle your requests.
-                    </p>
+                    <div class="hero-features">
 
-                    <!-- Server Information -->
-                    <div class="info">
+                        <div class="hero-feature">
 
-                        <div class="info-box">
-                            <div class="info-label">
-                                Service
+                            <div class="feature-icon">
+                                ⚡
                             </div>
 
-                            <div class="info-value">
-                                GridCare API
-                            </div>
+                            <h3>
+                                Real-time<br />
+                                Monitoring
+                            </h3>
+
                         </div>
 
-                        <div class="info-box">
-                            <div class="info-label">
-                                Version
+
+                        <div class="hero-feature">
+
+                            <div class="feature-icon">
+                                🛡️
                             </div>
 
-                            <div class="info-value">
-                                API v1
-                            </div>
+                            <h3>
+                                Outage<br />
+                                Management
+                            </h3>
+
                         </div>
 
-                        <div class="info-box">
-                            <div class="info-label">
-                                Status
+
+                        <div class="hero-feature">
+
+                            <div class="feature-icon">
+                                📊
                             </div>
 
-                            <div class="info-value">
-                                Operational
+                            <h3>
+                                Analytics &<br />
+                                Insights
+                            </h3>
+
+                        </div>
+
+
+                        <div class="hero-feature">
+
+                            <div class="feature-icon">
+                                🔔
                             </div>
+
+                            <h3>
+                                Instant<br />
+                                Alerts
+                            </h3>
+
                         </div>
 
                     </div>
 
-                    <!-- API Status -->
-                    <div class="api-status">
-                        <span>●</span>
-                        All systems are operational
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 WELCOME
+            ================================================== -->
+
+            <section class="welcome">
+
+                <div class="welcome-container">
+
+                    <div class="welcome-left">
+
+                        <div class="welcome-badge">
+
+                            <span class="badge-icon">
+                                👥
+                            </span>
+
+                            Welcome Aboard
+
+                        </div>
+
+
+                        <h1 class="welcome-title">
+
+                            Welcome to
+                            <span class="accent">
+                                GridCare
+                            </span>,
+
+                            <br />
+
+                            Powering a Smarter Future!
+
+                        </h1>
+
+
+                        <div class="welcome-divider"></div>
+
+
+                        <div class="welcome-message">
+
+                            <div class="message-icon">
+                                👥
+                            </div>
+
+                            <p>
+
+                                We're excited to have you
+                                on board.
+
+                                <br />
+
+                                Let's
+                                <strong>
+                                    power the future
+                                </strong>,
+                                together.
+
+                            </p>
+
+                        </div>
+
                     </div>
 
-                </section>
 
-                <footer>
-                    © ${new Date().getFullYear()}
-                    <strong>GridCare</strong>.
-                    All rights reserved.
-                </footer>
+                    <div class="values">
 
-            </main>
-        </body>
-        </html>
+                        <div class="value">
+
+                            <div class="value-icon">
+                                ⚡
+                            </div>
+
+                            <h3>
+                                Smart Solutions
+                            </h3>
+
+                            <p>
+                                Real-time monitoring
+                                and intelligent outage
+                                management.
+                            </p>
+
+                        </div>
+
+
+                        <div class="value">
+
+                            <div class="value-icon">
+                                🛡️
+                            </div>
+
+                            <h3>
+                                Reliable Systems
+                            </h3>
+
+                            <p>
+                                Built with enterprise-grade
+                                security and high reliability.
+                            </p>
+
+                        </div>
+
+
+                        <div class="value">
+
+                            <div class="value-icon">
+                                📊
+                            </div>
+
+                            <h3>
+                                Efficient Operations
+                            </h3>
+
+                            <p>
+                                Data-driven insights that
+                                optimize decisions and reduce
+                                downtime.
+                            </p>
+
+                        </div>
+
+
+                        <div class="value">
+
+                            <div class="value-icon">
+                                🌿
+                            </div>
+
+                            <h3>
+                                Sustainable Impact
+                            </h3>
+
+                            <p>
+                                Supporting a cleaner,
+                                smarter and more sustainable
+                                future.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="footer">
+
+                © ${new Date().getFullYear()}
+
+                <strong>
+                    Grid<span class="orange">
+                        Care
+                    </span>
+                </strong>.
+
+                All rights reserved.
+
+            </footer>
+
+        </div>
     `);
 });
 
