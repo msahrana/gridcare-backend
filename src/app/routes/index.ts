@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { authRoutes } from '../modules/auth/auth.route';
+import { zoneRoutes } from '../modules/zone/zone.route';
 
 const router = Router();
 
@@ -7,6 +8,10 @@ const routerManger = [
     {
         path: '/auth',
         route: authRoutes,
+    },
+    {
+        path: '/zones',
+        route: zoneRoutes,
     },
 ];
 
