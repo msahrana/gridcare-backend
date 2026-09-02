@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { authRoutes } from '../modules/auth/auth.route';
 import { zoneRoutes } from '../modules/zone/zone.route';
+import { substationRoutes } from '../modules/substation/substation.route';
 
 const router = Router();
 
@@ -12,6 +13,14 @@ const routerManger = [
     {
         path: '/zones',
         route: zoneRoutes,
+    },
+    {
+        path: '/zones',
+        route: zoneRoutes,
+    },
+    {
+        path: '/substations',
+        route: substationRoutes,
     },
 ];
 
