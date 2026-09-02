@@ -3,6 +3,7 @@ import { authRoutes } from '../modules/auth/auth.route';
 import { zoneRoutes } from '../modules/zone/zone.route';
 import { substationRoutes } from '../modules/substation/substation.route';
 import { feederRoutes } from '../modules/feeder/feeder.route';
+import { areaRoutes } from '../modules/area/area.route';
 
 const router = Router();
 
@@ -30,6 +31,14 @@ const routerManger = [
     {
         path: '/feeders',
         route: feederRoutes,
+    },
+    {
+        path: '/feeders',
+        route: feederRoutes,
+    },
+    {
+        path: '/areas',
+        route: areaRoutes,
     },
 ];
 
