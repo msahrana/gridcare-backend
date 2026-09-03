@@ -209,6 +209,7 @@ export type OutageAssignmentOrderByWithRelationInput = {
 
 export type OutageAssignmentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  outageId_technicianId?: Prisma.OutageAssignmentOutageIdTechnicianIdCompoundUniqueInput
   AND?: Prisma.OutageAssignmentWhereInput | Prisma.OutageAssignmentWhereInput[]
   OR?: Prisma.OutageAssignmentWhereInput[]
   NOT?: Prisma.OutageAssignmentWhereInput | Prisma.OutageAssignmentWhereInput[]
@@ -220,7 +221,7 @@ export type OutageAssignmentWhereUniqueInput = Prisma.AtLeast<{
   outage?: Prisma.XOR<Prisma.OutageScalarRelationFilter, Prisma.OutageWhereInput>
   technician?: Prisma.XOR<Prisma.TechnicianScalarRelationFilter, Prisma.TechnicianWhereInput>
   assignedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "outageId_technicianId">
 
 export type OutageAssignmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -314,6 +315,11 @@ export type OutageAssignmentListRelationFilter = {
 
 export type OutageAssignmentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type OutageAssignmentOutageIdTechnicianIdCompoundUniqueInput = {
+  outageId: string
+  technicianId: string
 }
 
 export type OutageAssignmentCountOrderByAggregateInput = {

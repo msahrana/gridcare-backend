@@ -4,6 +4,10 @@ import { zoneRoutes } from '../modules/zone/zone.route';
 import { substationRoutes } from '../modules/substation/substation.route';
 import { feederRoutes } from '../modules/feeder/feeder.route';
 import { areaRoutes } from '../modules/area/area.route';
+import { outageRoutes } from '../modules/outage/outage.route';
+import { outageReportRoutes } from '../modules/outageReport/outageReport.route';
+import { outageAssignmentRoutes } from '../modules/outageAssignment/outageAssignment.route';
+// import { technicianRoutes } from '../modules/technician/technician.route';
 
 const router = Router();
 
@@ -39,6 +43,34 @@ const routerManger = [
     {
         path: '/areas',
         route: areaRoutes,
+    },
+    {
+        path: '/areas',
+        route: areaRoutes,
+    },
+    {
+        path: '/outages',
+        route: outageRoutes,
+    },
+    {
+        path: '/outages',
+        route: outageRoutes,
+    },
+    {
+        path: '/outageReports',
+        route: outageReportRoutes,
+    },
+    {
+        path: '/outageReports',
+        route: outageReportRoutes,
+    },
+    {
+        path: '/outageAssignments',
+        route: outageAssignmentRoutes,
+    },
+    {
+        path: '/technicians',
+        // route: technicianRoutes,
     },
 ];
 

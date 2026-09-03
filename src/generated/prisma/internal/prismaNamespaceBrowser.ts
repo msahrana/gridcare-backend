@@ -256,7 +256,7 @@ export type SubstationScalarFieldEnum = (typeof SubstationScalarFieldEnum)[keyof
 
 export const TechnicianScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  userId: 'userId',
   phone: 'phone',
   employeeId: 'employeeId',
   skills: 'skills',

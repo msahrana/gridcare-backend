@@ -20,6 +20,7 @@ model Area {
 
   schedules    LoadSheddingSchedule[]
   outages      Outage[]
+  reports      OutageReport[]
 
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt

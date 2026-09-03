@@ -104,3 +104,54 @@ export const seedOperator = async (): Promise<void> => {
         console.error('Error seeding Operator:', error);
     }
 };
+
+// ======================================================
+// Create Technician
+// ======================================================
+
+export const seedTechnician = async (): Promise<void> => {
+    try {
+        const name = config.technician_name;
+        const email = config.technician_email;
+        const password = config.technician_password;
+
+        if (!name || !email || !password) {
+            throw new AppError(
+                httpStatus.INTERNAL_SERVER_ERROR,
+                'Technician name, email, or password is missing in the environment file.',
+            );
+        }
+
+        const existingTechnician = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+
+        if (existingTechnician) {
+            console.log(
+                '📦 Technician already exists. Skipping technician seed.',
+            );
+            return;
+        }
+
+        const hashedPassword = await bcrypt.hash(
+            password,
+            Number(config.bcrypt_salt_rounds),
+        );
+
+        const technician = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+                role: UserRole.TECHNICIAN,
+                emailVerified: true,
+            },
+        });
+
+        console.log(`Technician created successfully: ${technician.email}`);
+    } catch (error) {
+        console.error('Error seeding Technician:', error);
+    }
+};

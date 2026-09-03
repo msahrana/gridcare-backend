@@ -1,19 +1,23 @@
 model OutageAssignment {
   id           String   @id @default(uuid())
-
   outageId     String
   technicianId String
   assignedById String
 
-  assignedAt   DateTime @default(now())
-  completedAt  DateTime?
+  assignedAt  DateTime @default(now())
+  completedAt DateTime?
 
-  outage       Outage       @relation(fields: [outageId], references: [id])
-  technician   Technician   @relation(fields: [technicianId], references: [id])
-  assignedBy   User         @relation(fields: [assignedById], references: [id])
+  outage     Outage     @relation(fields: [outageId], references: [id])
+
+  technician Technician @relation(fields: [technicianId], references: [id])
+
+  assignedBy User @relation( "AssignmentCreator",  fields: [assignedById], references: [id])
 
   @@index([outageId])
   @@index([technicianId])
+  @@index([assignedById])
+
+  @@unique([outageId, technicianId])
 
   @@map("outage_assignments")
 }

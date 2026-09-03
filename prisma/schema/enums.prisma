@@ -1,5 +1,6 @@
 enum UserRole {
   CUSTOMER
+  TECHNICIAN
   OPERATOR
   ADMIN
 }
@@ -64,4 +65,12 @@ enum PaymentGateway {
 enum AuthProvider {
   GOOGLE
   CREDENTIAL
+}
+
+enum AssignmentStatus {
+  ASSIGNED
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }

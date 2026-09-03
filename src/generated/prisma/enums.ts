@@ -11,6 +11,7 @@
 
 export const UserRole = {
   CUSTOMER: 'CUSTOMER',
+  TECHNICIAN: 'TECHNICIAN',
   OPERATOR: 'OPERATOR',
   ADMIN: 'ADMIN'
 } as const
@@ -105,3 +106,14 @@ export const AuthProvider = {
 } as const
 
 export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
+
+
+export const AssignmentStatus = {
+  ASSIGNED: 'ASSIGNED',
+  ACCEPTED: 'ACCEPTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AssignmentStatus = (typeof AssignmentStatus)[keyof typeof AssignmentStatus]

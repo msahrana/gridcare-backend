@@ -1,35 +1,38 @@
 model User {
-  id            String     @id @default(uuid())
+  id            String       @id @default(uuid())
   name          String
-  email         String     @unique
+  email         String       @unique
   password      String?
-  role          UserRole   @default(CUSTOMER)
-  status        UserStatus @default(ACTIVE)
+  role          UserRole     @default(CUSTOMER)
+  status        UserStatus   @default(ACTIVE)
+  emailVerified Boolean      @default(false)
+  isDeleted     Boolean      @default(false)
 
-  emailVerified Boolean    @default(false)
-
-  isDeleted     Boolean    @default(false)
-  googleId      String?    @unique
+  googleId      String?      @unique
   authProvider  AuthProvider @default(CREDENTIAL)
-  imageUrl      String     @default("")
-  imagePublicId String     @default("")
+
+  imageUrl      String       @default("")
+  imagePublicId String       @default("")
 
   profile       Profile?
-
   payment       Payment[]
-  
   reports       OutageReport[]
-  assignments   OutageAssignment[]
+
+  assignments   OutageAssignment[] @relation("AssignmentCreator")
+
   notifications Notification[]
+
   auditLogs     AuditLog[] @relation("AuditActor")
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  
+  technician    Technician?
+
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
 
   @@index([email])
   @@index([role])
   @@index([status])
-
   @@map("users")
 }

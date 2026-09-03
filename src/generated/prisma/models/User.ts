@@ -268,6 +268,7 @@ export type UserWhereInput = {
   assignments?: Prisma.OutageAssignmentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
+  technician?: Prisma.XOR<Prisma.TechnicianNullableScalarRelationFilter, Prisma.TechnicianWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -292,6 +293,7 @@ export type UserOrderByWithRelationInput = {
   assignments?: Prisma.OutageAssignmentOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
+  technician?: Prisma.TechnicianOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -319,6 +321,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   assignments?: Prisma.OutageAssignmentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
+  technician?: Prisma.XOR<Prisma.TechnicianNullableScalarRelationFilter, Prisma.TechnicianWhereInput> | null
 }, "id" | "email" | "googleId">
 
 export type UserOrderByWithAggregationInput = {
@@ -385,6 +388,7 @@ export type UserCreateInput = {
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -409,6 +413,7 @@ export type UserUncheckedCreateInput = {
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -433,6 +438,7 @@ export type UserUpdateInput = {
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -457,6 +463,7 @@ export type UserUncheckedUpdateInput = {
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -656,6 +663,20 @@ export type UserUpdateOneRequiredWithoutProfileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfileInput, Prisma.UserUpdateWithoutProfileInput>, Prisma.UserUncheckedUpdateWithoutProfileInput>
 }
 
+export type UserCreateNestedOneWithoutTechnicianInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTechnicianInput, Prisma.UserUncheckedCreateWithoutTechnicianInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTechnicianInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTechnicianNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTechnicianInput, Prisma.UserUncheckedCreateWithoutTechnicianInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTechnicianInput
+  upsert?: Prisma.UserUpsertWithoutTechnicianInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTechnicianInput, Prisma.UserUpdateWithoutTechnicianInput>, Prisma.UserUncheckedUpdateWithoutTechnicianInput>
+}
+
 export type EnumUserRoleFieldUpdateOperationsInput = {
   set?: $Enums.UserRole
 }
@@ -689,6 +710,7 @@ export type UserCreateWithoutAuditLogsInput = {
   reports?: Prisma.OutageReportCreateNestedManyWithoutReporterInput
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -712,6 +734,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutReporterInput
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -751,6 +774,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   reports?: Prisma.OutageReportUpdateManyWithoutReporterNestedInput
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -774,6 +798,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutReporterNestedInput
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -797,6 +822,7 @@ export type UserCreateWithoutNotificationsInput = {
   reports?: Prisma.OutageReportCreateNestedManyWithoutReporterInput
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -820,6 +846,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutReporterInput
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -859,6 +886,7 @@ export type UserUpdateWithoutNotificationsInput = {
   reports?: Prisma.OutageReportUpdateManyWithoutReporterNestedInput
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -882,6 +910,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutReporterNestedInput
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssignmentsInput = {
@@ -905,6 +934,7 @@ export type UserCreateWithoutAssignmentsInput = {
   reports?: Prisma.OutageReportCreateNestedManyWithoutReporterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignmentsInput = {
@@ -928,6 +958,7 @@ export type UserUncheckedCreateWithoutAssignmentsInput = {
   reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutReporterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignmentsInput = {
@@ -967,6 +998,7 @@ export type UserUpdateWithoutAssignmentsInput = {
   reports?: Prisma.OutageReportUpdateManyWithoutReporterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignmentsInput = {
@@ -990,6 +1022,7 @@ export type UserUncheckedUpdateWithoutAssignmentsInput = {
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutReporterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -1013,6 +1046,7 @@ export type UserCreateWithoutReportsInput = {
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -1036,6 +1070,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -1075,6 +1110,7 @@ export type UserUpdateWithoutReportsInput = {
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -1098,6 +1134,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentInput = {
@@ -1121,6 +1158,7 @@ export type UserCreateWithoutPaymentInput = {
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentInput = {
@@ -1144,6 +1182,7 @@ export type UserUncheckedCreateWithoutPaymentInput = {
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentInput = {
@@ -1183,6 +1222,7 @@ export type UserUpdateWithoutPaymentInput = {
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentInput = {
@@ -1206,6 +1246,7 @@ export type UserUncheckedUpdateWithoutPaymentInput = {
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -1229,6 +1270,7 @@ export type UserCreateWithoutProfileInput = {
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -1252,6 +1294,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  technician?: Prisma.TechnicianUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -1291,6 +1334,7 @@ export type UserUpdateWithoutProfileInput = {
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -1309,6 +1353,119 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payment?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.OutageReportUncheckedUpdateManyWithoutReporterNestedInput
+  assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  technician?: Prisma.TechnicianUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutTechnicianInput = {
+  id?: string
+  name: string
+  email: string
+  password?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerified?: boolean
+  isDeleted?: boolean
+  googleId?: string | null
+  authProvider?: $Enums.AuthProvider
+  imageUrl?: string
+  imagePublicId?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  payment?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reports?: Prisma.OutageReportCreateNestedManyWithoutReporterInput
+  assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutAssignedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutTechnicianInput = {
+  id?: string
+  name: string
+  email: string
+  password?: string | null
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  emailVerified?: boolean
+  isDeleted?: boolean
+  googleId?: string | null
+  authProvider?: $Enums.AuthProvider
+  imageUrl?: string
+  imagePublicId?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  payment?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutReporterInput
+  assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutTechnicianInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTechnicianInput, Prisma.UserUncheckedCreateWithoutTechnicianInput>
+}
+
+export type UserUpsertWithoutTechnicianInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTechnicianInput, Prisma.UserUncheckedUpdateWithoutTechnicianInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTechnicianInput, Prisma.UserUncheckedCreateWithoutTechnicianInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTechnicianInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTechnicianInput, Prisma.UserUncheckedUpdateWithoutTechnicianInput>
+}
+
+export type UserUpdateWithoutTechnicianInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  payment?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reports?: Prisma.OutageReportUpdateManyWithoutReporterNestedInput
+  assignments?: Prisma.OutageAssignmentUpdateManyWithoutAssignedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTechnicianInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   payment?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutReporterNestedInput
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
@@ -1405,6 +1562,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   assignments?: boolean | Prisma.User$assignmentsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
+  technician?: boolean | Prisma.User$technicianArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1470,6 +1628,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   assignments?: boolean | Prisma.User$assignmentsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
+  technician?: boolean | Prisma.User$technicianArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1484,6 +1643,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     assignments: Prisma.$OutageAssignmentPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+    technician: Prisma.$TechnicianPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1901,6 +2061,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   assignments<T extends Prisma.User$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OutageAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  technician<T extends Prisma.User$technicianArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$technicianArgs<ExtArgs>>): Prisma.Prisma__TechnicianClient<runtime.Types.Result.GetResult<Prisma.$TechnicianPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2474,6 +2635,25 @@ export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * User.technician
+ */
+export type User$technicianArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Technician
+   */
+  select?: Prisma.TechnicianSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Technician
+   */
+  omit?: Prisma.TechnicianOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TechnicianInclude<ExtArgs> | null
+  where?: Prisma.TechnicianWhereInput
 }
 
 /**

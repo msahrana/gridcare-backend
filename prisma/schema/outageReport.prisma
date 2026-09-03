@@ -11,6 +11,7 @@ model OutageReport {
 
   outage      Outage?  @relation(fields: [outageId], references: [id])
   reporter    User     @relation(fields: [reporterId], references: [id])
+  area        Area      @relation(fields: [areaId], references: [id])
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
