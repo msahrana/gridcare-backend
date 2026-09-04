@@ -189,17 +189,24 @@ const getAllTechniciansListPublic = catchAsync(
 
 const getSingleTechnicianPublicProfile = catchAsync(
     async (req: Request, res: Response) => {
-        const technicianId = req.params.doctorId as string;
+        const { technicianId } = req.params;
+
+        if (!technicianId) {
+            throw new AppError(
+                httpStatus.BAD_REQUEST,
+                'Technician ID is required',
+            );
+        }
 
         const result =
             await technicianServices.getSingleTechnicianPublicProfileIntoDB(
-                technicianId,
+                technicianId as string,
             );
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
             success: true,
-            message: 'Technician Profile Retrieved Successfully!',
+            message: 'Technician public profile retrieved successfully',
             data: result,
         });
     },

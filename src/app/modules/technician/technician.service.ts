@@ -979,11 +979,44 @@ const getAvailableTechnicianByTodaysScheduleIntoDB = async (query: IQuery) => {
 
 const getAllTechniciansListPublicIntoDB = async (query: IQuery) => {
     const limit = query.limit ? Number(query.limit) : 10;
+
     const page = query.page ? Number(query.page) : 1;
+
     const skip = (page - 1) * limit;
 
-    const sortBy = query.sortBy || 'createdAt';
-    const sortOrder = query.sortOrder || 'desc';
+    // ==================================================
+    // Pagination Validation
+    // ==================================================
+
+    const safeLimit =
+        Number.isInteger(limit) && limit > 0 ? Math.min(limit, 100) : 10;
+
+    const safePage = Number.isInteger(page) && page > 0 ? page : 1;
+
+    const safeSkip = (safePage - 1) * safeLimit;
+
+    // ==================================================
+    // Sort Validation
+    // ==================================================
+
+    const allowedSortFields = [
+        'createdAt',
+        'updatedAt',
+        'experienceYears',
+        'technicianFee',
+        'employeeId',
+        'phone',
+    ];
+
+    const sortBy = allowedSortFields.includes(query.sortBy || '')
+        ? query.sortBy!
+        : 'createdAt';
+
+    const sortOrder = query.sortOrder === 'asc' ? 'asc' : 'desc';
+
+    // ==================================================
+    // Conditions
+    // ==================================================
 
     const andConditions: Prisma.TechnicianWhereInput[] = [
         {
@@ -997,32 +1030,45 @@ const getAllTechniciansListPublicIntoDB = async (query: IQuery) => {
         },
     ];
 
+    // ==================================================
     // Search
-    if (query.searchTerm) {
+    // ==================================================
+
+    if (query.searchTerm?.trim()) {
+        const searchTerm = query.searchTerm.trim();
+
         andConditions.push({
             OR: [
                 {
                     phone: {
-                        contains: query.searchTerm,
+                        contains: searchTerm,
                         mode: 'insensitive',
                     },
                 },
                 {
                     employeeId: {
-                        contains: query.searchTerm,
+                        contains: searchTerm,
                         mode: 'insensitive',
                     },
                 },
                 {
                     skills: {
-                        contains: query.searchTerm,
+                        contains: searchTerm,
                         mode: 'insensitive',
                     },
                 },
                 {
                     user: {
                         name: {
-                            contains: query.searchTerm,
+                            contains: searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+                {
+                    user: {
+                        email: {
+                            contains: searchTerm,
                             mode: 'insensitive',
                         },
                     },
@@ -1031,33 +1077,102 @@ const getAllTechniciansListPublicIntoDB = async (query: IQuery) => {
         });
     }
 
-    // Skills filter
-    if (query.skills) {
+    // ==================================================
+    // Skills Filter
+    // ==================================================
+
+    if (query.skills?.trim()) {
         andConditions.push({
             skills: {
-                contains: query.skills,
+                contains: query.skills.trim(),
                 mode: 'insensitive',
             },
         });
     }
 
-    // Zone filter
-    if (query.zoneId) {
+    // ==================================================
+    // Zone Filter
+    // ==================================================
+
+    if (query.zoneId?.trim()) {
         andConditions.push({
-            zoneId: query.zoneId,
+            zoneId: query.zoneId.trim(),
         });
     }
 
-    const allTechnicians = await prisma.technician.findMany({
-        where: {
-            AND: andConditions,
+    // ==================================================
+    // Get Technicians
+    // ==================================================
+
+    const [allTechnicians, totalTechnicianCount] = await Promise.all([
+        prisma.technician.findMany({
+            where: {
+                AND: andConditions,
+            },
+
+            take: safeLimit,
+            skip: safeSkip,
+
+            orderBy: {
+                [sortBy]: sortOrder,
+            },
+
+            select: {
+                id: true,
+                phone: true,
+                employeeId: true,
+                skills: true,
+                experienceYears: true,
+                technicianFee: true,
+                status: true,
+                verificationStatus: true,
+                zoneId: true,
+                createdAt: true,
+
+                user: {
+                    select: {
+                        name: true,
+                        email: true,
+                        imageUrl: true,
+                    },
+                },
+            },
+        }),
+
+        prisma.technician.count({
+            where: {
+                AND: andConditions,
+            },
+        }),
+    ]);
+
+    // ==================================================
+    // Return
+    // ==================================================
+
+    return {
+        data: allTechnicians,
+
+        meta: {
+            page: safePage,
+            limit: safeLimit,
+            total: totalTechnicianCount,
+            totalPages: Math.ceil(totalTechnicianCount / safeLimit),
         },
+    };
+};
 
-        take: limit,
-        skip,
+const getSingleTechnicianPublicProfileIntoDB = async (technicianId: string) => {
+    if (!technicianId) {
+        throw new AppError(httpStatus.BAD_REQUEST, 'Technician ID is required');
+    }
 
-        orderBy: {
-            [sortBy]: sortOrder,
+    const technician = await prisma.technician.findFirst({
+        where: {
+            id: technicianId,
+            deletedAt: null,
+            verificationStatus: TechnicianVerificationStatus.APPROVED,
+            status: TechnicianStatus.AVAILABLE,
         },
 
         select: {
@@ -1076,47 +1191,9 @@ const getAllTechniciansListPublicIntoDB = async (query: IQuery) => {
                 select: {
                     name: true,
                     email: true,
-                    profileImage: true,
+                    imageUrl: true,
                 },
             },
-        },
-    });
-
-    const totalTechnicianCount = await prisma.technician.count({
-        where: {
-            AND: andConditions,
-        },
-    });
-
-    return {
-        data: allTechnicians,
-
-        meta: {
-            page,
-            limit,
-            total: totalTechnicianCount,
-            totalPages: Math.ceil(totalTechnicianCount / limit),
-        },
-    };
-};
-
-const getSingleTechnicianPublicProfileIntoDB = async (technicianId: string) => {
-    const technician = await prisma.technician.findUnique({
-        where: {
-            id: technicianId,
-            isDeleted: false,
-            verificationStatus: TechnicianVerificationStatus.APPROVED,
-        },
-        select: {
-            id: true,
-            name: true,
-            specialization: true,
-            licenseNumber: true,
-            qualifications: true,
-            experienceYears: true,
-            bio: true,
-            consultationFee: true,
-            createdAt: true,
         },
     });
 

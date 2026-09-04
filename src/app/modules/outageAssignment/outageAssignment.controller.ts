@@ -110,7 +110,9 @@ const getAssignmentsByTechnician = catchAsync(async (req, res) => {
 });
 
 const getMyAssignments = catchAsync(async (req, res) => {
+    console.log('Authenticated User:', req.user);
     const userId = req.user?.id;
+    console.log('User ID:', userId);
 
     const result = await outageAssignmentServices.getMyAssignmentsFromDB(
         userId as string,

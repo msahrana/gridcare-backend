@@ -3,12 +3,13 @@ import { outageAssignmentControllers } from './outageAssignment.controller';
 import { OutageAssignmentValidation } from './outageAssignment.validation';
 import { auth } from '../../middleware/checkAuth';
 import { validateRequest } from '../../middleware/validateRequest';
+import { UserRole } from '../../../generated/prisma/enums';
 
 const router = express.Router();
 
 router.post(
     '/',
-    auth(),
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     validateRequest(
         OutageAssignmentValidation.createOutageAssignmentValidationSchema,
     ),
@@ -17,33 +18,37 @@ router.post(
 
 router.get(
     '/my-assignments',
-    auth(),
+    auth(UserRole.TECHNICIAN),
     outageAssignmentControllers.getMyAssignments,
 );
 
 router.get(
     '/outage/:outageId',
-    auth(),
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     outageAssignmentControllers.getAssignmentsByOutage,
 );
 
 router.get(
     '/technician/:technicianId',
-    auth(),
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     outageAssignmentControllers.getAssignmentsByTechnician,
 );
 
-router.get('/', auth(), outageAssignmentControllers.getAllOutageAssignments);
+router.get(
+    '/',
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
+    outageAssignmentControllers.getAllOutageAssignments,
+);
 
 router.get(
     '/:id',
-    auth(),
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     outageAssignmentControllers.getSingleOutageAssignment,
 );
 
 router.patch(
     '/:id',
-    auth(),
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     validateRequest(
         OutageAssignmentValidation.updateOutageAssignmentValidationSchema,
     ),
@@ -52,7 +57,7 @@ router.patch(
 
 router.delete(
     '/:id',
-    auth(),
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     outageAssignmentControllers.deleteOutageAssignment,
 );
 
