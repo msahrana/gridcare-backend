@@ -9,6 +9,7 @@ import { outageReportRoutes } from '../modules/outageReport/outageReport.route';
 import { outageAssignmentRoutes } from '../modules/outageAssignment/outageAssignment.route';
 import { technicianRoutes } from '../modules/technician/technician.route';
 import { loadSheddingScheduleRoutes } from '../modules/loadSheddingSchedule/loadSheddingSchedule.route';
+import { notificationRoutes } from '../modules/notifications/notification.route';
 
 const router = Router();
 
@@ -76,6 +77,10 @@ const routerManger = [
     {
         path: '/load-shedding-schedules',
         route: loadSheddingScheduleRoutes,
+    },
+    {
+        path: '/notifications',
+        route: notificationRoutes,
     },
 ];
 
