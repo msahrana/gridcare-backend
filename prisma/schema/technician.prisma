@@ -1,27 +1,33 @@
 model Technician {
-  id          String           @id @default(uuid())
-  userId      String           @unique
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  phone              String   @unique
+  employeeId         String   @unique
 
-  phone       String           @unique
-  employeeId  String           @unique
+  skills             String?
+  experienceYears    Int      @default(0)
+  resume             String?
+  resumePublicId     String?
+  additionalFiles    Json?
+  technicianFee      Decimal? @db.Decimal(10, 2)
 
-  skills      String?
+  status             TechnicianStatus @default(AVAILABLE)
+  verificationStatus TechnicianVerificationStatus @default(PENDING)
 
-  status      TechnicianStatus @default(AVAILABLE)
-
-  zoneId      String?
+  rejectionReason    String?
+  zoneId             String?
   
-  deletedAt   DateTime?
+  deletedAt          DateTime?
 
-  assignments OutageAssignment[]
+  assignments        OutageAssignment[]
+  user               User @relation(fields: [userId], references: [id])
 
-  user        User             @relation(fields: [userId], references: [id])
-
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   @@index([status])
   @@index([zoneId])
-  
+  @@index([verificationStatus])
+
   @@map("technicians")
 }

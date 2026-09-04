@@ -73,11 +73,19 @@ export type Priority = (typeof Priority)[keyof typeof Priority]
 export const TechnicianStatus = {
   AVAILABLE: 'AVAILABLE',
   BUSY: 'BUSY',
-  OFF_DUTY: 'OFF_DUTY',
-  INACTIVE: 'INACTIVE'
+  OFFLINE: 'OFFLINE'
 } as const
 
 export type TechnicianStatus = (typeof TechnicianStatus)[keyof typeof TechnicianStatus]
+
+
+export const TechnicianVerificationStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type TechnicianVerificationStatus = (typeof TechnicianVerificationStatus)[keyof typeof TechnicianVerificationStatus]
 
 
 export const PaymentStatus = {

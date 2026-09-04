@@ -7,7 +7,7 @@ import { areaRoutes } from '../modules/area/area.route';
 import { outageRoutes } from '../modules/outage/outage.route';
 import { outageReportRoutes } from '../modules/outageReport/outageReport.route';
 import { outageAssignmentRoutes } from '../modules/outageAssignment/outageAssignment.route';
-// import { technicianRoutes } from '../modules/technician/technician.route';
+import { technicianRoutes } from '../modules/technician/technician.route';
 
 const router = Router();
 
@@ -70,7 +70,7 @@ const routerManger = [
     },
     {
         path: '/technicians',
-        // route: technicianRoutes,
+        route: technicianRoutes,
     },
 ];
 

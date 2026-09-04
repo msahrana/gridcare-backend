@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "UserRole" AS ENUM ('CUSTOMER', 'OPERATOR', 'ADMIN');
+CREATE TYPE "UserRole" AS ENUM ('CUSTOMER', 'TECHNICIAN', 'OPERATOR', 'ADMIN');
 
 -- CreateEnum
 CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'BLOCKED', 'DELETED');
@@ -17,7 +17,10 @@ CREATE TYPE "OutageStatus" AS ENUM ('REPORTED', 'VERIFIED', 'ASSIGNED', 'IN_PROG
 CREATE TYPE "Priority" AS ENUM ('LOW', 'MEDIUM', 'HIGH', 'CRITICAL');
 
 -- CreateEnum
-CREATE TYPE "TechnicianStatus" AS ENUM ('AVAILABLE', 'BUSY', 'OFF_DUTY', 'INACTIVE');
+CREATE TYPE "TechnicianStatus" AS ENUM ('AVAILABLE', 'BUSY', 'OFFLINE');
+
+-- CreateEnum
+CREATE TYPE "TechnicianVerificationStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
 
 -- CreateEnum
 CREATE TYPE "PaymentStatus" AS ENUM ('PENDING', 'PAID', 'FAILED', 'CANCELLED', 'REFUNDED');
@@ -27,6 +30,9 @@ CREATE TYPE "PaymentGateway" AS ENUM ('BKASH', 'STRIPE', 'SSLCOMMERZ');
 
 -- CreateEnum
 CREATE TYPE "AuthProvider" AS ENUM ('GOOGLE', 'CREDENTIAL');
+
+-- CreateEnum
+CREATE TYPE "AssignmentStatus" AS ENUM ('ASSIGNED', 'ACCEPTED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED');
 
 -- CreateTable
 CREATE TABLE "areas" (
@@ -86,6 +92,7 @@ CREATE TABLE "load_shedding_schedules" (
     "endTime" TIMESTAMP(3) NOT NULL,
     "status" "ScheduleStatus" NOT NULL DEFAULT 'DRAFT',
     "createdById" TEXT NOT NULL,
+    "scheduleFee" DECIMAL(10,2),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deletedAt" TIMESTAMP(3),
@@ -202,11 +209,18 @@ CREATE TABLE "substations" (
 -- CreateTable
 CREATE TABLE "technicians" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "employeeId" TEXT NOT NULL,
     "skills" TEXT,
+    "experienceYears" INTEGER NOT NULL DEFAULT 0,
+    "resume" TEXT,
+    "resumePublicId" TEXT,
+    "additionalFiles" JSONB,
+    "technicianFee" DECIMAL(10,2),
     "status" "TechnicianStatus" NOT NULL DEFAULT 'AVAILABLE',
+    "verificationStatus" "TechnicianVerificationStatus" NOT NULL DEFAULT 'PENDING',
+    "rejectionReason" TEXT,
     "zoneId" TEXT,
     "deletedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -225,6 +239,7 @@ CREATE TABLE "users" (
     "status" "UserStatus" NOT NULL DEFAULT 'ACTIVE',
     "emailVerified" BOOLEAN NOT NULL DEFAULT false,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+    "needPasswordChange" BOOLEAN NOT NULL DEFAULT false,
     "googleId" TEXT,
     "authProvider" "AuthProvider" NOT NULL DEFAULT 'CREDENTIAL',
     "imageUrl" TEXT NOT NULL DEFAULT '',
@@ -311,6 +326,12 @@ CREATE INDEX "outage_assignments_outageId_idx" ON "outage_assignments"("outageId
 CREATE INDEX "outage_assignments_technicianId_idx" ON "outage_assignments"("technicianId");
 
 -- CreateIndex
+CREATE INDEX "outage_assignments_assignedById_idx" ON "outage_assignments"("assignedById");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "outage_assignments_outageId_technicianId_key" ON "outage_assignments"("outageId", "technicianId");
+
+-- CreateIndex
 CREATE INDEX "outage_reports_reporterId_idx" ON "outage_reports"("reporterId");
 
 -- CreateIndex
@@ -353,6 +374,9 @@ CREATE UNIQUE INDEX "substations_code_key" ON "substations"("code");
 CREATE INDEX "substations_zoneId_idx" ON "substations"("zoneId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "technicians_userId_key" ON "technicians"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "technicians_phone_key" ON "technicians"("phone");
 
 -- CreateIndex
@@ -363,6 +387,9 @@ CREATE INDEX "technicians_status_idx" ON "technicians"("status");
 
 -- CreateIndex
 CREATE INDEX "technicians_zoneId_idx" ON "technicians"("zoneId");
+
+-- CreateIndex
+CREATE INDEX "technicians_verificationStatus_idx" ON "technicians"("verificationStatus");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
@@ -425,6 +452,9 @@ ALTER TABLE "outage_reports" ADD CONSTRAINT "outage_reports_outageId_fkey" FOREI
 ALTER TABLE "outage_reports" ADD CONSTRAINT "outage_reports_reporterId_fkey" FOREIGN KEY ("reporterId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "outage_reports" ADD CONSTRAINT "outage_reports_areaId_fkey" FOREIGN KEY ("areaId") REFERENCES "areas"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "payments" ADD CONSTRAINT "payments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -435,3 +465,6 @@ ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userI
 
 -- AddForeignKey
 ALTER TABLE "substations" ADD CONSTRAINT "substations_zoneId_fkey" FOREIGN KEY ("zoneId") REFERENCES "zone"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "technicians" ADD CONSTRAINT "technicians_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

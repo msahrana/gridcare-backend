@@ -1,10 +1,22 @@
+import {
+    TechnicianStatus,
+    TechnicianVerificationStatus,
+} from '../../generated/prisma/enums';
+
 export interface IQuery {
-    searchTerm?: string;
     page?: string;
     limit?: string;
-    sortOrder?: string;
     sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
 
-    //any other filter fields can be added here
-    [key: string]: any;
+    searchTerm?: string;
+
+    phone?: string;
+    employeeId?: string;
+    skills?: string;
+
+    zoneId?: string;
+
+    status?: TechnicianStatus;
+    verificationStatus?: TechnicianVerificationStatus;
 }

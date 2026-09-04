@@ -44,8 +44,13 @@ enum Priority {
 enum TechnicianStatus {
   AVAILABLE
   BUSY
-  OFF_DUTY
-  INACTIVE
+  OFFLINE
+}
+
+enum TechnicianVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 enum PaymentStatus {

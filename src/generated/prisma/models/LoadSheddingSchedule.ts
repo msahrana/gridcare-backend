@@ -20,8 +20,18 @@ export type LoadSheddingScheduleModel = runtime.Types.Result.DefaultSelection<Pr
 
 export type AggregateLoadSheddingSchedule = {
   _count: LoadSheddingScheduleCountAggregateOutputType | null
+  _avg: LoadSheddingScheduleAvgAggregateOutputType | null
+  _sum: LoadSheddingScheduleSumAggregateOutputType | null
   _min: LoadSheddingScheduleMinAggregateOutputType | null
   _max: LoadSheddingScheduleMaxAggregateOutputType | null
+}
+
+export type LoadSheddingScheduleAvgAggregateOutputType = {
+  scheduleFee: runtime.Decimal | null
+}
+
+export type LoadSheddingScheduleSumAggregateOutputType = {
+  scheduleFee: runtime.Decimal | null
 }
 
 export type LoadSheddingScheduleMinAggregateOutputType = {
@@ -33,6 +43,7 @@ export type LoadSheddingScheduleMinAggregateOutputType = {
   endTime: Date | null
   status: $Enums.ScheduleStatus | null
   createdById: string | null
+  scheduleFee: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -47,6 +58,7 @@ export type LoadSheddingScheduleMaxAggregateOutputType = {
   endTime: Date | null
   status: $Enums.ScheduleStatus | null
   createdById: string | null
+  scheduleFee: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -61,12 +73,21 @@ export type LoadSheddingScheduleCountAggregateOutputType = {
   endTime: number
   status: number
   createdById: number
+  scheduleFee: number
   createdAt: number
   updatedAt: number
   deletedAt: number
   _all: number
 }
 
+
+export type LoadSheddingScheduleAvgAggregateInputType = {
+  scheduleFee?: true
+}
+
+export type LoadSheddingScheduleSumAggregateInputType = {
+  scheduleFee?: true
+}
 
 export type LoadSheddingScheduleMinAggregateInputType = {
   id?: true
@@ -77,6 +98,7 @@ export type LoadSheddingScheduleMinAggregateInputType = {
   endTime?: true
   status?: true
   createdById?: true
+  scheduleFee?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -91,6 +113,7 @@ export type LoadSheddingScheduleMaxAggregateInputType = {
   endTime?: true
   status?: true
   createdById?: true
+  scheduleFee?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -105,6 +128,7 @@ export type LoadSheddingScheduleCountAggregateInputType = {
   endTime?: true
   status?: true
   createdById?: true
+  scheduleFee?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -149,6 +173,18 @@ export type LoadSheddingScheduleAggregateArgs<ExtArgs extends runtime.Types.Exte
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: LoadSheddingScheduleAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: LoadSheddingScheduleSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: LoadSheddingScheduleMinAggregateInputType
@@ -179,6 +215,8 @@ export type LoadSheddingScheduleGroupByArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   _count?: LoadSheddingScheduleCountAggregateInputType | true
+  _avg?: LoadSheddingScheduleAvgAggregateInputType
+  _sum?: LoadSheddingScheduleSumAggregateInputType
   _min?: LoadSheddingScheduleMinAggregateInputType
   _max?: LoadSheddingScheduleMaxAggregateInputType
 }
@@ -192,10 +230,13 @@ export type LoadSheddingScheduleGroupByOutputType = {
   endTime: Date
   status: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee: runtime.Decimal | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
   _count: LoadSheddingScheduleCountAggregateOutputType | null
+  _avg: LoadSheddingScheduleAvgAggregateOutputType | null
+  _sum: LoadSheddingScheduleSumAggregateOutputType | null
   _min: LoadSheddingScheduleMinAggregateOutputType | null
   _max: LoadSheddingScheduleMaxAggregateOutputType | null
 }
@@ -227,6 +268,7 @@ export type LoadSheddingScheduleWhereInput = {
   endTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
   createdById?: Prisma.StringFilter<"LoadSheddingSchedule"> | string
+  scheduleFee?: Prisma.DecimalNullableFilter<"LoadSheddingSchedule"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -242,6 +284,7 @@ export type LoadSheddingScheduleOrderByWithRelationInput = {
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  scheduleFee?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -260,6 +303,7 @@ export type LoadSheddingScheduleWhereUniqueInput = Prisma.AtLeast<{
   endTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
   createdById?: Prisma.StringFilter<"LoadSheddingSchedule"> | string
+  scheduleFee?: Prisma.DecimalNullableFilter<"LoadSheddingSchedule"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -275,12 +319,15 @@ export type LoadSheddingScheduleOrderByWithAggregationInput = {
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  scheduleFee?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LoadSheddingScheduleCountOrderByAggregateInput
+  _avg?: Prisma.LoadSheddingScheduleAvgOrderByAggregateInput
   _max?: Prisma.LoadSheddingScheduleMaxOrderByAggregateInput
   _min?: Prisma.LoadSheddingScheduleMinOrderByAggregateInput
+  _sum?: Prisma.LoadSheddingScheduleSumOrderByAggregateInput
 }
 
 export type LoadSheddingScheduleScalarWhereWithAggregatesInput = {
@@ -295,6 +342,7 @@ export type LoadSheddingScheduleScalarWhereWithAggregatesInput = {
   endTime?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusWithAggregatesFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
   createdById?: Prisma.StringWithAggregatesFilter<"LoadSheddingSchedule"> | string
+  scheduleFee?: Prisma.DecimalNullableWithAggregatesFilter<"LoadSheddingSchedule"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -308,6 +356,7 @@ export type LoadSheddingScheduleCreateInput = {
   endTime: Date | string
   status?: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -323,6 +372,7 @@ export type LoadSheddingScheduleUncheckedCreateInput = {
   endTime: Date | string
   status?: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -336,6 +386,7 @@ export type LoadSheddingScheduleUpdateInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -351,6 +402,7 @@ export type LoadSheddingScheduleUncheckedUpdateInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -365,6 +417,7 @@ export type LoadSheddingScheduleCreateManyInput = {
   endTime: Date | string
   status?: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -378,6 +431,7 @@ export type LoadSheddingScheduleUpdateManyMutationInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -392,6 +446,7 @@ export type LoadSheddingScheduleUncheckedUpdateManyInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -416,9 +471,14 @@ export type LoadSheddingScheduleCountOrderByAggregateInput = {
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  scheduleFee?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type LoadSheddingScheduleAvgOrderByAggregateInput = {
+  scheduleFee?: Prisma.SortOrder
 }
 
 export type LoadSheddingScheduleMaxOrderByAggregateInput = {
@@ -430,6 +490,7 @@ export type LoadSheddingScheduleMaxOrderByAggregateInput = {
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  scheduleFee?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -444,9 +505,14 @@ export type LoadSheddingScheduleMinOrderByAggregateInput = {
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  scheduleFee?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type LoadSheddingScheduleSumOrderByAggregateInput = {
+  scheduleFee?: Prisma.SortOrder
 }
 
 export type LoadSheddingScheduleCreateNestedManyWithoutAreaInput = {
@@ -495,6 +561,14 @@ export type EnumScheduleStatusFieldUpdateOperationsInput = {
   set?: $Enums.ScheduleStatus
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
 export type LoadSheddingScheduleCreateWithoutAreaInput = {
   id?: string
   title: string
@@ -503,6 +577,7 @@ export type LoadSheddingScheduleCreateWithoutAreaInput = {
   endTime: Date | string
   status?: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -516,6 +591,7 @@ export type LoadSheddingScheduleUncheckedCreateWithoutAreaInput = {
   endTime: Date | string
   status?: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -559,6 +635,7 @@ export type LoadSheddingScheduleScalarWhereInput = {
   endTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
   createdById?: Prisma.StringFilter<"LoadSheddingSchedule"> | string
+  scheduleFee?: Prisma.DecimalNullableFilter<"LoadSheddingSchedule"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -572,6 +649,7 @@ export type LoadSheddingScheduleCreateManyAreaInput = {
   endTime: Date | string
   status?: $Enums.ScheduleStatus
   createdById: string
+  scheduleFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -585,6 +663,7 @@ export type LoadSheddingScheduleUpdateWithoutAreaInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -598,6 +677,7 @@ export type LoadSheddingScheduleUncheckedUpdateWithoutAreaInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -611,6 +691,7 @@ export type LoadSheddingScheduleUncheckedUpdateManyWithoutAreaInput = {
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -627,6 +708,7 @@ export type LoadSheddingScheduleSelect<ExtArgs extends runtime.Types.Extensions.
   endTime?: boolean
   status?: boolean
   createdById?: boolean
+  scheduleFee?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -642,6 +724,7 @@ export type LoadSheddingScheduleSelectCreateManyAndReturn<ExtArgs extends runtim
   endTime?: boolean
   status?: boolean
   createdById?: boolean
+  scheduleFee?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -657,6 +740,7 @@ export type LoadSheddingScheduleSelectUpdateManyAndReturn<ExtArgs extends runtim
   endTime?: boolean
   status?: boolean
   createdById?: boolean
+  scheduleFee?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -672,12 +756,13 @@ export type LoadSheddingScheduleSelectScalar = {
   endTime?: boolean
   status?: boolean
   createdById?: boolean
+  scheduleFee?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type LoadSheddingScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "areaId" | "title" | "description" | "startTime" | "endTime" | "status" | "createdById" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["loadSheddingSchedule"]>
+export type LoadSheddingScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "areaId" | "title" | "description" | "startTime" | "endTime" | "status" | "createdById" | "scheduleFee" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["loadSheddingSchedule"]>
 export type LoadSheddingScheduleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   area?: boolean | Prisma.AreaDefaultArgs<ExtArgs>
 }
@@ -702,6 +787,7 @@ export type $LoadSheddingSchedulePayload<ExtArgs extends runtime.Types.Extension
     endTime: Date
     status: $Enums.ScheduleStatus
     createdById: string
+    scheduleFee: runtime.Decimal | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -1137,6 +1223,7 @@ export interface LoadSheddingScheduleFieldRefs {
   readonly endTime: Prisma.FieldRef<"LoadSheddingSchedule", 'DateTime'>
   readonly status: Prisma.FieldRef<"LoadSheddingSchedule", 'ScheduleStatus'>
   readonly createdById: Prisma.FieldRef<"LoadSheddingSchedule", 'String'>
+  readonly scheduleFee: Prisma.FieldRef<"LoadSheddingSchedule", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"LoadSheddingSchedule", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"LoadSheddingSchedule", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"LoadSheddingSchedule", 'DateTime'>

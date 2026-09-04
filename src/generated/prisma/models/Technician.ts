@@ -20,8 +20,20 @@ export type TechnicianModel = runtime.Types.Result.DefaultSelection<Prisma.$Tech
 
 export type AggregateTechnician = {
   _count: TechnicianCountAggregateOutputType | null
+  _avg: TechnicianAvgAggregateOutputType | null
+  _sum: TechnicianSumAggregateOutputType | null
   _min: TechnicianMinAggregateOutputType | null
   _max: TechnicianMaxAggregateOutputType | null
+}
+
+export type TechnicianAvgAggregateOutputType = {
+  experienceYears: number | null
+  technicianFee: runtime.Decimal | null
+}
+
+export type TechnicianSumAggregateOutputType = {
+  experienceYears: number | null
+  technicianFee: runtime.Decimal | null
 }
 
 export type TechnicianMinAggregateOutputType = {
@@ -30,7 +42,13 @@ export type TechnicianMinAggregateOutputType = {
   phone: string | null
   employeeId: string | null
   skills: string | null
+  experienceYears: number | null
+  resume: string | null
+  resumePublicId: string | null
+  technicianFee: runtime.Decimal | null
   status: $Enums.TechnicianStatus | null
+  verificationStatus: $Enums.TechnicianVerificationStatus | null
+  rejectionReason: string | null
   zoneId: string | null
   deletedAt: Date | null
   createdAt: Date | null
@@ -43,7 +61,13 @@ export type TechnicianMaxAggregateOutputType = {
   phone: string | null
   employeeId: string | null
   skills: string | null
+  experienceYears: number | null
+  resume: string | null
+  resumePublicId: string | null
+  technicianFee: runtime.Decimal | null
   status: $Enums.TechnicianStatus | null
+  verificationStatus: $Enums.TechnicianVerificationStatus | null
+  rejectionReason: string | null
   zoneId: string | null
   deletedAt: Date | null
   createdAt: Date | null
@@ -56,7 +80,14 @@ export type TechnicianCountAggregateOutputType = {
   phone: number
   employeeId: number
   skills: number
+  experienceYears: number
+  resume: number
+  resumePublicId: number
+  additionalFiles: number
+  technicianFee: number
   status: number
+  verificationStatus: number
+  rejectionReason: number
   zoneId: number
   deletedAt: number
   createdAt: number
@@ -65,13 +96,29 @@ export type TechnicianCountAggregateOutputType = {
 }
 
 
+export type TechnicianAvgAggregateInputType = {
+  experienceYears?: true
+  technicianFee?: true
+}
+
+export type TechnicianSumAggregateInputType = {
+  experienceYears?: true
+  technicianFee?: true
+}
+
 export type TechnicianMinAggregateInputType = {
   id?: true
   userId?: true
   phone?: true
   employeeId?: true
   skills?: true
+  experienceYears?: true
+  resume?: true
+  resumePublicId?: true
+  technicianFee?: true
   status?: true
+  verificationStatus?: true
+  rejectionReason?: true
   zoneId?: true
   deletedAt?: true
   createdAt?: true
@@ -84,7 +131,13 @@ export type TechnicianMaxAggregateInputType = {
   phone?: true
   employeeId?: true
   skills?: true
+  experienceYears?: true
+  resume?: true
+  resumePublicId?: true
+  technicianFee?: true
   status?: true
+  verificationStatus?: true
+  rejectionReason?: true
   zoneId?: true
   deletedAt?: true
   createdAt?: true
@@ -97,7 +150,14 @@ export type TechnicianCountAggregateInputType = {
   phone?: true
   employeeId?: true
   skills?: true
+  experienceYears?: true
+  resume?: true
+  resumePublicId?: true
+  additionalFiles?: true
+  technicianFee?: true
   status?: true
+  verificationStatus?: true
+  rejectionReason?: true
   zoneId?: true
   deletedAt?: true
   createdAt?: true
@@ -143,6 +203,18 @@ export type TechnicianAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TechnicianAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TechnicianSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TechnicianMinAggregateInputType
@@ -173,6 +245,8 @@ export type TechnicianGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: TechnicianCountAggregateInputType | true
+  _avg?: TechnicianAvgAggregateInputType
+  _sum?: TechnicianSumAggregateInputType
   _min?: TechnicianMinAggregateInputType
   _max?: TechnicianMaxAggregateInputType
 }
@@ -183,12 +257,21 @@ export type TechnicianGroupByOutputType = {
   phone: string
   employeeId: string
   skills: string | null
+  experienceYears: number
+  resume: string | null
+  resumePublicId: string | null
+  additionalFiles: runtime.JsonValue | null
+  technicianFee: runtime.Decimal | null
   status: $Enums.TechnicianStatus
+  verificationStatus: $Enums.TechnicianVerificationStatus
+  rejectionReason: string | null
   zoneId: string | null
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: TechnicianCountAggregateOutputType | null
+  _avg: TechnicianAvgAggregateOutputType | null
+  _sum: TechnicianSumAggregateOutputType | null
   _min: TechnicianMinAggregateOutputType | null
   _max: TechnicianMaxAggregateOutputType | null
 }
@@ -217,7 +300,14 @@ export type TechnicianWhereInput = {
   phone?: Prisma.StringFilter<"Technician"> | string
   employeeId?: Prisma.StringFilter<"Technician"> | string
   skills?: Prisma.StringNullableFilter<"Technician"> | string | null
+  experienceYears?: Prisma.IntFilter<"Technician"> | number
+  resume?: Prisma.StringNullableFilter<"Technician"> | string | null
+  resumePublicId?: Prisma.StringNullableFilter<"Technician"> | string | null
+  additionalFiles?: Prisma.JsonNullableFilter<"Technician">
+  technicianFee?: Prisma.DecimalNullableFilter<"Technician"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFilter<"Technician"> | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFilter<"Technician"> | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.StringNullableFilter<"Technician"> | string | null
   zoneId?: Prisma.StringNullableFilter<"Technician"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Technician"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Technician"> | Date | string
@@ -232,7 +322,14 @@ export type TechnicianOrderByWithRelationInput = {
   phone?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   skills?: Prisma.SortOrderInput | Prisma.SortOrder
+  experienceYears?: Prisma.SortOrder
+  resume?: Prisma.SortOrderInput | Prisma.SortOrder
+  resumePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  additionalFiles?: Prisma.SortOrderInput | Prisma.SortOrder
+  technicianFee?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  verificationStatus?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   zoneId?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -250,7 +347,14 @@ export type TechnicianWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TechnicianWhereInput[]
   NOT?: Prisma.TechnicianWhereInput | Prisma.TechnicianWhereInput[]
   skills?: Prisma.StringNullableFilter<"Technician"> | string | null
+  experienceYears?: Prisma.IntFilter<"Technician"> | number
+  resume?: Prisma.StringNullableFilter<"Technician"> | string | null
+  resumePublicId?: Prisma.StringNullableFilter<"Technician"> | string | null
+  additionalFiles?: Prisma.JsonNullableFilter<"Technician">
+  technicianFee?: Prisma.DecimalNullableFilter<"Technician"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFilter<"Technician"> | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFilter<"Technician"> | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.StringNullableFilter<"Technician"> | string | null
   zoneId?: Prisma.StringNullableFilter<"Technician"> | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Technician"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Technician"> | Date | string
@@ -265,14 +369,23 @@ export type TechnicianOrderByWithAggregationInput = {
   phone?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   skills?: Prisma.SortOrderInput | Prisma.SortOrder
+  experienceYears?: Prisma.SortOrder
+  resume?: Prisma.SortOrderInput | Prisma.SortOrder
+  resumePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  additionalFiles?: Prisma.SortOrderInput | Prisma.SortOrder
+  technicianFee?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  verificationStatus?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   zoneId?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TechnicianCountOrderByAggregateInput
+  _avg?: Prisma.TechnicianAvgOrderByAggregateInput
   _max?: Prisma.TechnicianMaxOrderByAggregateInput
   _min?: Prisma.TechnicianMinOrderByAggregateInput
+  _sum?: Prisma.TechnicianSumOrderByAggregateInput
 }
 
 export type TechnicianScalarWhereWithAggregatesInput = {
@@ -284,7 +397,14 @@ export type TechnicianScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringWithAggregatesFilter<"Technician"> | string
   employeeId?: Prisma.StringWithAggregatesFilter<"Technician"> | string
   skills?: Prisma.StringNullableWithAggregatesFilter<"Technician"> | string | null
+  experienceYears?: Prisma.IntWithAggregatesFilter<"Technician"> | number
+  resume?: Prisma.StringNullableWithAggregatesFilter<"Technician"> | string | null
+  resumePublicId?: Prisma.StringNullableWithAggregatesFilter<"Technician"> | string | null
+  additionalFiles?: Prisma.JsonNullableWithAggregatesFilter<"Technician">
+  technicianFee?: Prisma.DecimalNullableWithAggregatesFilter<"Technician"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusWithAggregatesFilter<"Technician"> | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusWithAggregatesFilter<"Technician"> | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"Technician"> | string | null
   zoneId?: Prisma.StringNullableWithAggregatesFilter<"Technician"> | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Technician"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Technician"> | Date | string
@@ -296,7 +416,14 @@ export type TechnicianCreateInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -311,7 +438,14 @@ export type TechnicianUncheckedCreateInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -324,7 +458,14 @@ export type TechnicianUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,7 +480,14 @@ export type TechnicianUncheckedUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -353,7 +501,14 @@ export type TechnicianCreateManyInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -365,7 +520,14 @@ export type TechnicianUpdateManyMutationInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -378,7 +540,14 @@ export type TechnicianUncheckedUpdateManyInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -396,11 +565,23 @@ export type TechnicianCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   skills?: Prisma.SortOrder
+  experienceYears?: Prisma.SortOrder
+  resume?: Prisma.SortOrder
+  resumePublicId?: Prisma.SortOrder
+  additionalFiles?: Prisma.SortOrder
+  technicianFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  verificationStatus?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
   zoneId?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type TechnicianAvgOrderByAggregateInput = {
+  experienceYears?: Prisma.SortOrder
+  technicianFee?: Prisma.SortOrder
 }
 
 export type TechnicianMaxOrderByAggregateInput = {
@@ -409,7 +590,13 @@ export type TechnicianMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   skills?: Prisma.SortOrder
+  experienceYears?: Prisma.SortOrder
+  resume?: Prisma.SortOrder
+  resumePublicId?: Prisma.SortOrder
+  technicianFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  verificationStatus?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
   zoneId?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -422,11 +609,22 @@ export type TechnicianMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
   skills?: Prisma.SortOrder
+  experienceYears?: Prisma.SortOrder
+  resume?: Prisma.SortOrder
+  resumePublicId?: Prisma.SortOrder
+  technicianFee?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  verificationStatus?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
   zoneId?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type TechnicianSumOrderByAggregateInput = {
+  experienceYears?: Prisma.SortOrder
+  technicianFee?: Prisma.SortOrder
 }
 
 export type TechnicianNullableScalarRelationFilter = {
@@ -448,8 +646,20 @@ export type TechnicianUpdateOneRequiredWithoutAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TechnicianUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.TechnicianUpdateWithoutAssignmentsInput>, Prisma.TechnicianUncheckedUpdateWithoutAssignmentsInput>
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type EnumTechnicianStatusFieldUpdateOperationsInput = {
   set?: $Enums.TechnicianStatus
+}
+
+export type EnumTechnicianVerificationStatusFieldUpdateOperationsInput = {
+  set?: $Enums.TechnicianVerificationStatus
 }
 
 export type TechnicianCreateNestedOneWithoutUserInput = {
@@ -489,7 +699,14 @@ export type TechnicianCreateWithoutAssignmentsInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -503,7 +720,14 @@ export type TechnicianUncheckedCreateWithoutAssignmentsInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -531,7 +755,14 @@ export type TechnicianUpdateWithoutAssignmentsInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,7 +776,14 @@ export type TechnicianUncheckedUpdateWithoutAssignmentsInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -557,7 +795,14 @@ export type TechnicianCreateWithoutUserInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -570,7 +815,14 @@ export type TechnicianUncheckedCreateWithoutUserInput = {
   phone: string
   employeeId: string
   skills?: string | null
+  experienceYears?: number
+  resume?: string | null
+  resumePublicId?: string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.TechnicianStatus
+  verificationStatus?: $Enums.TechnicianVerificationStatus
+  rejectionReason?: string | null
   zoneId?: string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -599,7 +851,14 @@ export type TechnicianUpdateWithoutUserInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -612,7 +871,14 @@ export type TechnicianUncheckedUpdateWithoutUserInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   employeeId?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  resume?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resumePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  technicianFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumTechnicianStatusFieldUpdateOperationsInput | $Enums.TechnicianStatus
+  verificationStatus?: Prisma.EnumTechnicianVerificationStatusFieldUpdateOperationsInput | $Enums.TechnicianVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -657,7 +923,14 @@ export type TechnicianSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   phone?: boolean
   employeeId?: boolean
   skills?: boolean
+  experienceYears?: boolean
+  resume?: boolean
+  resumePublicId?: boolean
+  additionalFiles?: boolean
+  technicianFee?: boolean
   status?: boolean
+  verificationStatus?: boolean
+  rejectionReason?: boolean
   zoneId?: boolean
   deletedAt?: boolean
   createdAt?: boolean
@@ -673,7 +946,14 @@ export type TechnicianSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   phone?: boolean
   employeeId?: boolean
   skills?: boolean
+  experienceYears?: boolean
+  resume?: boolean
+  resumePublicId?: boolean
+  additionalFiles?: boolean
+  technicianFee?: boolean
   status?: boolean
+  verificationStatus?: boolean
+  rejectionReason?: boolean
   zoneId?: boolean
   deletedAt?: boolean
   createdAt?: boolean
@@ -687,7 +967,14 @@ export type TechnicianSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   phone?: boolean
   employeeId?: boolean
   skills?: boolean
+  experienceYears?: boolean
+  resume?: boolean
+  resumePublicId?: boolean
+  additionalFiles?: boolean
+  technicianFee?: boolean
   status?: boolean
+  verificationStatus?: boolean
+  rejectionReason?: boolean
   zoneId?: boolean
   deletedAt?: boolean
   createdAt?: boolean
@@ -701,14 +988,21 @@ export type TechnicianSelectScalar = {
   phone?: boolean
   employeeId?: boolean
   skills?: boolean
+  experienceYears?: boolean
+  resume?: boolean
+  resumePublicId?: boolean
+  additionalFiles?: boolean
+  technicianFee?: boolean
   status?: boolean
+  verificationStatus?: boolean
+  rejectionReason?: boolean
   zoneId?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TechnicianOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "phone" | "employeeId" | "skills" | "status" | "zoneId" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["technician"]>
+export type TechnicianOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "phone" | "employeeId" | "skills" | "experienceYears" | "resume" | "resumePublicId" | "additionalFiles" | "technicianFee" | "status" | "verificationStatus" | "rejectionReason" | "zoneId" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["technician"]>
 export type TechnicianInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignments?: boolean | Prisma.Technician$assignmentsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -733,7 +1027,14 @@ export type $TechnicianPayload<ExtArgs extends runtime.Types.Extensions.Internal
     phone: string
     employeeId: string
     skills: string | null
+    experienceYears: number
+    resume: string | null
+    resumePublicId: string | null
+    additionalFiles: runtime.JsonValue | null
+    technicianFee: runtime.Decimal | null
     status: $Enums.TechnicianStatus
+    verificationStatus: $Enums.TechnicianVerificationStatus
+    rejectionReason: string | null
     zoneId: string | null
     deletedAt: Date | null
     createdAt: Date
@@ -1168,7 +1469,14 @@ export interface TechnicianFieldRefs {
   readonly phone: Prisma.FieldRef<"Technician", 'String'>
   readonly employeeId: Prisma.FieldRef<"Technician", 'String'>
   readonly skills: Prisma.FieldRef<"Technician", 'String'>
+  readonly experienceYears: Prisma.FieldRef<"Technician", 'Int'>
+  readonly resume: Prisma.FieldRef<"Technician", 'String'>
+  readonly resumePublicId: Prisma.FieldRef<"Technician", 'String'>
+  readonly additionalFiles: Prisma.FieldRef<"Technician", 'Json'>
+  readonly technicianFee: Prisma.FieldRef<"Technician", 'Decimal'>
   readonly status: Prisma.FieldRef<"Technician", 'TechnicianStatus'>
+  readonly verificationStatus: Prisma.FieldRef<"Technician", 'TechnicianVerificationStatus'>
+  readonly rejectionReason: Prisma.FieldRef<"Technician", 'String'>
   readonly zoneId: Prisma.FieldRef<"Technician", 'String'>
   readonly deletedAt: Prisma.FieldRef<"Technician", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Technician", 'DateTime'>

@@ -1562,6 +1562,7 @@ export const LoadSheddingScheduleScalarFieldEnum = {
   endTime: 'endTime',
   status: 'status',
   createdById: 'createdById',
+  scheduleFee: 'scheduleFee',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -1682,7 +1683,14 @@ export const TechnicianScalarFieldEnum = {
   phone: 'phone',
   employeeId: 'employeeId',
   skills: 'skills',
+  experienceYears: 'experienceYears',
+  resume: 'resume',
+  resumePublicId: 'resumePublicId',
+  additionalFiles: 'additionalFiles',
+  technicianFee: 'technicianFee',
   status: 'status',
+  verificationStatus: 'verificationStatus',
+  rejectionReason: 'rejectionReason',
   zoneId: 'zoneId',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
@@ -1701,6 +1709,7 @@ export const UserScalarFieldEnum = {
   status: 'status',
   emailVerified: 'emailVerified',
   isDeleted: 'isDeleted',
+  needPasswordChange: 'needPasswordChange',
   googleId: 'googleId',
   authProvider: 'authProvider',
   imageUrl: 'imageUrl',
@@ -1852,6 +1861,20 @@ export type ListEnumScheduleStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
  * Reference to a field of type 'OutageType'
  */
 export type EnumOutageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OutageType'>
@@ -1894,20 +1917,6 @@ export type ListEnumOutageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
- * Reference to a field of type 'Decimal'
- */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal[]'
- */
-export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-/**
  * Reference to a field of type 'PaymentGateway'
  */
 export type EnumPaymentGatewayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentGateway'>
@@ -1936,6 +1945,20 @@ export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
  * Reference to a field of type 'TechnicianStatus'
  */
 export type EnumTechnicianStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TechnicianStatus'>
@@ -1946,6 +1969,20 @@ export type EnumTechnicianStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'TechnicianStatus[]'
  */
 export type ListEnumTechnicianStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TechnicianStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TechnicianVerificationStatus'
+ */
+export type EnumTechnicianVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TechnicianVerificationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'TechnicianVerificationStatus[]'
+ */
+export type ListEnumTechnicianVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TechnicianVerificationStatus[]'>
     
 
 
@@ -1988,20 +2025,6 @@ export type EnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'AuthProvider[]'
  */
 export type ListEnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 /**
