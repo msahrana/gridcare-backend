@@ -19,7 +19,7 @@ router.post(
 router.get(
     '/my-assignments',
     auth(UserRole.TECHNICIAN),
-    outageAssignmentControllers.getMyAssignments,
+    outageAssignmentControllers.getMyAssignments,   // TODO 
 );
 
 router.get(
