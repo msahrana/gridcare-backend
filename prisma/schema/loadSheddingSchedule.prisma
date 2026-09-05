@@ -3,6 +3,7 @@ model LoadSheddingSchedule {
 
   areaId      String
   title       String
+
   description String?
 
   startTime   DateTime
@@ -12,17 +13,16 @@ model LoadSheddingSchedule {
 
   createdById String
 
-  area        Area           @relation(fields: [areaId], references: [id])
+  area Area @relation(fields: [areaId], references: [id])
 
-  scheduleFee Decimal?       @db.Decimal(10, 2)
-
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  deletedAt   DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 
   @@index([areaId])
   @@index([startTime])
   @@index([status])
-
+  @@index([createdById])
+  
   @@map("load_shedding_schedules")
 }

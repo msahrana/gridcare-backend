@@ -1,0 +1,89 @@
+model SubscriptionPayment {
+  id String @id @default(uuid())
+
+  // =========================
+  // User / Customer
+  // =========================
+
+  userId String
+  user   User @relation( fields: [userId], references: [id], onDelete: Cascade )
+
+  // =========================
+  // Related Subscription
+  // =========================
+
+  subscriptionId String
+  subscription   Subscription @relation( fields: [subscriptionId], references: [id], onDelete: Restrict )
+
+  // =========================
+  // Payment Information
+  // =========================
+
+  status         PaymentStatus  @default(PENDING)
+  amount         Decimal        @db.Decimal(10, 2)
+  currency       String         @default("BDT")
+  paymentGateway PaymentGateway @default(BKASH)
+
+  // =========================
+  // Merchant Information
+  // =========================
+
+  merchantInvoiceNumber String @unique
+
+  // =========================
+  // bKash Information
+  // =========================
+
+  bkashPaymentId String? @unique
+  bkashTrxId     String? @unique
+  payerReference String?
+
+  // =========================
+  // Gateway Response
+  // =========================
+
+  gatewayResponse Json?
+
+  // =========================
+  // Payment Information
+  // =========================
+
+  paidAt DateTime?
+
+  // =========================
+  // Refund Information
+  // =========================
+
+  refundTrxId  String?
+  refundReason String?
+  refundedAt   DateTime?
+  refundAmount Decimal? @db.Decimal(10, 2)
+
+  // =========================
+  // Stripe Information
+  // Future Support
+  // =========================
+
+  stripeSessionId       String? @unique
+  stripePaymentIntentId String? @unique
+  stripeCustomerId       String?
+
+  // =========================
+  // Timestamps
+  // =========================
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // =========================
+  // Indexes
+  // =========================
+
+  @@index([userId])
+  @@index([subscriptionId])
+  @@index([status])
+  @@index([paymentGateway])
+  @@index([createdAt])
+
+  @@map("subscription_payments")
+}

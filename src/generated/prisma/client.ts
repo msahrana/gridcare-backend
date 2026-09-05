@@ -82,15 +82,25 @@ export type OutageAssignment = Prisma.OutageAssignmentModel
  */
 export type OutageReport = Prisma.OutageReportModel
 /**
- * Model Payment
- * 
- */
-export type Payment = Prisma.PaymentModel
-/**
  * Model Profile
  * 
  */
 export type Profile = Prisma.ProfileModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model SubscriptionPayment
+ * 
+ */
+export type SubscriptionPayment = Prisma.SubscriptionPaymentModel
+/**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel
 /**
  * Model Substation
  * 

@@ -10,6 +10,9 @@ import { outageAssignmentRoutes } from '../modules/outageAssignment/outageAssign
 import { technicianRoutes } from '../modules/technician/technician.route';
 import { notificationRoutes } from '../modules/notifications/notification.route';
 import { auditLogRoutes } from '../modules/auditLog/auditLog.route';
+import { subscriptionRoutes } from '../modules/subscriptions/subscription.route';
+import { subscriptionPaymentRoutes } from '../modules/subscriptionPayment/payment.route';
+
 import { loadSheddingScheduleRoutes } from '../modules/loadSheddingSchedule/loadSheddingSchedule.route';
 
 const router = Router();
@@ -86,6 +89,14 @@ const routerManger = [
     {
         path: '/audit-logs',
         route: auditLogRoutes,
+    },
+    {
+        path: '/subscriptions',
+        route: subscriptionRoutes,
+    },
+    {
+        path: '/payments',
+        route: subscriptionPaymentRoutes,
     },
 ];
 

@@ -1,29 +1,31 @@
 model Technician {
   id                 String   @id @default(uuid())
+
   userId             String   @unique
   phone              String   @unique
   employeeId         String   @unique
 
   skills             String?
   experienceYears    Int      @default(0)
+
   resume             String?
   resumePublicId     String?
-  additionalFiles    Json?
-  technicianFee      Decimal? @db.Decimal(10, 2)
 
-  status             TechnicianStatus @default(AVAILABLE)
-  verificationStatus TechnicianVerificationStatus @default(PENDING)
+  additionalFiles    Json?
+
+  status             TechnicianStatus              @default(AVAILABLE)
+  verificationStatus TechnicianVerificationStatus  @default(PENDING)
 
   rejectionReason    String?
+
   zoneId             String?
-  
   deletedAt          DateTime?
 
+  user               User                @relation(fields: [userId], references: [id])
   assignments        OutageAssignment[]
-  user               User @relation(fields: [userId], references: [id])
 
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   @@index([status])
   @@index([zoneId])

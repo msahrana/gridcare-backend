@@ -1,6 +1,5 @@
 model Outage {
   id          String       @id @default(uuid())
-
   areaId      String
   title       String
   description String?
@@ -12,14 +11,13 @@ model Outage {
   startedAt   DateTime?
   restoredAt  DateTime?
 
-  area        Area         @relation(fields: [areaId], references: [id])
-
+  area        Area              @relation(fields: [areaId], references: [id])
+  
   reports     OutageReport[]
   assignments OutageAssignment[]
-  payments    Payment[]
 
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   deletedAt   DateTime?
 
   @@index([areaId])
@@ -27,5 +25,5 @@ model Outage {
   @@index([priority])
   @@index([type])
 
-  @@map("outages")  
+  @@map("outages")
 }

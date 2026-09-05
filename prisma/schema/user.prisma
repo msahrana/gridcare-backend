@@ -1,36 +1,40 @@
 model User {
-  id            String       @id @default(uuid())
-  name          String
-  email         String       @unique
-  password      String?
-  role          UserRole     @default(CUSTOMER)
-  status        UserStatus   @default(ACTIVE)
-  emailVerified Boolean      @default(false)
-  isDeleted     Boolean      @default(false)
-  needPasswordChange Boolean    @default(false)
+  id                 String       @id @default(uuid())
+  name               String
+  email              String       @unique
+  password           String?
+  role               UserRole     @default(CUSTOMER)
+  status             UserStatus   @default(ACTIVE)
 
-  googleId      String?      @unique
-  authProvider  AuthProvider @default(CREDENTIAL)
+  emailVerified      Boolean      @default(false)
+  isDeleted          Boolean      @default(false)
+  needPasswordChange Boolean      @default(false)
 
-  imageUrl      String       @default("")
-  imagePublicId String       @default("")
+  googleId           String?      @unique
+  authProvider       AuthProvider @default(CREDENTIAL)
 
-  profile       Profile?
-  payment       Payment[]
-  reports       OutageReport[]
+  imageUrl           String       @default("")
+  imagePublicId      String       @default("")
 
-  assignments   OutageAssignment[] @relation("AssignmentCreator")
+  // =========================
+  // User Relations
+  // =========================
 
-  notifications Notification[]
+  profile            Profile?
 
-  auditLogs     AuditLog[] @relation("AuditActor")
+  subscriptions      Subscription[]
+  subscriptionPayments SubscriptionPayment[]
 
-  
-  technician    Technician?
+  reports            OutageReport[]
+  assignments        OutageAssignment[] @relation("AssignmentCreator")
+  notifications      Notification[]
+  auditLogs          AuditLog[]         @relation("AuditActor")
 
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  deletedAt     DateTime?
+  technician         Technician?
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  deletedAt          DateTime?
 
   @@index([email])
   @@index([role])

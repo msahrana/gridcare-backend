@@ -79,3 +79,15 @@ enum AssignmentStatus {
   COMPLETED
   CANCELLED
 }
+
+enum SubscriptionPlanStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum SubscriptionStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}

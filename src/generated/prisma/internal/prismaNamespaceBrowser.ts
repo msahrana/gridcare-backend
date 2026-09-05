@@ -59,8 +59,10 @@ export const ModelName = {
   Outage: 'Outage',
   OutageAssignment: 'OutageAssignment',
   OutageReport: 'OutageReport',
-  Payment: 'Payment',
   Profile: 'Profile',
+  Subscription: 'Subscription',
+  SubscriptionPayment: 'SubscriptionPayment',
+  SubscriptionPlan: 'SubscriptionPlan',
   Substation: 'Substation',
   Technician: 'Technician',
   User: 'User',
@@ -140,7 +142,6 @@ export const LoadSheddingScheduleScalarFieldEnum = {
   endTime: 'endTime',
   status: 'status',
   createdById: 'createdById',
-  scheduleFee: 'scheduleFee',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -206,27 +207,6 @@ export const OutageReportScalarFieldEnum = {
 export type OutageReportScalarFieldEnum = (typeof OutageReportScalarFieldEnum)[keyof typeof OutageReportScalarFieldEnum]
 
 
-export const PaymentScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  outageId: 'outageId',
-  amount: 'amount',
-  currency: 'currency',
-  gateway: 'gateway',
-  status: 'status',
-  merchantInvoiceNumber: 'merchantInvoiceNumber',
-  transactionId: 'transactionId',
-  stripeSessionId: 'stripeSessionId',
-  stripePaymentIntentId: 'stripePaymentIntentId',
-  stripeCustomerId: 'stripeCustomerId',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
-
-
 export const ProfileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -238,6 +218,63 @@ export const ProfileScalarFieldEnum = {
 } as const
 
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const SubscriptionPaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subscriptionId: 'subscriptionId',
+  status: 'status',
+  amount: 'amount',
+  currency: 'currency',
+  paymentGateway: 'paymentGateway',
+  merchantInvoiceNumber: 'merchantInvoiceNumber',
+  bkashPaymentId: 'bkashPaymentId',
+  bkashTrxId: 'bkashTrxId',
+  payerReference: 'payerReference',
+  gatewayResponse: 'gatewayResponse',
+  paidAt: 'paidAt',
+  refundTrxId: 'refundTrxId',
+  refundReason: 'refundReason',
+  refundedAt: 'refundedAt',
+  refundAmount: 'refundAmount',
+  stripeSessionId: 'stripeSessionId',
+  stripePaymentIntentId: 'stripePaymentIntentId',
+  stripeCustomerId: 'stripeCustomerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionPaymentScalarFieldEnum = (typeof SubscriptionPaymentScalarFieldEnum)[keyof typeof SubscriptionPaymentScalarFieldEnum]
+
+
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  durationDays: 'durationDays',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
 
 
 export const SubstationScalarFieldEnum = {
@@ -265,7 +302,6 @@ export const TechnicianScalarFieldEnum = {
   resume: 'resume',
   resumePublicId: 'resumePublicId',
   additionalFiles: 'additionalFiles',
-  technicianFee: 'technicianFee',
   status: 'status',
   verificationStatus: 'verificationStatus',
   rejectionReason: 'rejectionReason',
