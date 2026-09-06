@@ -17,6 +17,7 @@ import { subscriptionPaymentRoutes } from '../modules/subscriptionPayment/subscr
 import { restorationRoutes } from '../modules/restoration/restoration.route';
 import { analyticsRoutes } from '../modules/analytics/analytics.route';
 import { dashboardRoutes } from '../modules/dashboard/dashboard.route';
+import { automatedScheduleRoutes } from '../modules/automatedSchedule/automatedSchedule.route';
 
 const router = Router();
 
@@ -112,6 +113,10 @@ const routerManger = [
     {
         path: '/dashboard',
         route: dashboardRoutes,
+    },
+    {
+        path: '/automated-schedules',
+        route: automatedScheduleRoutes,
     },
 ];
 
