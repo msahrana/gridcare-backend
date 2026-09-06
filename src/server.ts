@@ -1,9 +1,6 @@
 import app from './app';
 import config from './app/config';
-import {
-    deleteRejectedTechnicians,
-    deleteUnverifiedTechnicians,
-} from './app/lib/cron';
+import { initializeCronJobs } from './app/lib/cron';
 import { transporter } from './app/lib/nodemailer';
 import { prisma } from './app/lib/prisma';
 import { redisClient } from './app/lib/redis';
@@ -25,8 +22,7 @@ const main = async () => {
         await seedOperator();
         await seedTechnician();
 
-        await deleteUnverifiedTechnicians();
-        await deleteRejectedTechnicians();
+        initializeCronJobs();
 
         app.listen(PORT, () => {
             console.log(`🚀 Server is running on port: ${PORT}`);
