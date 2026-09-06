@@ -7,7 +7,7 @@ model Subscription {
 
   userId String
 
-  user User @relation( fields: [userId], references: [id], onDelete: Cascade )
+  user User @relation(  fields: [userId],  references: [id], onDelete: Cascade )
 
   // =========================
   // Subscription Plan
@@ -15,14 +15,14 @@ model Subscription {
 
   planId String
 
-  plan SubscriptionPlan @relation( fields: [planId], references: [id], onDelete: Restrict )
+  plan SubscriptionPlan @relation( fields: [planId],  references: [id], onDelete: Restrict )
 
   // =========================
   // Subscription Period
   // =========================
 
-  startDate DateTime
-  endDate   DateTime
+  startDate DateTime?
+  endDate   DateTime?
 
   // =========================
   // Status

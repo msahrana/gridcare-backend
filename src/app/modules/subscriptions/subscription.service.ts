@@ -1,5 +1,4 @@
 import httpStatus from 'http-status';
-
 import { prisma } from '../../lib/prisma';
 import { AppError } from '../../errors/AppError';
 
@@ -239,6 +238,10 @@ const createSubscriptionIntoDB = async (
     userId: string,
     payload: ICreateSubscriptionPayload,
 ) => {
+    // =====================================================
+    // 1. Check User
+    // =====================================================
+
     const user = await prisma.user.findUnique({
         where: {
             id: userId,
@@ -248,6 +251,10 @@ const createSubscriptionIntoDB = async (
     if (!user) {
         throw new AppError(httpStatus.NOT_FOUND, 'User not found');
     }
+
+    // =====================================================
+    // 2. Check Active Subscription Plan
+    // =====================================================
 
     const plan = await prisma.subscriptionPlan.findFirst({
         where: {
@@ -263,6 +270,10 @@ const createSubscriptionIntoDB = async (
             'Active subscription plan not found',
         );
     }
+
+    // =====================================================
+    // 3. Check Existing Active Subscription
+    // =====================================================
 
     const activeSubscription = await prisma.subscription.findFirst({
         where: {
@@ -281,18 +292,16 @@ const createSubscriptionIntoDB = async (
         );
     }
 
+    // =====================================================
+    // 4. Create Pending Subscription
+    // =====================================================
+
     const result = await prisma.subscription.create({
         data: {
             userId,
             planId: plan.id,
-
-            // Payment successful হলে এগুলো update করা হবে
-            startDate: new Date(),
-
-            endDate: new Date(
-                Date.now() + plan.durationDays * 24 * 60 * 60 * 1000,
-            ),
-
+            startDate: null,
+            endDate: null,
             status: SubscriptionStatus.PENDING,
         },
 

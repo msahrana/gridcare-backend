@@ -11,9 +11,9 @@ import { technicianRoutes } from '../modules/technician/technician.route';
 import { notificationRoutes } from '../modules/notifications/notification.route';
 import { auditLogRoutes } from '../modules/auditLog/auditLog.route';
 import { subscriptionRoutes } from '../modules/subscriptions/subscription.route';
-import { subscriptionPaymentRoutes } from '../modules/subscriptionPayment/payment.route';
 
 import { loadSheddingScheduleRoutes } from '../modules/loadSheddingSchedule/loadSheddingSchedule.route';
+import { subscriptionPaymentRoutes } from '../modules/subscriptionPayment/subscriptionPayment.route';
 
 const router = Router();
 
@@ -95,7 +95,7 @@ const routerManger = [
         route: subscriptionRoutes,
     },
     {
-        path: '/payments',
+        path: '/subscription-payments',
         route: subscriptionPaymentRoutes,
     },
 ];
