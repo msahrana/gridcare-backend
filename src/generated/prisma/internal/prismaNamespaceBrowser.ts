@@ -186,7 +186,10 @@ export const OutageAssignmentScalarFieldEnum = {
   outageId: 'outageId',
   technicianId: 'technicianId',
   assignedById: 'assignedById',
+  status: 'status',
   assignedAt: 'assignedAt',
+  acceptedAt: 'acceptedAt',
+  startedAt: 'startedAt',
   completedAt: 'completedAt'
 } as const
 

@@ -1,22 +1,24 @@
 model OutageAssignment {
-  id           String   @id @default(uuid())
+  id           String           @id @default(uuid())
   outageId     String
   technicianId String
   assignedById String
 
-  assignedAt  DateTime @default(now())
-  completedAt DateTime?
+  status       AssignmentStatus @default(ASSIGNED)
 
-  outage     Outage     @relation(fields: [outageId], references: [id])
+  assignedAt   DateTime         @default(now())
+  acceptedAt   DateTime?
+  startedAt    DateTime?
+  completedAt  DateTime?
 
-  technician Technician @relation(fields: [technicianId], references: [id])
-
-  assignedBy User @relation( "AssignmentCreator",  fields: [assignedById], references: [id])
+  outage       Outage     @relation(fields: [outageId], references: [id])
+  technician   Technician @relation(fields: [technicianId], references: [id])
+  assignedBy   User       @relation("AssignmentCreator", fields: [assignedById], references: [id])
 
   @@index([outageId])
   @@index([technicianId])
   @@index([assignedById])
-
+  @@index([status])
   @@unique([outageId, technicianId])
 
   @@map("outage_assignments")

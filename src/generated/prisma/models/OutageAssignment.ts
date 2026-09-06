@@ -29,7 +29,10 @@ export type OutageAssignmentMinAggregateOutputType = {
   outageId: string | null
   technicianId: string | null
   assignedById: string | null
+  status: $Enums.AssignmentStatus | null
   assignedAt: Date | null
+  acceptedAt: Date | null
+  startedAt: Date | null
   completedAt: Date | null
 }
 
@@ -38,7 +41,10 @@ export type OutageAssignmentMaxAggregateOutputType = {
   outageId: string | null
   technicianId: string | null
   assignedById: string | null
+  status: $Enums.AssignmentStatus | null
   assignedAt: Date | null
+  acceptedAt: Date | null
+  startedAt: Date | null
   completedAt: Date | null
 }
 
@@ -47,7 +53,10 @@ export type OutageAssignmentCountAggregateOutputType = {
   outageId: number
   technicianId: number
   assignedById: number
+  status: number
   assignedAt: number
+  acceptedAt: number
+  startedAt: number
   completedAt: number
   _all: number
 }
@@ -58,7 +67,10 @@ export type OutageAssignmentMinAggregateInputType = {
   outageId?: true
   technicianId?: true
   assignedById?: true
+  status?: true
   assignedAt?: true
+  acceptedAt?: true
+  startedAt?: true
   completedAt?: true
 }
 
@@ -67,7 +79,10 @@ export type OutageAssignmentMaxAggregateInputType = {
   outageId?: true
   technicianId?: true
   assignedById?: true
+  status?: true
   assignedAt?: true
+  acceptedAt?: true
+  startedAt?: true
   completedAt?: true
 }
 
@@ -76,7 +91,10 @@ export type OutageAssignmentCountAggregateInputType = {
   outageId?: true
   technicianId?: true
   assignedById?: true
+  status?: true
   assignedAt?: true
+  acceptedAt?: true
+  startedAt?: true
   completedAt?: true
   _all?: true
 }
@@ -158,7 +176,10 @@ export type OutageAssignmentGroupByOutputType = {
   outageId: string
   technicianId: string
   assignedById: string
+  status: $Enums.AssignmentStatus
   assignedAt: Date
+  acceptedAt: Date | null
+  startedAt: Date | null
   completedAt: Date | null
   _count: OutageAssignmentCountAggregateOutputType | null
   _min: OutageAssignmentMinAggregateOutputType | null
@@ -188,7 +209,10 @@ export type OutageAssignmentWhereInput = {
   outageId?: Prisma.StringFilter<"OutageAssignment"> | string
   technicianId?: Prisma.StringFilter<"OutageAssignment"> | string
   assignedById?: Prisma.StringFilter<"OutageAssignment"> | string
+  status?: Prisma.EnumAssignmentStatusFilter<"OutageAssignment"> | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFilter<"OutageAssignment"> | Date | string
+  acceptedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
+  startedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
   outage?: Prisma.XOR<Prisma.OutageScalarRelationFilter, Prisma.OutageWhereInput>
   technician?: Prisma.XOR<Prisma.TechnicianScalarRelationFilter, Prisma.TechnicianWhereInput>
@@ -200,7 +224,10 @@ export type OutageAssignmentOrderByWithRelationInput = {
   outageId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrder
   assignedById?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   outage?: Prisma.OutageOrderByWithRelationInput
   technician?: Prisma.TechnicianOrderByWithRelationInput
@@ -216,7 +243,10 @@ export type OutageAssignmentWhereUniqueInput = Prisma.AtLeast<{
   outageId?: Prisma.StringFilter<"OutageAssignment"> | string
   technicianId?: Prisma.StringFilter<"OutageAssignment"> | string
   assignedById?: Prisma.StringFilter<"OutageAssignment"> | string
+  status?: Prisma.EnumAssignmentStatusFilter<"OutageAssignment"> | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFilter<"OutageAssignment"> | Date | string
+  acceptedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
+  startedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
   outage?: Prisma.XOR<Prisma.OutageScalarRelationFilter, Prisma.OutageWhereInput>
   technician?: Prisma.XOR<Prisma.TechnicianScalarRelationFilter, Prisma.TechnicianWhereInput>
@@ -228,7 +258,10 @@ export type OutageAssignmentOrderByWithAggregationInput = {
   outageId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrder
   assignedById?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  startedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.OutageAssignmentCountOrderByAggregateInput
   _max?: Prisma.OutageAssignmentMaxOrderByAggregateInput
@@ -243,13 +276,19 @@ export type OutageAssignmentScalarWhereWithAggregatesInput = {
   outageId?: Prisma.StringWithAggregatesFilter<"OutageAssignment"> | string
   technicianId?: Prisma.StringWithAggregatesFilter<"OutageAssignment"> | string
   assignedById?: Prisma.StringWithAggregatesFilter<"OutageAssignment"> | string
+  status?: Prisma.EnumAssignmentStatusWithAggregatesFilter<"OutageAssignment"> | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeWithAggregatesFilter<"OutageAssignment"> | Date | string
+  acceptedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OutageAssignment"> | Date | string | null
+  startedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OutageAssignment"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"OutageAssignment"> | Date | string | null
 }
 
 export type OutageAssignmentCreateInput = {
   id?: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
   outage: Prisma.OutageCreateNestedOneWithoutAssignmentsInput
   technician: Prisma.TechnicianCreateNestedOneWithoutAssignmentsInput
@@ -261,13 +300,19 @@ export type OutageAssignmentUncheckedCreateInput = {
   outageId: string
   technicianId: string
   assignedById: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type OutageAssignmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outage?: Prisma.OutageUpdateOneRequiredWithoutAssignmentsNestedInput
   technician?: Prisma.TechnicianUpdateOneRequiredWithoutAssignmentsNestedInput
@@ -279,7 +324,10 @@ export type OutageAssignmentUncheckedUpdateInput = {
   outageId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -288,13 +336,19 @@ export type OutageAssignmentCreateManyInput = {
   outageId: string
   technicianId: string
   assignedById: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type OutageAssignmentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -303,7 +357,10 @@ export type OutageAssignmentUncheckedUpdateManyInput = {
   outageId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -327,7 +384,10 @@ export type OutageAssignmentCountOrderByAggregateInput = {
   outageId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrder
   assignedById?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
 }
 
@@ -336,7 +396,10 @@ export type OutageAssignmentMaxOrderByAggregateInput = {
   outageId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrder
   assignedById?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
 }
 
@@ -345,7 +408,10 @@ export type OutageAssignmentMinOrderByAggregateInput = {
   outageId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrder
   assignedById?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   assignedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
+  startedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
 }
 
@@ -389,6 +455,10 @@ export type OutageAssignmentUncheckedUpdateManyWithoutOutageNestedInput = {
   update?: Prisma.OutageAssignmentUpdateWithWhereUniqueWithoutOutageInput | Prisma.OutageAssignmentUpdateWithWhereUniqueWithoutOutageInput[]
   updateMany?: Prisma.OutageAssignmentUpdateManyWithWhereWithoutOutageInput | Prisma.OutageAssignmentUpdateManyWithWhereWithoutOutageInput[]
   deleteMany?: Prisma.OutageAssignmentScalarWhereInput | Prisma.OutageAssignmentScalarWhereInput[]
+}
+
+export type EnumAssignmentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.AssignmentStatus
 }
 
 export type OutageAssignmentCreateNestedManyWithoutTechnicianInput = {
@@ -477,7 +547,10 @@ export type OutageAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput = {
 
 export type OutageAssignmentCreateWithoutOutageInput = {
   id?: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
   technician: Prisma.TechnicianCreateNestedOneWithoutAssignmentsInput
   assignedBy: Prisma.UserCreateNestedOneWithoutAssignmentsInput
@@ -487,7 +560,10 @@ export type OutageAssignmentUncheckedCreateWithoutOutageInput = {
   id?: string
   technicianId: string
   assignedById: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
@@ -525,13 +601,19 @@ export type OutageAssignmentScalarWhereInput = {
   outageId?: Prisma.StringFilter<"OutageAssignment"> | string
   technicianId?: Prisma.StringFilter<"OutageAssignment"> | string
   assignedById?: Prisma.StringFilter<"OutageAssignment"> | string
+  status?: Prisma.EnumAssignmentStatusFilter<"OutageAssignment"> | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFilter<"OutageAssignment"> | Date | string
+  acceptedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
+  startedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"OutageAssignment"> | Date | string | null
 }
 
 export type OutageAssignmentCreateWithoutTechnicianInput = {
   id?: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
   outage: Prisma.OutageCreateNestedOneWithoutAssignmentsInput
   assignedBy: Prisma.UserCreateNestedOneWithoutAssignmentsInput
@@ -541,7 +623,10 @@ export type OutageAssignmentUncheckedCreateWithoutTechnicianInput = {
   id?: string
   outageId: string
   assignedById: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
@@ -573,7 +658,10 @@ export type OutageAssignmentUpdateManyWithWhereWithoutTechnicianInput = {
 
 export type OutageAssignmentCreateWithoutAssignedByInput = {
   id?: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
   outage: Prisma.OutageCreateNestedOneWithoutAssignmentsInput
   technician: Prisma.TechnicianCreateNestedOneWithoutAssignmentsInput
@@ -583,7 +671,10 @@ export type OutageAssignmentUncheckedCreateWithoutAssignedByInput = {
   id?: string
   outageId: string
   technicianId: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
@@ -617,13 +708,19 @@ export type OutageAssignmentCreateManyOutageInput = {
   id?: string
   technicianId: string
   assignedById: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type OutageAssignmentUpdateWithoutOutageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   technician?: Prisma.TechnicianUpdateOneRequiredWithoutAssignmentsNestedInput
   assignedBy?: Prisma.UserUpdateOneRequiredWithoutAssignmentsNestedInput
@@ -633,7 +730,10 @@ export type OutageAssignmentUncheckedUpdateWithoutOutageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -641,7 +741,10 @@ export type OutageAssignmentUncheckedUpdateManyWithoutOutageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -649,13 +752,19 @@ export type OutageAssignmentCreateManyTechnicianInput = {
   id?: string
   outageId: string
   assignedById: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type OutageAssignmentUpdateWithoutTechnicianInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outage?: Prisma.OutageUpdateOneRequiredWithoutAssignmentsNestedInput
   assignedBy?: Prisma.UserUpdateOneRequiredWithoutAssignmentsNestedInput
@@ -665,7 +774,10 @@ export type OutageAssignmentUncheckedUpdateWithoutTechnicianInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   outageId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -673,7 +785,10 @@ export type OutageAssignmentUncheckedUpdateManyWithoutTechnicianInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   outageId?: Prisma.StringFieldUpdateOperationsInput | string
   assignedById?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -681,13 +796,19 @@ export type OutageAssignmentCreateManyAssignedByInput = {
   id?: string
   outageId: string
   technicianId: string
+  status?: $Enums.AssignmentStatus
   assignedAt?: Date | string
+  acceptedAt?: Date | string | null
+  startedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type OutageAssignmentUpdateWithoutAssignedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   outage?: Prisma.OutageUpdateOneRequiredWithoutAssignmentsNestedInput
   technician?: Prisma.TechnicianUpdateOneRequiredWithoutAssignmentsNestedInput
@@ -697,7 +818,10 @@ export type OutageAssignmentUncheckedUpdateWithoutAssignedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   outageId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -705,7 +829,10 @@ export type OutageAssignmentUncheckedUpdateManyWithoutAssignedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   outageId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -716,7 +843,10 @@ export type OutageAssignmentSelect<ExtArgs extends runtime.Types.Extensions.Inte
   outageId?: boolean
   technicianId?: boolean
   assignedById?: boolean
+  status?: boolean
   assignedAt?: boolean
+  acceptedAt?: boolean
+  startedAt?: boolean
   completedAt?: boolean
   outage?: boolean | Prisma.OutageDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.TechnicianDefaultArgs<ExtArgs>
@@ -728,7 +858,10 @@ export type OutageAssignmentSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   outageId?: boolean
   technicianId?: boolean
   assignedById?: boolean
+  status?: boolean
   assignedAt?: boolean
+  acceptedAt?: boolean
+  startedAt?: boolean
   completedAt?: boolean
   outage?: boolean | Prisma.OutageDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.TechnicianDefaultArgs<ExtArgs>
@@ -740,7 +873,10 @@ export type OutageAssignmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   outageId?: boolean
   technicianId?: boolean
   assignedById?: boolean
+  status?: boolean
   assignedAt?: boolean
+  acceptedAt?: boolean
+  startedAt?: boolean
   completedAt?: boolean
   outage?: boolean | Prisma.OutageDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.TechnicianDefaultArgs<ExtArgs>
@@ -752,11 +888,14 @@ export type OutageAssignmentSelectScalar = {
   outageId?: boolean
   technicianId?: boolean
   assignedById?: boolean
+  status?: boolean
   assignedAt?: boolean
+  acceptedAt?: boolean
+  startedAt?: boolean
   completedAt?: boolean
 }
 
-export type OutageAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "outageId" | "technicianId" | "assignedById" | "assignedAt" | "completedAt", ExtArgs["result"]["outageAssignment"]>
+export type OutageAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "outageId" | "technicianId" | "assignedById" | "status" | "assignedAt" | "acceptedAt" | "startedAt" | "completedAt", ExtArgs["result"]["outageAssignment"]>
 export type OutageAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   outage?: boolean | Prisma.OutageDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.TechnicianDefaultArgs<ExtArgs>
@@ -785,7 +924,10 @@ export type $OutageAssignmentPayload<ExtArgs extends runtime.Types.Extensions.In
     outageId: string
     technicianId: string
     assignedById: string
+    status: $Enums.AssignmentStatus
     assignedAt: Date
+    acceptedAt: Date | null
+    startedAt: Date | null
     completedAt: Date | null
   }, ExtArgs["result"]["outageAssignment"]>
   composites: {}
@@ -1217,7 +1359,10 @@ export interface OutageAssignmentFieldRefs {
   readonly outageId: Prisma.FieldRef<"OutageAssignment", 'String'>
   readonly technicianId: Prisma.FieldRef<"OutageAssignment", 'String'>
   readonly assignedById: Prisma.FieldRef<"OutageAssignment", 'String'>
+  readonly status: Prisma.FieldRef<"OutageAssignment", 'AssignmentStatus'>
   readonly assignedAt: Prisma.FieldRef<"OutageAssignment", 'DateTime'>
+  readonly acceptedAt: Prisma.FieldRef<"OutageAssignment", 'DateTime'>
+  readonly startedAt: Prisma.FieldRef<"OutageAssignment", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"OutageAssignment", 'DateTime'>
 }
     

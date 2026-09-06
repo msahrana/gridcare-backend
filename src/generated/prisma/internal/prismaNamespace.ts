@@ -1830,7 +1830,10 @@ export const OutageAssignmentScalarFieldEnum = {
   outageId: 'outageId',
   technicianId: 'technicianId',
   assignedById: 'assignedById',
+  status: 'status',
   assignedAt: 'assignedAt',
+  acceptedAt: 'acceptedAt',
+  startedAt: 'startedAt',
   completedAt: 'completedAt'
 } as const
 
@@ -2174,6 +2177,20 @@ export type EnumOutageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'OutageStatus[]'
  */
 export type ListEnumOutageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OutageStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AssignmentStatus'
+ */
+export type EnumAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssignmentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'AssignmentStatus[]'
+ */
+export type ListEnumAssignmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssignmentStatus[]'>
     
 
 

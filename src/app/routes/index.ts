@@ -16,6 +16,7 @@ import { loadSheddingScheduleRoutes } from '../modules/loadSheddingSchedule/load
 import { subscriptionPaymentRoutes } from '../modules/subscriptionPayment/subscriptionPayment.route';
 import { restorationRoutes } from '../modules/restoration/restoration.route';
 import { analyticsRoutes } from '../modules/analytics/analytics.route';
+import { dashboardRoutes } from '../modules/dashboard/dashboard.route';
 
 const router = Router();
 
@@ -107,6 +108,10 @@ const routerManger = [
     {
         path: '/analytics',
         route: analyticsRoutes,
+    },
+    {
+        path: '/dashboard',
+        route: dashboardRoutes,
     },
 ];
 
