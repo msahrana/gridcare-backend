@@ -108,7 +108,7 @@ const parseBKashResponse = async (
     } catch {
         throw new AppError(
             httpStatus.BAD_GATEWAY,
-            'Invalid response received from bKash',
+            `Invalid response received from bKash. HTTP Status: ${response.status}`,
         );
     }
 
@@ -117,7 +117,7 @@ const parseBKashResponse = async (
             httpStatus.BAD_GATEWAY,
             data.statusMessage ||
                 data.errorMessage ||
-                'bKash API request failed',
+                `bKash API request failed. HTTP Status: ${response.status}`,
         );
     }
 
@@ -126,7 +126,7 @@ const parseBKashResponse = async (
             httpStatus.BAD_GATEWAY,
             data.statusMessage ||
                 data.errorMessage ||
-                'bKash transaction failed',
+                `bKash transaction failed. Status Code: ${data.statusCode}`,
         );
     }
 
@@ -180,17 +180,15 @@ const executeBKashPayment = async (
     if (!token) {
         throw new AppError(
             httpStatus.BAD_GATEWAY,
-            'Unable to get bKash authentication token',
+            'Unable to obtain bKash ID token',
         );
     }
 
     const response = await fetch(
-        `${config.bkash_base_url}/tokenized/checkout/execute/${paymentID}`,
+        `${config.bkash_base_url}/tokenized/checkout/execute`,
         {
             method: 'POST',
-
             headers: getBKashHeaders(token),
-
             body: JSON.stringify({
                 paymentID,
             }),
@@ -208,16 +206,18 @@ const queryBKashPayment = async (
     if (!token) {
         throw new AppError(
             httpStatus.BAD_GATEWAY,
-            'Unable to get bKash authentication token',
+            'Unable to obtain bKash ID token',
         );
     }
 
     const response = await fetch(
-        `${config.bkash_base_url}/tokenized/checkout/payment/status/${paymentID}`,
+        `${config.bkash_base_url}/tokenized/checkout/payment/status`,
         {
-            method: 'GET',
-
+            method: 'POST',
             headers: getBKashHeaders(token),
+            body: JSON.stringify({
+                paymentID,
+            }),
         },
     );
 
@@ -536,7 +536,7 @@ const createSubscriptionPaymentIntoDB = async (
             );
         }
 
-        await prisma.subscriptionPayment.update({
+        const updatedPayment = await prisma.subscriptionPayment.update({
             where: {
                 id: payment.id,
             },
@@ -693,12 +693,6 @@ const handleBKashCallbackIntoDB = async (
             };
         }
     } catch (error) {
-        /*
-         * Execute can fail because payment may
-         * already have been executed.
-         *
-         * So query status before returning failure.
-         */
         console.error(
             'bKash execute error:',
             error instanceof Error ? error.message : error,
@@ -748,13 +742,32 @@ const handleBKashCallbackIntoDB = async (
 };
 
 const verifyBKashPaymentIntoDB = async (userId: string, paymentID: string) => {
+    // 🔍 DEBUG: এই user-এর সব subscription payments দেখুন
+    const allPayments = await prisma.subscriptionPayment.findMany({
+        where: {
+            userId,
+        },
+        select: {
+            id: true,
+            userId: true,
+            merchantInvoiceNumber: true,
+            bkashPaymentId: true,
+            status: true,
+            createdAt: true,
+        },
+    });
+
+    console.log('USER PAYMENTS:', allPayments);
+
+    // 🔍 এখন নির্দিষ্ট bKash payment খুঁজুন
     const payment = await prisma.subscriptionPayment.findFirst({
         where: {
             userId,
-
             bkashPaymentId: paymentID,
         },
     });
+
+   
 
     if (!payment) {
         throw new AppError(httpStatus.NOT_FOUND, 'Payment not found');
@@ -767,17 +780,12 @@ const verifyBKashPaymentIntoDB = async (userId: string, paymentID: string) => {
         };
     }
 
-    /*
-     * First query current bKash status.
-     */
+    // বাকি আপনার existing verification code...
+
     let gatewayResult = await queryBKashPayment(paymentID);
 
     let status = normalizeBKashStatus(gatewayResult.transactionStatus);
 
-    /*
-     * If still initiated/processing,
-     * try execute.
-     */
     if (status === 'PENDING') {
         try {
             const executeResult = await executeBKashPayment(paymentID);
@@ -791,10 +799,6 @@ const verifyBKashPaymentIntoDB = async (userId: string, paymentID: string) => {
                 error instanceof Error ? error.message : error,
             );
 
-            /*
-             * Query one more time because
-             * payment may already have been executed.
-             */
             gatewayResult = await queryBKashPayment(paymentID);
 
             status = normalizeBKashStatus(gatewayResult.transactionStatus);
@@ -805,7 +809,6 @@ const verifyBKashPaymentIntoDB = async (userId: string, paymentID: string) => {
 
     return {
         status,
-
         payment: processed,
     };
 };
@@ -1063,14 +1066,9 @@ const getAllSubscriptionPaymentsIntoDB = async (query: IQuery) => {
 
 export const subscriptionPaymentServices = {
     createSubscriptionPaymentIntoDB,
-
     handleBKashCallbackIntoDB,
-
     verifyBKashPaymentIntoDB,
-
     getSingleSubscriptionPaymentIntoDB,
-
     getMySubscriptionPaymentsIntoDB,
-
     getAllSubscriptionPaymentsIntoDB,
 };
