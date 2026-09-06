@@ -46,6 +46,8 @@ router.post(
     authControllers.changePassword,
 );
 
+router.post('/google', authControllers.googleLogin);
+
 router.post(
     '/forgot-password',
     validateRequest(userValidation.forgotPasswordZodSchema),

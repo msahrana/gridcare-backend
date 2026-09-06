@@ -443,7 +443,7 @@ const googleLoginIntoDB = async (payload: IGoogleLoginPayload) => {
         );
     }
 
-    const ifPatientExistWithGoogleAuth = await prisma.user.findUnique({
+    const ifUserExistWithGoogleAuth = await prisma.user.findUnique({
         where: {
             email: googleIdTokenPayload.email,
             role: UserRole.CUSTOMER,
@@ -451,10 +451,10 @@ const googleLoginIntoDB = async (payload: IGoogleLoginPayload) => {
         },
     });
 
-    let user = ifPatientExistWithGoogleAuth;
+    let user = ifUserExistWithGoogleAuth;
 
-    if (!ifPatientExistWithGoogleAuth) {
-        const ifPatientExistWithCredentials = await prisma.user.findUnique({
+    if (!ifUserExistWithGoogleAuth) {
+        const ifUserExistWithCredentials = await prisma.user.findUnique({
             where: {
                 email: googleIdTokenPayload.email,
                 role: UserRole.CUSTOMER,
@@ -462,28 +462,28 @@ const googleLoginIntoDB = async (payload: IGoogleLoginPayload) => {
             },
         });
 
-        if (ifPatientExistWithCredentials) {
-            if (!ifPatientExistWithCredentials.emailVerified) {
+        if (ifUserExistWithCredentials) {
+            if (!ifUserExistWithCredentials.emailVerified) {
                 throw new AppError(
                     httpStatus.BAD_REQUEST,
                     'Email Not Verified',
                 );
             }
 
-            if (ifPatientExistWithCredentials.status === UserStatus.BLOCKED) {
+            if (ifUserExistWithCredentials.status === UserStatus.BLOCKED) {
                 throw new AppError(httpStatus.FORBIDDEN, 'User Is Blocked');
             }
 
             if (
-                ifPatientExistWithCredentials.isDeleted ||
-                ifPatientExistWithCredentials.status === UserStatus.DELETED
+                ifUserExistWithCredentials.isDeleted ||
+                ifUserExistWithCredentials.status === UserStatus.DELETED
             ) {
                 throw new AppError(httpStatus.GONE, 'User Is Deleted');
             }
 
             user = await prisma.user.update({
                 where: {
-                    id: ifPatientExistWithCredentials.id,
+                    id: ifUserExistWithCredentials.id,
                 },
 
                 data: {
@@ -500,12 +500,6 @@ const googleLoginIntoDB = async (payload: IGoogleLoginPayload) => {
                     googleId: googleIdTokenPayload.sub,
                     authProvider: AuthProvider.GOOGLE,
                     emailVerified: true,
-                    patient: {
-                        create: {
-                            name: googleIdTokenPayload.name,
-                            email: googleIdTokenPayload.email,
-                        },
-                    },
                 },
             });
 
