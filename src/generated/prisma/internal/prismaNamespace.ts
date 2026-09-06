@@ -406,6 +406,7 @@ export const ModelName = {
   OutageAssignment: 'OutageAssignment',
   OutageReport: 'OutageReport',
   Profile: 'Profile',
+  Restoration: 'Restoration',
   Subscription: 'Subscription',
   SubscriptionPayment: 'SubscriptionPayment',
   SubscriptionPlan: 'SubscriptionPlan',
@@ -428,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "area" | "auditLog" | "feeder" | "loadSheddingSchedule" | "notification" | "outage" | "outageAssignment" | "outageReport" | "profile" | "subscription" | "subscriptionPayment" | "subscriptionPlan" | "substation" | "technician" | "user" | "zone"
+    modelProps: "area" | "auditLog" | "feeder" | "loadSheddingSchedule" | "notification" | "outage" | "outageAssignment" | "outageReport" | "profile" | "restoration" | "subscription" | "subscriptionPayment" | "subscriptionPlan" | "substation" | "technician" | "user" | "zone"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1095,6 +1096,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProfileCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    Restoration: {
+      payload: Prisma.$RestorationPayload<ExtArgs>
+      fields: Prisma.RestorationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RestorationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RestorationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>
+        }
+        findFirst: {
+          args: Prisma.RestorationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RestorationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>
+        }
+        findMany: {
+          args: Prisma.RestorationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>[]
+        }
+        create: {
+          args: Prisma.RestorationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>
+        }
+        createMany: {
+          args: Prisma.RestorationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RestorationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>[]
+        }
+        delete: {
+          args: Prisma.RestorationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>
+        }
+        update: {
+          args: Prisma.RestorationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>
+        }
+        deleteMany: {
+          args: Prisma.RestorationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RestorationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RestorationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>[]
+        }
+        upsert: {
+          args: Prisma.RestorationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestorationPayload>
+        }
+        aggregate: {
+          args: Prisma.RestorationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRestoration>
+        }
+        groupBy: {
+          args: Prisma.RestorationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RestorationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RestorationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RestorationCountAggregateOutputType> | number
         }
       }
     }
@@ -1790,6 +1865,22 @@ export const ProfileScalarFieldEnum = {
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
 
 
+export const RestorationScalarFieldEnum = {
+  id: 'id',
+  outageId: 'outageId',
+  technicianId: 'technicianId',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  duration: 'duration',
+  status: 'status',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RestorationScalarFieldEnum = (typeof RestorationScalarFieldEnum)[keyof typeof RestorationScalarFieldEnum]
+
+
 export const SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -2087,6 +2178,34 @@ export type ListEnumOutageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RestorationStatus'
+ */
+export type EnumRestorationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestorationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RestorationStatus[]'
+ */
+export type ListEnumRestorationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestorationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'SubscriptionStatus'
  */
 export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
@@ -2139,20 +2258,6 @@ export type EnumPaymentGatewayFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'PaymentGateway[]'
  */
 export type ListEnumPaymentGatewayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentGateway[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -2399,6 +2504,7 @@ export type GlobalOmitConfig = {
   outageAssignment?: Prisma.OutageAssignmentOmit
   outageReport?: Prisma.OutageReportOmit
   profile?: Prisma.ProfileOmit
+  restoration?: Prisma.RestorationOmit
   subscription?: Prisma.SubscriptionOmit
   subscriptionPayment?: Prisma.SubscriptionPaymentOmit
   subscriptionPlan?: Prisma.SubscriptionPlanOmit

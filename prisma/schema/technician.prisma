@@ -23,6 +23,7 @@ model Technician {
 
   user               User                @relation(fields: [userId], references: [id])
   assignments        OutageAssignment[]
+  restorations       Restoration[]
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt

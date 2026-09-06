@@ -143,3 +143,12 @@ export const SubscriptionStatus = {
 } as const
 
 export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+
+
+export const RestorationStatus = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type RestorationStatus = (typeof RestorationStatus)[keyof typeof RestorationStatus]

@@ -91,3 +91,9 @@ enum SubscriptionStatus {
   EXPIRED
   CANCELLED
 }
+
+enum RestorationStatus {
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}

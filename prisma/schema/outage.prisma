@@ -15,6 +15,7 @@ model Outage {
   
   reports     OutageReport[]
   assignments OutageAssignment[]
+  restoration Restoration?
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

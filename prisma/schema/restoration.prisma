@@ -1,0 +1,23 @@
+model Restoration {
+  id            String   @id @default(uuid())
+  outageId      String   @unique
+  technicianId  String?
+
+  startedAt     DateTime?
+  completedAt   DateTime?
+  duration      Int? // duration in minutes
+
+  status        RestorationStatus @default(IN_PROGRESS)
+  remarks       String?
+
+  outage        Outage      @relation(fields: [outageId], references: [id])
+  technician    Technician? @relation(fields: [technicianId], references: [id])
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([technicianId])
+  @@index([status])
+  
+  @@map("restorations")
+}

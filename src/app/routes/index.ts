@@ -14,6 +14,7 @@ import { subscriptionRoutes } from '../modules/subscriptions/subscription.route'
 
 import { loadSheddingScheduleRoutes } from '../modules/loadSheddingSchedule/loadSheddingSchedule.route';
 import { subscriptionPaymentRoutes } from '../modules/subscriptionPayment/subscriptionPayment.route';
+import { restorationRoutes } from '../modules/restoration/restoration.route';
 
 const router = Router();
 
@@ -97,6 +98,10 @@ const routerManger = [
     {
         path: '/subscription-payments',
         route: subscriptionPaymentRoutes,
+    },
+    {
+        path: '/restorations',
+        route: restorationRoutes,
     },
 ];
 

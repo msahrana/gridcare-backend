@@ -63,6 +63,11 @@ export type OutageReport = Prisma.OutageReportModel
  */
 export type Profile = Prisma.ProfileModel
 /**
+ * Model Restoration
+ * 
+ */
+export type Restoration = Prisma.RestorationModel
+/**
  * Model Subscription
  * 
  */

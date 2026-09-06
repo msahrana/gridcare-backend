@@ -241,6 +241,7 @@ export type OutageWhereInput = {
   area?: Prisma.XOR<Prisma.AreaScalarRelationFilter, Prisma.AreaWhereInput>
   reports?: Prisma.OutageReportListRelationFilter
   assignments?: Prisma.OutageAssignmentListRelationFilter
+  restoration?: Prisma.XOR<Prisma.RestorationNullableScalarRelationFilter, Prisma.RestorationWhereInput> | null
 }
 
 export type OutageOrderByWithRelationInput = {
@@ -259,6 +260,7 @@ export type OutageOrderByWithRelationInput = {
   area?: Prisma.AreaOrderByWithRelationInput
   reports?: Prisma.OutageReportOrderByRelationAggregateInput
   assignments?: Prisma.OutageAssignmentOrderByRelationAggregateInput
+  restoration?: Prisma.RestorationOrderByWithRelationInput
 }
 
 export type OutageWhereUniqueInput = Prisma.AtLeast<{
@@ -280,6 +282,7 @@ export type OutageWhereUniqueInput = Prisma.AtLeast<{
   area?: Prisma.XOR<Prisma.AreaScalarRelationFilter, Prisma.AreaWhereInput>
   reports?: Prisma.OutageReportListRelationFilter
   assignments?: Prisma.OutageAssignmentListRelationFilter
+  restoration?: Prisma.XOR<Prisma.RestorationNullableScalarRelationFilter, Prisma.RestorationWhereInput> | null
 }, "id">
 
 export type OutageOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type OutageCreateInput = {
   area: Prisma.AreaCreateNestedOneWithoutOutagesInput
   reports?: Prisma.OutageReportCreateNestedManyWithoutOutageInput
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationCreateNestedOneWithoutOutageInput
 }
 
 export type OutageUncheckedCreateInput = {
@@ -350,6 +354,7 @@ export type OutageUncheckedCreateInput = {
   deletedAt?: Date | string | null
   reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutOutageInput
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationUncheckedCreateNestedOneWithoutOutageInput
 }
 
 export type OutageUpdateInput = {
@@ -367,6 +372,7 @@ export type OutageUpdateInput = {
   area?: Prisma.AreaUpdateOneRequiredWithoutOutagesNestedInput
   reports?: Prisma.OutageReportUpdateManyWithoutOutageNestedInput
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageUncheckedUpdateInput = {
@@ -384,6 +390,7 @@ export type OutageUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutOutageNestedInput
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUncheckedUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageCreateManyInput = {
@@ -579,6 +586,20 @@ export type OutageUpdateOneWithoutReportsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OutageUpdateToOneWithWhereWithoutReportsInput, Prisma.OutageUpdateWithoutReportsInput>, Prisma.OutageUncheckedUpdateWithoutReportsInput>
 }
 
+export type OutageCreateNestedOneWithoutRestorationInput = {
+  create?: Prisma.XOR<Prisma.OutageCreateWithoutRestorationInput, Prisma.OutageUncheckedCreateWithoutRestorationInput>
+  connectOrCreate?: Prisma.OutageCreateOrConnectWithoutRestorationInput
+  connect?: Prisma.OutageWhereUniqueInput
+}
+
+export type OutageUpdateOneRequiredWithoutRestorationNestedInput = {
+  create?: Prisma.XOR<Prisma.OutageCreateWithoutRestorationInput, Prisma.OutageUncheckedCreateWithoutRestorationInput>
+  connectOrCreate?: Prisma.OutageCreateOrConnectWithoutRestorationInput
+  upsert?: Prisma.OutageUpsertWithoutRestorationInput
+  connect?: Prisma.OutageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OutageUpdateToOneWithWhereWithoutRestorationInput, Prisma.OutageUpdateWithoutRestorationInput>, Prisma.OutageUncheckedUpdateWithoutRestorationInput>
+}
+
 export type OutageCreateWithoutAreaInput = {
   id?: string
   title: string
@@ -593,6 +614,7 @@ export type OutageCreateWithoutAreaInput = {
   deletedAt?: Date | string | null
   reports?: Prisma.OutageReportCreateNestedManyWithoutOutageInput
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationCreateNestedOneWithoutOutageInput
 }
 
 export type OutageUncheckedCreateWithoutAreaInput = {
@@ -609,6 +631,7 @@ export type OutageUncheckedCreateWithoutAreaInput = {
   deletedAt?: Date | string | null
   reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutOutageInput
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationUncheckedCreateNestedOneWithoutOutageInput
 }
 
 export type OutageCreateOrConnectWithoutAreaInput = {
@@ -669,6 +692,7 @@ export type OutageCreateWithoutAssignmentsInput = {
   deletedAt?: Date | string | null
   area: Prisma.AreaCreateNestedOneWithoutOutagesInput
   reports?: Prisma.OutageReportCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationCreateNestedOneWithoutOutageInput
 }
 
 export type OutageUncheckedCreateWithoutAssignmentsInput = {
@@ -685,6 +709,7 @@ export type OutageUncheckedCreateWithoutAssignmentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationUncheckedCreateNestedOneWithoutOutageInput
 }
 
 export type OutageCreateOrConnectWithoutAssignmentsInput = {
@@ -717,6 +742,7 @@ export type OutageUpdateWithoutAssignmentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   area?: Prisma.AreaUpdateOneRequiredWithoutOutagesNestedInput
   reports?: Prisma.OutageReportUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageUncheckedUpdateWithoutAssignmentsInput = {
@@ -733,6 +759,7 @@ export type OutageUncheckedUpdateWithoutAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUncheckedUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageCreateWithoutReportsInput = {
@@ -749,6 +776,7 @@ export type OutageCreateWithoutReportsInput = {
   deletedAt?: Date | string | null
   area: Prisma.AreaCreateNestedOneWithoutOutagesInput
   assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationCreateNestedOneWithoutOutageInput
 }
 
 export type OutageUncheckedCreateWithoutReportsInput = {
@@ -765,6 +793,7 @@ export type OutageUncheckedCreateWithoutReportsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutOutageInput
+  restoration?: Prisma.RestorationUncheckedCreateNestedOneWithoutOutageInput
 }
 
 export type OutageCreateOrConnectWithoutReportsInput = {
@@ -797,6 +826,7 @@ export type OutageUpdateWithoutReportsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   area?: Prisma.AreaUpdateOneRequiredWithoutOutagesNestedInput
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageUncheckedUpdateWithoutReportsInput = {
@@ -812,6 +842,91 @@ export type OutageUncheckedUpdateWithoutReportsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUncheckedUpdateOneWithoutOutageNestedInput
+}
+
+export type OutageCreateWithoutRestorationInput = {
+  id?: string
+  title: string
+  description?: string | null
+  type: $Enums.OutageType
+  priority?: $Enums.Priority
+  status?: $Enums.OutageStatus
+  startedAt?: Date | string | null
+  restoredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  area: Prisma.AreaCreateNestedOneWithoutOutagesInput
+  reports?: Prisma.OutageReportCreateNestedManyWithoutOutageInput
+  assignments?: Prisma.OutageAssignmentCreateNestedManyWithoutOutageInput
+}
+
+export type OutageUncheckedCreateWithoutRestorationInput = {
+  id?: string
+  areaId: string
+  title: string
+  description?: string | null
+  type: $Enums.OutageType
+  priority?: $Enums.Priority
+  status?: $Enums.OutageStatus
+  startedAt?: Date | string | null
+  restoredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  reports?: Prisma.OutageReportUncheckedCreateNestedManyWithoutOutageInput
+  assignments?: Prisma.OutageAssignmentUncheckedCreateNestedManyWithoutOutageInput
+}
+
+export type OutageCreateOrConnectWithoutRestorationInput = {
+  where: Prisma.OutageWhereUniqueInput
+  create: Prisma.XOR<Prisma.OutageCreateWithoutRestorationInput, Prisma.OutageUncheckedCreateWithoutRestorationInput>
+}
+
+export type OutageUpsertWithoutRestorationInput = {
+  update: Prisma.XOR<Prisma.OutageUpdateWithoutRestorationInput, Prisma.OutageUncheckedUpdateWithoutRestorationInput>
+  create: Prisma.XOR<Prisma.OutageCreateWithoutRestorationInput, Prisma.OutageUncheckedCreateWithoutRestorationInput>
+  where?: Prisma.OutageWhereInput
+}
+
+export type OutageUpdateToOneWithWhereWithoutRestorationInput = {
+  where?: Prisma.OutageWhereInput
+  data: Prisma.XOR<Prisma.OutageUpdateWithoutRestorationInput, Prisma.OutageUncheckedUpdateWithoutRestorationInput>
+}
+
+export type OutageUpdateWithoutRestorationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOutageTypeFieldUpdateOperationsInput | $Enums.OutageType
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+  status?: Prisma.EnumOutageStatusFieldUpdateOperationsInput | $Enums.OutageStatus
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  restoredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  area?: Prisma.AreaUpdateOneRequiredWithoutOutagesNestedInput
+  reports?: Prisma.OutageReportUpdateManyWithoutOutageNestedInput
+  assignments?: Prisma.OutageAssignmentUpdateManyWithoutOutageNestedInput
+}
+
+export type OutageUncheckedUpdateWithoutRestorationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumOutageTypeFieldUpdateOperationsInput | $Enums.OutageType
+  priority?: Prisma.EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
+  status?: Prisma.EnumOutageStatusFieldUpdateOperationsInput | $Enums.OutageStatus
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  restoredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reports?: Prisma.OutageReportUncheckedUpdateManyWithoutOutageNestedInput
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutOutageNestedInput
 }
 
@@ -843,6 +958,7 @@ export type OutageUpdateWithoutAreaInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reports?: Prisma.OutageReportUpdateManyWithoutOutageNestedInput
   assignments?: Prisma.OutageAssignmentUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageUncheckedUpdateWithoutAreaInput = {
@@ -859,6 +975,7 @@ export type OutageUncheckedUpdateWithoutAreaInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reports?: Prisma.OutageReportUncheckedUpdateManyWithoutOutageNestedInput
   assignments?: Prisma.OutageAssignmentUncheckedUpdateManyWithoutOutageNestedInput
+  restoration?: Prisma.RestorationUncheckedUpdateOneWithoutOutageNestedInput
 }
 
 export type OutageUncheckedUpdateManyWithoutAreaInput = {
@@ -931,6 +1048,7 @@ export type OutageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   area?: boolean | Prisma.AreaDefaultArgs<ExtArgs>
   reports?: boolean | Prisma.Outage$reportsArgs<ExtArgs>
   assignments?: boolean | Prisma.Outage$assignmentsArgs<ExtArgs>
+  restoration?: boolean | Prisma.Outage$restorationArgs<ExtArgs>
   _count?: boolean | Prisma.OutageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["outage"]>
 
@@ -986,6 +1104,7 @@ export type OutageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   area?: boolean | Prisma.AreaDefaultArgs<ExtArgs>
   reports?: boolean | Prisma.Outage$reportsArgs<ExtArgs>
   assignments?: boolean | Prisma.Outage$assignmentsArgs<ExtArgs>
+  restoration?: boolean | Prisma.Outage$restorationArgs<ExtArgs>
   _count?: boolean | Prisma.OutageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OutageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1001,6 +1120,7 @@ export type $OutagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     area: Prisma.$AreaPayload<ExtArgs>
     reports: Prisma.$OutageReportPayload<ExtArgs>[]
     assignments: Prisma.$OutageAssignmentPayload<ExtArgs>[]
+    restoration: Prisma.$RestorationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1412,6 +1532,7 @@ export interface Prisma__OutageClient<T, Null = never, ExtArgs extends runtime.T
   area<T extends Prisma.AreaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AreaDefaultArgs<ExtArgs>>): Prisma.Prisma__AreaClient<runtime.Types.Result.GetResult<Prisma.$AreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reports<T extends Prisma.Outage$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outage$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OutageReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignments<T extends Prisma.Outage$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outage$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OutageAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  restoration<T extends Prisma.Outage$restorationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Outage$restorationArgs<ExtArgs>>): Prisma.Prisma__RestorationClient<runtime.Types.Result.GetResult<Prisma.$RestorationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1899,6 +2020,25 @@ export type Outage$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.OutageAssignmentScalarFieldEnum | Prisma.OutageAssignmentScalarFieldEnum[]
+}
+
+/**
+ * Outage.restoration
+ */
+export type Outage$restorationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Restoration
+   */
+  select?: Prisma.RestorationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Restoration
+   */
+  omit?: Prisma.RestorationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RestorationInclude<ExtArgs> | null
+  where?: Prisma.RestorationWhereInput
 }
 
 /**
