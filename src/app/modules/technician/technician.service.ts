@@ -251,7 +251,11 @@ const applyAsTechnicianIntoDB = async (
     // 8. Create User + Technician
     // ==================================================
 
-    let technicianApplication;
+    let technicianApplication: Prisma.UserGetPayload<{
+        include: {
+            technician: true;
+        };
+    }>;
 
     try {
         technicianApplication = await prisma.user.create({

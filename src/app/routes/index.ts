@@ -120,6 +120,8 @@ const routerManger = [
     },
 ];
 
-routerManger.forEach((r) => router.use(r.path, r.route));
+routerManger.forEach((r) => {
+    router.use(r.path, r.route);
+});
 
 export default router;
