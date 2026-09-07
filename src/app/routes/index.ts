@@ -18,6 +18,7 @@ import { restorationRoutes } from '../modules/restoration/restoration.route';
 import { analyticsRoutes } from '../modules/analytics/analytics.route';
 import { dashboardRoutes } from '../modules/dashboard/dashboard.route';
 import { automatedScheduleRoutes } from '../modules/automatedSchedule/automatedSchedule.route';
+import { adminRoutes } from '../modules/admin/admin.route';
 
 const router = Router();
 
@@ -117,6 +118,10 @@ const routerManger = [
     {
         path: '/automated-schedules',
         route: automatedScheduleRoutes,
+    },
+    {
+        path: '/admin',
+        route: adminRoutes,
     },
 ];
 
