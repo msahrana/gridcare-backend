@@ -1216,13 +1216,13 @@ pnpm start
 Server:
 
 ```text
-http://localhost:5000
+https://gridcare-backend.vercel.app
 ```
 
 API:
 
 ```text
-http://localhost:5000/api/v1
+https://gridcare-backend.vercel.app/api/v1
 ```
 
 ---
