@@ -1,0 +1,3000 @@
+{
+  "info": {
+    "_postman_id": "dadee2a2-0312-4583-986d-b6fd55fc6923",
+    "name": "GridCare",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40003326"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"name\": \"Md. Sayed Anower Hossain\",\r\n    \"email\": \"msahrana@gmail.com\",\r\n    \"password\": \"SAYed#@5288%$@\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Email Verification",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"msahrana@gmail.com\",\r\n    \"otp\" : \"677946\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/verify-email",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "verify-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Credential User Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"email\": \"msahrana@gmail.com\",\r\n    \"password\": \"SAYed#@5288%$@\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/all-users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "all-users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/user/9e7d78e8-483a-41fb-858e-1797f3457d53",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "user",
+                "9e7d78e8-483a-41fb-858e-1797f3457d53"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n  \"name\": \"Md. Sayed Anower Hossain\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/my-profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "my-profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"oldPassword\": \"SAYed#@5288%$@8\",\r\n    \"newPassword\": \"SAYed#@5288%$@\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/change-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"msahrana@gmail.com\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"msahrana@gmail.com\",\r\n    \"otp\" : \"571036\",\r\n    \"newPassword\": \"SAYed#@5288%$@\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Profile Image Upload",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/user/Desktop/Mony.jpg"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/profile-image",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "profile-image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Google Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idToken\":\"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Zone",
+      "item": [
+        {
+          "name": "Create Zone",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rangpur Zone\",\r\n  \"code\": \"RNG\",\r\n  \"description\": \"Rangpur power distribution zone\",\r\n  \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/zones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "zones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Zones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/zones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "zones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Zone By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/zones/e5be6edb-2de2-4da1-bb2f-2ceb172e7f74",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "zones",
+                "e5be6edb-2de2-4da1-bb2f-2ceb172e7f74"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Zone",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Kurigram Zone\",\r\n  \"description\": \"Kurigram power distribution zone Updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/zones/5fb4936e-61d5-45e8-887e-af87df3c2de2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "zones",
+                "5fb4936e-61d5-45e8-887e-af87df3c2de2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Zone",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/zones/e2ab204d-56f1-4d62-889a-ce833c68928e",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "zones",
+                "e2ab204d-56f1-4d62-889a-ce833c68928e"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin or Operator",
+      "item": [
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"email\": \"sayedrana@srhealthcare.com\",\r\n    \"password\": \"$2b$12$sAyEd[Rana]5288\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Operator",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"email\": \"tara.mony@srhealthcare.com\",\r\n    \"password\": \"$2b$12$TaraMonymost7860\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Substations",
+      "item": [
+        {
+          "name": "Create Substations",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rangpur Central Substation\",\r\n  \"code\": \"RNG-CSS\",\r\n  \"zoneId\": \"e5be6edb-2de2-4da1-bb2f-2ceb172e7f74\",\r\n  \"capacity\": 50,\r\n  \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/substations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "substations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Substations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/substations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "substations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Substation By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/substations/adf865b8-3dfa-4da6-8988-2230bcaa9e33",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "substations",
+                "adf865b8-3dfa-4da6-8988-2230bcaa9e33"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Substation",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Gaibandha Central Substation\",\r\n  \"capacity\": 65\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/substations/adf865b8-3dfa-4da6-8988-2230bcaa9e33",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "substations",
+                "adf865b8-3dfa-4da6-8988-2230bcaa9e33"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Substation",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/substations/51579984-4f03-4c8d-be87-92d987b75066",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "substations",
+                "51579984-4f03-4c8d-be87-92d987b75066"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Feeder",
+      "item": [
+        {
+          "name": "Create Feeder",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rangpur Central Feeder 01\",\r\n  \"code\": \"RNG-CSS-F01\",\r\n  \"substationId\": \"ff34051a-53d8-4e63-955f-a02b5096539c\",\r\n  \"status\": \"ACTIVE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/feeders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "feeders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Feeders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/feeders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "feeders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Feeder By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/feeders/13313360-064d-411a-ada4-8f739b967a95",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "feeders",
+                "13313360-064d-411a-ada4-8f739b967a95"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Feeder",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"MAINTENANCE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/feeders/13313360-064d-411a-ada4-8f739b967a95",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "feeders",
+                "13313360-064d-411a-ada4-8f739b967a95"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Area",
+      "item": [
+        {
+          "name": "Create Area",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Rangpur Sadar Area\",\r\n    \"code\": \"AREA-RNG-SADAR-001\",\r\n    \"zoneId\": \"e5be6edb-2de2-4da1-bb2f-2ceb172e7f74\",\r\n    \"substationId\": \"ff34051a-53d8-4e63-955f-a02b5096539c\",\r\n    \"feederId\": \"666e0717-7519-4baf-8e37-8b7ba1aec379\",\r\n    \"address\": \"Rangpur Sadar, Rangpur\",\r\n    \"latitude\": 25.7439,\r\n    \"longitude\": 89.2752,\r\n    \"isActive\": true\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/areas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "areas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Areas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/areas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "areas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Area By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/areas/1638f9ea-004c-46b7-9e5c-c96485eedd63",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "areas",
+                "1638f9ea-004c-46b7-9e5c-c96485eedd63"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Area",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Rangpur City Central Area updated\",\r\n    \"code\": \"AREA-RNG-CENTRAL-101\",\r\n    \"zoneId\": \"e5be6edb-2de2-4da1-bb2f-2ceb172e7f74\",\r\n    \"substationId\": \"ff34051a-53d8-4e63-955f-a02b5096539c\",\r\n    \"feederId\": \"666e0717-7519-4baf-8e37-8b7ba1aec379\",\r\n    \"address\": \"Jahaj Company More, Rangpur Sadar, Rangpur\",\r\n    \"latitude\": 25.7439,\r\n    \"longitude\": 89.2752,\r\n    \"isActive\": true\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/areas/1638f9ea-004c-46b7-9e5c-c96485eedd63",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "areas",
+                "1638f9ea-004c-46b7-9e5c-c96485eedd63"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Srea",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/areas/search?q=Rangpur",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "areas",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Rangpur"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Outage",
+      "item": [
+        {
+          "name": "Create Outage",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"areaId\": \"1638f9ea-004c-46b7-9e5c-c96485eedd63\",\r\n  \"title\": \"Major Feeder Trip in Rangpur Sadar\",\r\n  \"description\": \"Unexpected feeder trip has caused a widespread power outage affecting residential and commercial customers in Rangpur Sadar.\",\r\n  \"type\": \"UNEXPECTED\",\r\n  \"priority\": \"CRITICAL\",\r\n  \"status\": \"REPORTED\",\r\n  \"startedAt\": \"2026-09-03T02:10:00.000Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Outage",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Outage By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages/9c3cc1b3-4747-4f5d-bdc2-e2416d73b1f1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages",
+                "9c3cc1b3-4747-4f5d-bdc2-e2416d73b1f1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Outage By AreaId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages/area/f8f4a4a2-0177-4f2c-ae48-b30c8de7ded9",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages",
+                "area",
+                "f8f4a4a2-0177-4f2c-ae48-b30c8de7ded9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Outage Search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages/search?search=transformer&status=VERIFIED&priority=HIGH",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "transformer"
+                },
+                {
+                  "key": "status",
+                  "value": "VERIFIED"
+                },
+                {
+                  "key": "priority",
+                  "value": "HIGH"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Outage Active",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages/active",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages",
+                "active"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Outage",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"IN_PROGRESS\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages/e6099e81-4a78-4538-93b0-5f62363ff8b7",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages",
+                "e6099e81-4a78-4538-93b0-5f62363ff8b7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Otage",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outages/id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outages",
+                "id"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Outage Report",
+      "item": [
+        {
+          "name": "Create Outage Report",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"outageId\": \"3753734b-4590-4e5d-a09d-abcba4fcc70a\",\r\n  \"areaId\": \"1638f9ea-004c-46b7-9e5c-c96485eedd63\",\r\n  \"description\": \"Residents in several streets have reported a complete power outage following the transformer failure.\",\r\n  \"latitude\": 25.6279,\r\n  \"longitude\": 88.6332\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Outage Reports",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Outage Report By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports/3f78ebb8-42bc-4c1e-a241-b1350233fbb3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports",
+                "3f78ebb8-42bc-4c1e-a241-b1350233fbb3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Report By OutageId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports/outage/0f214e7a-7a37-4882-bb1a-249697376811",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports",
+                "outage",
+                "0f214e7a-7a37-4882-bb1a-249697376811"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Report By AreaId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports/area/be8e284f-a77c-49e5-9ca3-46c7945faaa3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports",
+                "area",
+                "be8e284f-a77c-49e5-9ca3-46c7945faaa3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Outage Report",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"description\": \"Power restoration work is ongoing. The damaged distribution line is being repaired by the maintenance team.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports/282b922a-fb98-4817-9dc4-3dee0b48b15f",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports",
+                "282b922a-fb98-4817-9dc4-3dee0b48b15f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Outage Report",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageReports/ee8b2ba3-584f-4744-97de-cddad5d43ed5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageReports",
+                "ee8b2ba3-584f-4744-97de-cddad5d43ed5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Outage Assignment",
+      "item": [
+        {
+          "name": "Create Outage Assignment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"outageId\": \"3753734b-4590-4e5d-a09d-abcba4fcc70a\",\r\n  \"technicianId\": \"95784ab4-5d1a-44e9-81d5-22331e57fc5f\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My All Assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Assignment By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments/2d145f52-97c6-4866-8137-afa93040ae3c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments",
+                "2d145f52-97c6-4866-8137-afa93040ae3c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Outage Assignment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"completedAt\": \"2026-09-04T12:30:00.000Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments/2d145f52-97c6-4866-8137-afa93040ae3c",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments",
+                "2d145f52-97c6-4866-8137-afa93040ae3c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Outage Assignment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments/4b201012-d83c-4194-bef7-08e57ebaa0da",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments",
+                "4b201012-d83c-4194-bef7-08e57ebaa0da"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Assignments by Technician Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments/technician/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments",
+                "technician",
+                "95784ab4-5d1a-44e9-81d5-22331e57fc5f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Assignments by Outage Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments/outage/3753734b-4590-4e5d-a09d-abcba4fcc70a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments",
+                "outage",
+                "3753734b-4590-4e5d-a09d-abcba4fcc70a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/outageAssignments/my-assignments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "outageAssignments",
+                "my-assignments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Technician",
+      "item": [
+        {
+          "name": "Apply As Technician",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "resume",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/user/Desktop/Technician-Files/technician_resume_mohammad_rahman.pdf"
+                  ]
+                },
+                {
+                  "key": "additionalFiles",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/user/Desktop/Technician-Files/Training_Certificate_Mohammad_Rahman_SAMPLE.pdf"
+                  ]
+                },
+                {
+                  "key": "data",
+                  "value": "{\n  \"user\": {\n    \"name\": \"Mohammad Rahman\",\n    \"email\": \"mohammad.rahman.tech@gmail.com\"\n  },\n  \"technician\": {\n    \"phone\": \"+8801712345678\",\n    \"employeeId\": \"TECH-2026-0042\",\n    \"skills\": \"Electrical Maintenance, Fault Diagnosis, Feeder Maintenance, Transformer Inspection, Emergency Outage Response\",\n    \"experienceYears\": 6,\n    \"technicianFee\": 850\n  }\n}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/technicians/apply-as-technician",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "technicians",
+                "apply-as-technician"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Technicians",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/technicians/all-technician",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "technicians",
+                "all-technician"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Technicians For Public",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/technicians/public/all-technician",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "technicians",
+                "public",
+                "all-technician"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Technician For Public By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/technicians/public/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "technicians",
+                "public",
+                "95784ab4-5d1a-44e9-81d5-22331e57fc5f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login As Technician",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"email\": \"mohammad.rahman.tech@gmail.com\",\r\n    \"password\": \"Rahman@2026#Tech\"\r\n }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Load Shedding Schedule",
+      "item": [
+        {
+          "name": "Create Load Shedding Schedule",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"areaId\": \"1638f9ea-004c-46b7-9e5c-c96485eedd63\",\r\n  \"title\": \"Scheduled Load Shedding - Rangpur Sadar\",\r\n  \"description\": \"Planned power interruption for maintenance and network load management.\",\r\n  \"startTime\": \"2026-09-05T10:00:00.000Z\",\r\n  \"endTime\": \"2026-09-05T12:00:00.000Z\",\r\n  \"scheduleFee\": 150\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Load Shedding Schedules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Load Shedding Schedule By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/f249354e-382f-40d6-a318-d752793b38f5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "f249354e-382f-40d6-a318-d752793b38f5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Load Shedding Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Emergency Maintenance Load Shedding\",\r\n  \"description\": \"Updated maintenance schedule.\",\r\n  \"startTime\": \"2026-09-05T14:00:00.000Z\",\r\n  \"endTime\": \"2026-09-05T16:30:00.000Z\",\r\n  \"scheduleFee\": 200\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "a6054922-5315-45da-b165-39ba0b57b509"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Publish Load Shedding Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/publish",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "a6054922-5315-45da-b165-39ba0b57b509",
+                "publish"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Active Load Shedding Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/activate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "a6054922-5315-45da-b165-39ba0b57b509",
+                "activate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Complete Load Shedding Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "a6054922-5315-45da-b165-39ba0b57b509",
+                "complete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Load Shedding Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/6536fe23-facb-4c72-87c9-2f1952463594/cancel",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "6536fe23-facb-4c72-87c9-2f1952463594",
+                "cancel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Load Shedding Schedule",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/ece6228b-6892-46d6-a178-cbf5aa538a24",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "ece6228b-6892-46d6-a178-cbf5aa538a24"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upcoming Load Shedding Schedules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/load-shedding-schedules/upcoming",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "load-shedding-schedules",
+                "upcoming"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Create Notifications",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": \"5a97b529-5c25-426c-b306-4f514e4a8aaa\",\r\n    \"title\": \"Technician Assignment\",\r\n    \"message\": \"You have been assigned to a new outage in Rangpur Sadar. Please review the outage details and respond to the assignment.\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My All Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications/my",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Unread Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications/my/unread",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "my",
+                "unread"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark (Update) All Notifications As Read",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications/my/read-all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "my",
+                "read-all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Single Notification As Read By Id",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications/c6dc8428-1ac4-4b77-8c84-337604b2a977/read",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "c6dc8428-1ac4-4b77-8c84-337604b2a977",
+                "read"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Notification By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/notifications/c6dc8428-1ac4-4b77-8c84-337604b2a977",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "notifications",
+                "c6dc8428-1ac4-4b77-8c84-337604b2a977"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Audit Log",
+      "item": [
+        {
+          "name": "Create Audit Log",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"action\": \"STATUS_UPDATE\",\r\n  \"entity\": \"Outage\",\r\n  \"entityId\": \"3753734b-4590-4e5d-a09d-abcba4fcc70a\",\r\n  \"oldValue\": {\r\n    \"status\": \"REPORTED\"\r\n  },\r\n  \"newValue\": {\r\n    \"status\": \"VERIFIED\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/audit-logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "audit-logs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/audit-logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "audit-logs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Audit Log",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/audit-logs/6a0bc12c-cdcb-4615-9c1f-8cdeccf6d8e6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "audit-logs",
+                "6a0bc12c-cdcb-4615-9c1f-8cdeccf6d8e6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Audit Logs By Entity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/audit-logs/entity/4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "audit-logs",
+                "entity",
+                "4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Audit Log",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/audit-logs/entity/4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "audit-logs",
+                "entity",
+                "4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subscription Payments",
+      "item": [
+        {
+          "name": "Create Payment By BKash",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"subscriptionId\": \"6932d38a-658a-4942-b44d-d1d3c55b9225\",\r\n  \"paymentGateway\": \"BKASH\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscription-payments/create",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscription-payments",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify BKash Payment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscription-payments/verify/TR0011YwKaYwB1788695587162",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscription-payments",
+                "verify",
+                "TR0011YwKaYwB1788695587162"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My All Subscription Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscription-payments/my",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscription-payments",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Subscription Payment By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscription-payments/11520877-e2df-49eb-9962-a9e2c39eb493",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscription-payments",
+                "11520877-e2df-49eb-9962-a9e2c39eb493"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subscription",
+      "item": [
+        {
+          "name": "Create Subscription Plan",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"name\": \"Annual Premium\",\r\n    \"description\": \"৩৬৫ দিনের জন্য সম্পূর্ণ load shedding schedule access।\",\r\n    \"price\": 80,\r\n    \"durationDays\": 365,\r\n    \"status\": \"ACTIVE\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/plans",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "plans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Subscription Plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/plans",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "plans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Subscription Plan By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/plans/b294dd10-3bed-4355-9c68-ce916285feec",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "plans",
+                "b294dd10-3bed-4355-9c68-ce916285feec"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Subscription Plan",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": " {\r\n    \"name\": \"Annual Premium\",\r\n    \"description\": \"৩৬৫ দিনের জন্য সম্পূর্ণ load shedding schedule access Updated।\",\r\n    \"price\": 800,\r\n    \"durationDays\": 365,\r\n    \"status\": \"ACTIVE\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/plans/b294dd10-3bed-4355-9c68-ce916285feec",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "plans",
+                "b294dd10-3bed-4355-9c68-ce916285feec"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Subscription",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"planId\": \"81a7d0aa-89cd-40af-942e-85d165ff5545c\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/my-subscription",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "my-subscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Subscription History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/history",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "history"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Subscription",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/subscriptions/6932d38a-658a-4942-b44d-d1d3c55b9225/cancel",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "subscriptions",
+                "6932d38a-658a-4942-b44d-d1d3c55b9225",
+                "cancel"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Restorations",
+      "item": [
+        {
+          "name": "Start Restoration",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"outageId\": \"3753734b-4590-4e5d-a09d-abcba4fcc70a\",\r\n  \"technicianId\": \"95784ab4-5d1a-44e9-81d5-22331e57fc5f\",\r\n  \"remarks\": \"Damaged distribution cable identified and repair work started.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/restorations/start",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "restorations",
+                "start"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Completed Restoration",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14/complete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "restorations",
+                "0d989b81-df4f-4984-942f-acf3a1e1ae14",
+                "complete"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cencel Restoration",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/restorations/8730cc1d-ad89-4b18-bfd7-6fbd50b88bc2/cancel",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "restorations",
+                "8730cc1d-ad89-4b18-bfd7-6fbd50b88bc2",
+                "cancel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Restorations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/restorations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "restorations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Restoration By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "restorations",
+                "0d989b81-df4f-4984-942f-acf3a1e1ae14"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Restoration",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "restorations",
+                "0d989b81-df4f-4984-942f-acf3a1e1ae14"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Overview Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/analytics/overview",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "analytics",
+                "overview"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Outage Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/analytics/outages",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "analytics",
+                "outages"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get Admin Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/dashboard/admin",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "dashboard",
+                "admin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Operator Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/dashboard/operator",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "dashboard",
+                "operator"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Technician Dashboard By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/dashboard/technician/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "dashboard",
+                "technician",
+                "95784ab4-5d1a-44e9-81d5-22331e57fc5f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Automated Schedule",
+      "item": [
+        {
+          "name": "Generate Automated Schedule",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"areaIds\": [\r\n    \"df24928a-cfea-4175-bbe6-264364c68864\"\r\n  ],\r\n  \"date\": \"2026-09-10\",\r\n  \"startTime\": \"18:00\",\r\n  \"endTime\": \"20:00\",\r\n  \"title\": \"Evening Load Shedding\",\r\n  \"description\": \"Automated evening load shedding for residential demand management.\",\r\n  \"createdById\": \"5a97b529-5c25-426c-b306-4f514e4a8aaa\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/automated-schedules/generate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "automated-schedules",
+                "generate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Automated Schedules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/automated-schedules",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "automated-schedules"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Automated Schedule By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/automated-schedules/22b4d1f5-f41e-467d-8539-c3d7667a9940",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "automated-schedules",
+                "22b4d1f5-f41e-467d-8539-c3d7667a9940"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Automated Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/automated-schedules/22b4d1f5-f41e-467d-8539-c3d7667a9940/publish",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "automated-schedules",
+                "22b4d1f5-f41e-467d-8539-c3d7667a9940",
+                "publish"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/admin/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Role",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"role\": \"OPERATOR\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/admin/users/45247640-04ee-4ea7-a3e8-b3259d767b0b/role",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users",
+                "45247640-04ee-4ea7-a3e8-b3259d767b0b",
+                "role"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/admin/dashboard-stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dashboard-stats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/admin/audit-logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "audit-logs"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
