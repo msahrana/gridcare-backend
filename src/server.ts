@@ -11,7 +11,7 @@ const PORT = config.port;
 const main = async () => {
     try {
         await prisma.$connect();
-        console.log('🗃️ Database connected successfully!!!');
+        console.log('🗃️  Database connected successfully!!!');
 
         await redisClient.connect();
 
