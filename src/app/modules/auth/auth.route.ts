@@ -60,6 +60,8 @@ router.post(
     authControllers.resetPassword,
 );
 
+router.post('/logout', authControllers.logout);
+
 router.patch(
     '/profile-image',
     auth(UserRole.ADMIN, UserRole.CUSTOMER, UserRole.OPERATOR),
