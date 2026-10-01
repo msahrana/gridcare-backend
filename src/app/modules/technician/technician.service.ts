@@ -27,6 +27,7 @@ import {
 import { RequestUser } from '../../middleware/checkAuth';
 import { IQuery } from '../../interfaces';
 import { Prisma } from '../../../generated/prisma/client';
+import generateRandomPassword from '../../utils/randomPassword';
 
 // ======================================================
 // Helper: Upload file to Cloudinary
@@ -240,12 +241,12 @@ const applyAsTechnicianIntoDB = async (
     // 7. Generate Temporary Password
     // ==================================================
 
-    const randomTechnicianPassword = crypto.randomBytes(8).toString('hex');
+    // const randomTechnicianPassword = crypto.randomBytes(8).toString('hex');
 
-    const hashedPassword = await bcrypt.hash(
-        randomTechnicianPassword,
-        Number(config.bcrypt_salt_rounds),
-    );
+    // const hashedPassword = await bcrypt.hash(
+    //     randomTechnicianPassword,
+    //     Number(config.bcrypt_salt_rounds),
+    // );
 
     // ==================================================
     // 8. Create User + Technician
@@ -263,7 +264,7 @@ const applyAsTechnicianIntoDB = async (
                 name: payload.user.name.trim(),
                 email: payload.user.email.trim().toLowerCase(),
 
-                password: hashedPassword,
+                // password: hashedPassword,
 
                 role: UserRole.TECHNICIAN,
 
@@ -354,6 +355,11 @@ const applyAsTechnicianIntoDB = async (
         .toLowerCase()}`;
 
     const otpValue = crypto.randomInt(100000, 1000000).toString();
+
+    if (config.node_env === 'development')
+        console.log(
+            `[dev] Doctor application OTP for ${payload.user.email}: ${otpValue}`,
+        );
 
     // ==================================================
     // 10. Save OTP to Redis
@@ -530,7 +536,7 @@ const applyAsTechnicianIntoDB = async (
         technician: technicianApplication.technician,
 
         // Development only
-        temporaryPassword: randomTechnicianPassword,
+        // temporaryPassword: randomTechnicianPassword,
     };
 };
 
@@ -558,6 +564,11 @@ const verifyTechnicianEmailIntoDB = async (
     const otpKey = `technician-application-otp:${email}`;
 
     const redisOtp = await redisClient.get(otpKey);
+
+    // if (config.node_env === 'development')
+    //     console.log(
+    //         `[dev] Doctor application OTP for ${payload.user.email}: ${otpValue}`,
+    //     );
 
     if (!redisOtp) {
         throw new AppError(
@@ -648,6 +659,30 @@ const approveTechnicianIntoDB = async (
     }
 
     // ==========================================================
+    // CREATE PASSWORD
+    // ==========================================================
+
+    const isApproved =
+        verificationStatus === TechnicianVerificationStatus.APPROVED;
+
+    const randomDoctorPassword = isApproved
+        ? generateRandomPassword()
+        : undefined;
+
+    if (config.node_env === 'development' && randomDoctorPassword) {
+        console.log(
+            `[dev] Random Password plain text: ${randomDoctorPassword}`,
+        );
+    }
+
+    const hashedPassword = randomDoctorPassword
+        ? await bcrypt.hash(
+              randomDoctorPassword,
+              Number(config.bcrypt_salt_rounds),
+          )
+        : undefined;
+
+    // ==========================================================
     // UPDATE APPLICATION
     // ==========================================================
 
@@ -657,11 +692,24 @@ const approveTechnicianIntoDB = async (
         },
         data: {
             verificationStatus,
+
             rejectionReason:
                 verificationStatus === TechnicianVerificationStatus.REJECTED
                     ? rejectionReason
                     : null,
+
+            ...(hashedPassword
+                ? {
+                      user: {
+                          update: {
+                              password: hashedPassword,
+                              role: UserRole.TECHNICIAN,
+                          },
+                      },
+                  }
+                : {}),
         },
+
         include: {
             user: true,
         },
@@ -670,9 +718,6 @@ const approveTechnicianIntoDB = async (
     // ==========================================================
     // SEND EMAIL
     // ==========================================================
-
-    const isApproved =
-        verificationStatus === TechnicianVerificationStatus.APPROVED;
 
     const templatePath = path.join(
         process.cwd(),
@@ -852,7 +897,10 @@ const updateTechnicianProfileIntoDB = async (
     });
 
     if (!existingTechnician) {
-        throw new AppError(httpStatus.NOT_FOUND, 'Doctor Profile Not Found');
+        throw new AppError(
+            httpStatus.NOT_FOUND,
+            'Technician Profile Not Found',
+        );
     }
 
     const updatedTechnician = await prisma.technician.update({

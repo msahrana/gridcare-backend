@@ -11,22 +11,40 @@ const applyAsTechnician = catchAsync(async (req: Request, res: Response) => {
     // Get Uploaded Files
     // ==============================================
 
-    const files = req.files as {
-        [fieldname: string]: Express.Multer.File[];
-    };
+    const files =
+        (req.files as {
+            [fieldname: string]: Express.Multer.File[];
+        }) || {};
 
-    const resume = files?.['resume']?.[0] || null;
+    const resume = files.resume?.[0] ?? null;
 
-    const additionalFiles = files?.['additionalFiles'] || [];
+    const additionalFiles = files.additionalFiles ?? [];
 
     // ==============================================
-    // Check Data
+    // Check Request Body
     // ==============================================
 
-    if (!req.body.data) {
+    if (!req.body) {
+        throw new AppError(httpStatus.BAD_REQUEST, 'Request body is required');
+    }
+
+    // ==============================================
+    // Get Application Data
+    // ==============================================
+
+    const { data } = req.body;
+
+    if (!data) {
         throw new AppError(
             httpStatus.BAD_REQUEST,
             'Technician application data is required',
+        );
+    }
+
+    if (typeof data !== 'string') {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            'Technician application data must be a valid JSON string',
         );
     }
 
@@ -37,30 +55,43 @@ const applyAsTechnician = catchAsync(async (req: Request, res: Response) => {
     let parsedData: unknown;
 
     try {
-        parsedData = JSON.parse(req.body.data);
-    } catch (error) {
-        throw new AppError(httpStatus.BAD_REQUEST, 'Invalid JSON data');
-    }
-
-    // ==============================================
-    // Zod Validation
-    // ==============================================
-
-    const zodValidationResult =
-        applyTechnicianValidationSchema.safeParse(parsedData);
-
-    if (!zodValidationResult.success) {
+        parsedData = JSON.parse(data);
+    } catch {
         throw new AppError(
             httpStatus.BAD_REQUEST,
-            zodValidationResult.error.issues[0].message,
+            'Invalid technician application JSON data',
         );
     }
 
     // ==============================================
-    // Payload
+    // Validate Application Data
     // ==============================================
 
-    const payload = zodValidationResult.data;
+    const validationResult =
+        applyTechnicianValidationSchema.safeParse(parsedData);
+
+    if (!validationResult.success) {
+        const firstIssue = validationResult.error.issues[0];
+
+        const errorMessage =
+            firstIssue?.message || 'Invalid technician application data';
+
+        throw new AppError(httpStatus.BAD_REQUEST, errorMessage);
+    }
+
+    // ==============================================
+    // Validated Payload
+    // ==============================================
+
+    const payload = validationResult.data;
+
+    // ==============================================
+    // Resume Validation
+    // ==============================================
+
+    if (!resume) {
+        throw new AppError(httpStatus.BAD_REQUEST, 'Resume is required');
+    }
 
     // ==============================================
     // Apply As Technician
@@ -79,7 +110,8 @@ const applyAsTechnician = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'Applied As Technician Successful!!',
+        message:
+            'Applied as technician successfully, Now verification account by OTP',
         data: result,
     });
 });

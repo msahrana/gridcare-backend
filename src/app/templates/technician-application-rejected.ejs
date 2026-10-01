@@ -1,0 +1,208 @@
+```ejs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Technician Application Update - GridCare</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f9;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333333;
+    }
+
+    .email-wrapper {
+      width: 100%;
+      padding: 40px 0;
+      background-color: #f4f7f9;
+    }
+
+    .email-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .header {
+      padding: 28px 30px;
+      background-color: #0f766e;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 26px;
+    }
+
+    .header p {
+      margin: 8px 0 0;
+      color: #dff7f5;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 35px 30px;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      color: #222222;
+      font-size: 22px;
+    }
+
+    .content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555555;
+    }
+
+    .rejection-box {
+      margin: 25px 0;
+      padding: 20px;
+      background-color: #fff5f5;
+      border-left: 4px solid #dc2626;
+      border-radius: 6px;
+    }
+
+    .rejection-box h3 {
+      margin: 0 0 10px;
+      color: #b91c1c;
+      font-size: 16px;
+    }
+
+    .rejection-box p {
+      margin: 0;
+      color: #555555;
+    }
+
+    .reason-box {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #ffffff;
+      border: 1px solid #eeeeee;
+      border-radius: 6px;
+    }
+
+    .reason-box strong {
+      color: #333333;
+    }
+
+    .footer {
+      padding: 22px 30px;
+      background-color: #f8fafc;
+      text-align: center;
+      border-top: 1px solid #eeeeee;
+    }
+
+    .footer p {
+      margin: 5px 0;
+      color: #777777;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .brand {
+      color: #0f766e;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="email-wrapper">
+
+    <div class="email-container">
+
+      <!-- Header -->
+      <div class="header">
+        <h1>GridCare</h1>
+        <p>Technician Application Update</p>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+
+        <h2>Hello <%= name %>,</h2>
+
+        <p>
+          Thank you for your interest in joining
+          <span class="brand">GridCare</span> as a technician.
+        </p>
+
+        <p>
+          We have carefully reviewed your technician application.
+          Unfortunately, we are unable to approve your application at this time.
+        </p>
+
+        <!-- Rejection Notice -->
+        <div class="rejection-box">
+          <h3>Application Not Approved</h3>
+
+          <p>
+            Your technician application has been rejected based on the
+            information and documents submitted during the application process.
+          </p>
+
+          <% if (reason) { %>
+            <div class="reason-box">
+              <strong>Reason:</strong>
+
+              <p>
+                <%= reason %>
+              </p>
+            </div>
+          <% } %>
+        </div>
+
+        <p>
+          If you believe there has been an error or you would like to provide
+          additional information, please contact the GridCare support team.
+        </p>
+
+        <p>
+          You may be able to submit a new application in the future with
+          updated or additional information.
+        </p>
+
+        <p>
+          Thank you for your time and interest in GridCare.
+        </p>
+
+        <p>
+          Regards,<br />
+          <strong>GridCare Team</strong>
+        </p>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>
+          This is an automated email from <span class="brand">GridCare</span>.
+        </p>
+
+        <p>
+          Please do not reply directly to this email.
+        </p>
+
+        <p>
+          &copy; <%= new Date().getFullYear() %> GridCare. All rights reserved.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>
+```

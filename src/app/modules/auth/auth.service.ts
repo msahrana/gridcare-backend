@@ -53,6 +53,10 @@ const registerUserIntoDB = async (payload: IRegisterUserPayload) => {
     const otpKey = `user-registration-otp:${email}`;
     const otpValue = crypto.randomInt(100000, 1000000).toString();
 
+    if (config.node_env === 'development') {
+        console.log(`[dev] ${email} : ${otpValue}`);
+    }
+
     await redisClient.set(otpKey, otpValue, {
         expiration: {
             type: 'EX',
@@ -180,7 +184,7 @@ const verifyEmailIntoDB = async (payload: IVerifyEmailPayload) => {
     const { ...user } = createdUser;
 
     const jwtPayload = {
-        userId: user.id,
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role,

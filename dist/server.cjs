@@ -5080,7 +5080,7 @@ var updateTechnicianProfileIntoDB = async (payload, user) => {
     where: { userId: user.id }
   });
   if (!existingTechnician) {
-    throw new AppError(import_http_status19.default.NOT_FOUND, "Doctor Profile Not Found");
+    throw new AppError(import_http_status19.default.NOT_FOUND, "Technician Profile Not Found");
   }
   const updatedTechnician = await prisma.technician.update({
     where: { id: existingTechnician.id },

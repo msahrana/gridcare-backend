@@ -7,37 +7,43 @@ import {
 
 export const applyTechnicianValidationSchema = z.object({
     user: z.object({
-        name: z.string().min(2, 'Name must be at least 2 characters'),
+        name: z.string().trim().min(2, 'Name must be at least 2 characters'),
 
-        email: z.string().email('Invalid email address'),
+        email: z.string().trim().email('Invalid email address'),
     }),
 
     technician: z.object({
         phone: z
             .string()
+            .trim()
             .min(11, 'Phone number must be at least 11 characters'),
 
         employeeId: z
             .string()
+            .trim()
             .min(2, 'Employee ID must be at least 2 characters'),
 
-        skills: z.string().optional(),
+        skills: z.string().trim().optional(),
 
         experienceYears: z.number().int().min(0).default(0),
 
-        technicianFee: z.number().min(0).optional(),
-
         zoneId: z.string().uuid().optional(),
+
+        bio: z
+            .string()
+            .trim()
+            .max(1000, 'Bio must not exceed 1000 characters')
+            .optional(),
     }),
 });
 
 export const updateTechnicianValidationSchema = z.object({
     body: z.object({
-        phone: z.string().min(11).max(20).optional(),
+        phone: z.string().trim().min(11).max(20).optional(),
 
-        employeeId: z.string().min(2).max(50).optional(),
+        employeeId: z.string().trim().min(2).max(50).optional(),
 
-        skills: z.string().max(500).optional(),
+        skills: z.string().trim().max(500).optional(),
 
         experienceYears: z.number().int().min(0).max(60).optional(),
 
@@ -52,6 +58,8 @@ export const updateTechnicianValidationSchema = z.object({
         technicianFee: z.number().min(0).optional(),
 
         zoneId: z.string().uuid().nullable().optional(),
+
+        bio: z.string().trim().max(1000).optional(),
     }),
 });
 
