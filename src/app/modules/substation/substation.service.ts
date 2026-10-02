@@ -7,6 +7,8 @@ import type {
     ICreateSubstationPayload,
     IUpdateSubstationPayload,
 } from './substation.interface';
+import { IQuery } from '../../interfaces';
+import { Prisma } from '../../../generated/prisma/client';
 
 const createSubstationIntoDB = async (payload: ICreateSubstationPayload) => {
     // Check Zone exists
@@ -78,20 +80,68 @@ const createSubstationIntoDB = async (payload: ICreateSubstationPayload) => {
     return substation;
 };
 
-const getAllSubstationsFromDB = async () => {
-    const substations = await prisma.substation.findMany({
+const getAllSubstationsFromDB = async (query: IQuery) => {
+    const limit = query.limit ? Number(query.limit) : 10;
+    const page = query.page ? Number(query.page) : 1;
+    const skip = (page - 1) * limit;
+
+    const sortBy = query.sortBy || 'createdAt';
+    const sortOrder = query.sortOrder || 'desc';
+
+    const andConditions: Prisma.SubstationWhereInput[] = [];
+
+    if (query.searchTerm) {
+        andConditions.push({
+            OR: [
+                {
+                    name: {
+                        contains: query.searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    code: {
+                        contains: query.searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+            ],
+        });
+    }
+
+    andConditions.push({
+        deletedAt: null,
+    });
+
+    const allSubstations = await prisma.substation.findMany({
         where: {
-            deletedAt: null,
+            AND: andConditions,
         },
         include: {
             zone: true,
         },
+        take: limit,
+        skip,
         orderBy: {
-            createdAt: 'desc',
+            [sortBy]: sortOrder,
         },
     });
 
-    return substations;
+    const totalSubstationCount = await prisma.substation.count({
+        where: {
+            AND: andConditions,
+        },
+    });
+
+    return {
+        data: allSubstations,
+        meta: {
+            page,
+            limit,
+            total: totalSubstationCount,
+            totalPages: Math.ceil(totalSubstationCount / limit),
+        },
+    };
 };
 
 const getSingleSubstationFromDB = async (id: string) => {
@@ -224,11 +274,9 @@ const updateSubstationIntoDB = async (
 };
 
 const deleteSubstationFromDB = async (id: string) => {
-    // Check existing substation
     const existingSubstation = await prisma.substation.findFirst({
         where: {
             id,
-            deletedAt: null,
         },
     });
 
@@ -236,18 +284,13 @@ const deleteSubstationFromDB = async (id: string) => {
         throw new AppError(httpStatus.NOT_FOUND, 'Substation not found.');
     }
 
-    // Soft delete
-    const deletedSubstation = await prisma.substation.update({
+    await prisma.substation.delete({
         where: {
             id,
         },
-        data: {
-            deletedAt: new Date(),
-            isActive: false,
-        },
     });
 
-    return deletedSubstation;
+    return null;
 };
 
 export const substationServices = {

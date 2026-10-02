@@ -5,6 +5,7 @@ import { substationServices } from './substation.service';
 
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
+import { IQuery } from '../../interfaces';
 
 const createSubstation = catchAsync(async (req: Request, res: Response) => {
     const result = await substationServices.createSubstationIntoDB(req.body);
@@ -17,14 +18,16 @@ const createSubstation = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
-const getAllSubstations = catchAsync(async (_req: Request, res: Response) => {
-    const result = await substationServices.getAllSubstationsFromDB();
+const getAllSubstations = catchAsync(async (req: Request, res: Response) => {
+    const query = req.query as IQuery;
+    const result = await substationServices.getAllSubstationsFromDB(query);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
         message: 'All Substations retrieved successfully!',
-        data: result,
+        data: result.data,
+        meta: result.meta,
     });
 });
 
