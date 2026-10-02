@@ -1,10 +1,9 @@
 import type { Request, Response } from 'express';
 import httpStatus from 'http-status';
-
 import { feederServices } from './feeder.service';
-
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
+import { IQuery } from '../../interfaces';
 
 const createFeeder = catchAsync(async (req: Request, res: Response) => {
     const result = await feederServices.createFeederIntoDB(req.body);
@@ -17,8 +16,9 @@ const createFeeder = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
-const getAllFeeders = catchAsync(async (_req: Request, res: Response) => {
-    const result = await feederServices.getAllFeedersFromDB();
+const getAllFeeders = catchAsync(async (req: Request, res: Response) => {
+    const query = req.query as IQuery;
+    const result = await feederServices.getAllFeedersFromDB(query);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
