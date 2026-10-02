@@ -18,7 +18,7 @@ const createZone = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllZones = catchAsync(async (req: Request, res: Response) => {
-    const result = await zoneServices.getAllZonesFromDB();
+    const result = await zoneServices.getAllZonesFromDB(req.query);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,

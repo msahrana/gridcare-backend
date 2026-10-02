@@ -4,6 +4,8 @@ import { prisma } from '../../lib/prisma';
 import { AppError } from '../../errors/AppError';
 
 import type { ICreateZonePayload, IUpdateZonePayload } from './zone.interface';
+import { IQuery } from '../../interfaces';
+import { Prisma } from '../../../generated/prisma/client';
 
 const createZoneIntoDB = async (payload: ICreateZonePayload) => {
     // Check duplicate zone name
@@ -47,17 +49,70 @@ const createZoneIntoDB = async (payload: ICreateZonePayload) => {
     return zone;
 };
 
-const getAllZonesFromDB = async () => {
-    const zones = await prisma.zone.findMany({
+const getAllZonesFromDB = async (query: IQuery) => {
+    const limit = query.limit ? Number(query.limit) : 10;
+    const page = query.page ? Number(query.page) : 1;
+    const skip = (page - 1) * limit;
+
+    const sortBy = query.sortBy || 'createdAt';
+    const sortOrder = query.sortOrder || 'desc';
+
+    const andConditions: Prisma.ZoneWhereInput[] = [];
+
+    // Searching
+    if (query.searchTerm) {
+        andConditions.push({
+            OR: [
+                {
+                    name: {
+                        contains: query.searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    code: {
+                        contains: query.searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+            ],
+        });
+    }
+
+    // Only non-deleted zones
+    andConditions.push({
+        deletedAt: null,
+    });
+
+    const allZones = await prisma.zone.findMany({
         where: {
-            deletedAt: null,
+            AND: andConditions,
         },
+
+        take: limit,
+        skip,
+
         orderBy: {
-            createdAt: 'desc',
+            [sortBy]: sortOrder,
         },
     });
 
-    return zones;
+    const totalZoneCount = await prisma.zone.count({
+        where: {
+            AND: andConditions,
+        },
+    });
+
+    return {
+        data: allZones,
+
+        meta: {
+            page,
+            limit,
+            total: totalZoneCount,
+            totalPages: Math.ceil(totalZoneCount / limit),
+        },
+    };
 };
 
 const getSingleZoneFromDB = async (id: string) => {
@@ -155,10 +210,9 @@ const updateZoneIntoDB = async (id: string, payload: IUpdateZonePayload) => {
 };
 
 const deleteZoneFromDB = async (id: string) => {
-    const existingZone = await prisma.zone.findFirst({
+    const existingZone = await prisma.zone.findUnique({
         where: {
             id,
-            deletedAt: null,
         },
     });
 
@@ -166,17 +220,13 @@ const deleteZoneFromDB = async (id: string) => {
         throw new AppError(httpStatus.NOT_FOUND, 'Zone not found.');
     }
 
-    const deletedZone = await prisma.zone.update({
+    await prisma.zone.delete({
         where: {
             id,
         },
-        data: {
-            deletedAt: new Date(),
-            isActive: false,
-        },
     });
 
-    return deletedZone;
+    return null;
 };
 
 export const zoneServices = {
