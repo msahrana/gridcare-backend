@@ -1,9 +1,7 @@
-import { Prisma } from '../../../generated/prisma/client';
-
-export interface IUpdateAreaPayload {
-    name?: string;
-    code?: string;
-    zoneId?: string;
+export interface ICreateAreaPayload {
+    name: string;
+    code: string;
+    zoneId: string;
     substationId?: string | null;
     feederId?: string | null;
     address?: string | null;
@@ -12,10 +10,10 @@ export interface IUpdateAreaPayload {
     isActive?: boolean;
 }
 
-export interface ICreateAreaPayload {
-    name: string;
-    code: string;
-    zoneId: string;
+export interface IUpdateAreaPayload {
+    name?: string;
+    code?: string;
+    zoneId?: string;
     substationId?: string | null;
     feederId?: string | null;
     address?: string | null;

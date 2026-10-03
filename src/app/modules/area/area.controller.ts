@@ -23,6 +23,7 @@ const getAllAreas = catchAsync(async (req: Request, res: Response) => {
         success: true,
         message: 'All Areas retrieved successfully!',
         data: result.data,
+        meta: result.meta,
     });
 });
 

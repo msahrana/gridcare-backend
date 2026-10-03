@@ -54,7 +54,11 @@ const getAllAreasFromDB = async (query: IAreaQuery) => {
         isActive,
     } = query;
 
-    const skip = (page - 1) * limit;
+    // Convert query params to numbers
+    const pageNumber = Math.max(1, Number(page) || 1);
+    const limitNumber = Math.max(1, Number(limit) || 10);
+
+    const skip = (pageNumber - 1) * limitNumber;
 
     const andConditions: Prisma.AreaWhereInput[] = [
         {
@@ -105,9 +109,15 @@ const getAllAreasFromDB = async (query: IAreaQuery) => {
         });
     }
 
+    // Handle isActive safely
     if (isActive !== undefined) {
+        const activeValue =
+            typeof isActive === 'boolean'
+                ? isActive
+                : String(isActive).toLowerCase() === 'true';
+
         andConditions.push({
-            isActive,
+            isActive: activeValue,
         });
     }
 
@@ -119,7 +129,7 @@ const getAllAreasFromDB = async (query: IAreaQuery) => {
         prisma.area.findMany({
             where: whereConditions,
             skip,
-            take: limit,
+            take: limitNumber,
             orderBy: {
                 createdAt: 'desc',
             },
@@ -136,13 +146,13 @@ const getAllAreasFromDB = async (query: IAreaQuery) => {
     ]);
 
     return {
-        meta: {
-            page,
-            limit,
-            total,
-            totalPage: Math.ceil(total / limit),
-        },
         data: areas,
+        meta: {
+            page: pageNumber,
+            limit: limitNumber,
+            total,
+            totalPages: Math.ceil(total / limitNumber),
+        },
     };
 };
 
@@ -156,8 +166,6 @@ const getAreaByIdFromDB = async (id: string) => {
             zone: true,
             substation: true,
             feeder: true,
-            schedules: true,
-            outages: true,
         },
     });
 
@@ -215,7 +223,6 @@ const deleteAreaFromDB = async (id: string) => {
     const area = await prisma.area.findFirst({
         where: {
             id,
-            deletedAt: null,
         },
     });
 
@@ -223,13 +230,9 @@ const deleteAreaFromDB = async (id: string) => {
         throw new AppError(httpStatus.NOT_FOUND, 'Area not found');
     }
 
-    await prisma.area.update({
+    await prisma.area.delete({
         where: {
             id,
-        },
-        data: {
-            deletedAt: new Date(),
-            isActive: false,
         },
     });
 
