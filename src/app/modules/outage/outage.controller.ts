@@ -47,7 +47,7 @@ const getAllOutages = catchAsync(async (req: Request, res: Response) => {
         statusCode: httpStatus.OK,
         success: true,
         message: 'All Outages retrieved successfully',
-        data: result.data,
+        data: result,
     });
 });
 

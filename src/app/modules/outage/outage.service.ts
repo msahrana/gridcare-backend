@@ -545,7 +545,6 @@ const deleteOutageFromDB = async (id: string) => {
     const existingOutage = await prisma.outage.findFirst({
         where: {
             id,
-            deletedAt: null,
         },
     });
 
@@ -568,13 +567,9 @@ const deleteOutageFromDB = async (id: string) => {
     // Soft delete
     // --------------------------------------------------------
 
-    const deletedOutage = await prisma.outage.update({
+    const deletedOutage = await prisma.outage.delete({
         where: {
             id,
-        },
-
-        data: {
-            deletedAt: new Date(),
         },
     });
 
