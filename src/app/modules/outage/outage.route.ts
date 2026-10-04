@@ -2,6 +2,8 @@ import express from 'express';
 import { outageControllers } from './outage.controller';
 import { OutageValidation } from './outage.validation';
 import { validateRequest } from '../../middleware/validateRequest';
+import { auth } from '../../middleware/checkAuth';
+import { UserRole } from '../../../generated/prisma/enums';
 
 const router = express.Router();
 
@@ -11,6 +13,7 @@ const router = express.Router();
 
 router.post(
     '/',
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     validateRequest(OutageValidation.createOutageSchema),
     outageControllers.createOutage,
 );
@@ -37,14 +40,22 @@ router.get('/area/:areaId', outageControllers.getOutagesByArea);
 // GET ALL
 // ============================================================
 
-router.get('/', outageControllers.getAllOutages);
+router.get(
+    '/',
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
+    outageControllers.getAllOutages,
+);
 
 // ============================================================
 // GET SINGLE
 // IMPORTANT: Keep this AFTER all named routes
 // ============================================================
 
-router.get('/:id', outageControllers.getSingleOutage);
+router.get(
+    '/:id',
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
+    outageControllers.getSingleOutage,
+);
 
 // ============================================================
 // UPDATE
@@ -52,6 +63,7 @@ router.get('/:id', outageControllers.getSingleOutage);
 
 router.patch(
     '/:id',
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
     validateRequest(OutageValidation.updateOutageSchema),
     outageControllers.updateOutage,
 );
@@ -60,7 +72,11 @@ router.patch(
 // DELETE
 // ============================================================
 
-router.delete('/:id', outageControllers.deleteOutage);
+router.delete(
+    '/:id',
+    auth(UserRole.TECHNICIAN, UserRole.ADMIN, UserRole.OPERATOR),
+    outageControllers.deleteOutage,
+);
 
 // ============================================================
 // EXPORT

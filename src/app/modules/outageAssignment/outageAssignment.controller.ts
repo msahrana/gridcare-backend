@@ -20,8 +20,9 @@ const createOutageAssignment = catchAsync(async (req, res) => {
 });
 
 const getAllOutageAssignments = catchAsync(async (req, res) => {
-    const result =
-        await outageAssignmentServices.getAllOutageAssignmentsFromDB();
+    const result = await outageAssignmentServices.getAllOutageAssignmentsFromDB(
+        req.query,
+    );
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
@@ -30,7 +31,6 @@ const getAllOutageAssignments = catchAsync(async (req, res) => {
         data: result,
     });
 });
-
 const getSingleOutageAssignment = catchAsync(async (req, res) => {
     const { id } = req.params;
 
