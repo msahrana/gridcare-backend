@@ -16,12 +16,7 @@ const router = Router();
 
 router.post(
     '/',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     validateRequest(NotificationValidation.createNotificationValidationSchema),
     notificationControllers.createNotification,
 );
@@ -32,12 +27,7 @@ router.post(
 
 router.get(
     '/my',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.getMyNotifications,
 );
 
@@ -47,12 +37,7 @@ router.get(
 
 router.get(
     '/my/unread',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.getMyUnreadNotifications,
 );
 
@@ -62,12 +47,7 @@ router.get(
 
 router.patch(
     '/my/read-all',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.markAllNotificationsAsRead,
 );
 
@@ -77,12 +57,7 @@ router.patch(
 
 router.delete(
     '/my/read',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.deleteAllReadNotifications,
 );
 
@@ -92,12 +67,7 @@ router.delete(
 
 router.patch(
     '/:id/read',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.markNotificationAsRead,
 );
 
@@ -107,12 +77,7 @@ router.patch(
 
 router.get(
     '/',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.getAllNotifications,
 );
 
@@ -122,12 +87,7 @@ router.get(
 
 router.get(
     '/:id',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.getSingleNotification,
 );
 
@@ -137,12 +97,7 @@ router.get(
 
 router.delete(
     '/:id',
-    auth(
-        UserRole.ADMIN,
-        UserRole.OPERATOR,
-        UserRole.TECHNICIAN,
-        UserRole.CUSTOMER,
-    ),
+    auth(UserRole.ADMIN, UserRole.OPERATOR),
     notificationControllers.deleteNotification,
 );
 

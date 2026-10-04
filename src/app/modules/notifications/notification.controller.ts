@@ -76,7 +76,7 @@ const getAllNotifications = catchAsync(async (req: Request, res: Response) => {
         statusCode: httpStatus.OK,
         success: true,
         message: 'All Notifications Retrieved Successfully!',
-        data: result.data,
+        data: result,
     });
 });
 
@@ -109,11 +109,9 @@ const getSingleNotification = catchAsync(
 
 const markNotificationAsRead = catchAsync(
     async (req: Request, res: Response) => {
-        const userId = req.user?.id;
         const { id } = req.params;
 
         const result = await notificationServices.markNotificationAsReadIntoDB(
-            userId as string,
             id as string,
         );
 

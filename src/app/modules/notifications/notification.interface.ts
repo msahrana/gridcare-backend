@@ -7,3 +7,10 @@ export type ICreateNotificationPayload = {
 };
 
 export type INotificationResponse = Notification;
+
+export interface INotificationQuery {
+    page?: string | number;
+    limit?: string | number;
+    searchTerm?: string;
+}
+

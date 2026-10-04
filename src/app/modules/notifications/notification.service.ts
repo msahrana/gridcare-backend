@@ -3,7 +3,10 @@ import httpStatus from 'http-status';
 import { AppError } from '../../errors/AppError';
 import { prisma } from '../../lib/prisma';
 
-import { ICreateNotificationPayload } from './notification.interface';
+import {
+    ICreateNotificationPayload,
+    INotificationQuery,
+} from './notification.interface';
 
 // ======================================================
 // CREATE NOTIFICATION
@@ -40,7 +43,10 @@ const createNotificationIntoDB = async (
 // GET MY NOTIFICATIONS
 // ======================================================
 
-const getMyNotificationsFromDB = async (userId: string, query: any) => {
+const getMyNotificationsFromDB = async (
+    userId: string,
+    query: INotificationQuery,
+) => {
     const page = query.page ? Number(query.page) : 1;
     const limit = query.limit ? Number(query.limit) : 10;
 
@@ -99,7 +105,7 @@ const getMyUnreadNotificationsFromDB = async (userId: string) => {
 // GET ALL NOTIFICATION
 // ======================================================
 
-const getAllNotificationsFromDB = async (query: any) => {
+const getAllNotificationsFromDB = async (query: INotificationQuery) => {
     const page = query.page ? Number(query.page) : 1;
     const limit = query.limit ? Number(query.limit) : 10;
 
@@ -154,13 +160,13 @@ const getAllNotificationsFromDB = async (query: any) => {
     ]);
 
     return {
+        data: notifications,
         meta: {
             page,
             limit,
             total,
-            totalPage: Math.ceil(total / limit),
+            totalPages: Math.ceil(total / limit),
         },
-        data: notifications,
     };
 };
 
@@ -190,14 +196,10 @@ const getSingleNotificationFromDB = async (
 // MARK AS READ
 // ======================================================
 
-const markNotificationAsReadIntoDB = async (
-    userId: string,
-    notificationId: string,
-) => {
-    const notification = await prisma.notification.findFirst({
+const markNotificationAsReadIntoDB = async (notificationId: string) => {
+    const notification = await prisma.notification.findUnique({
         where: {
             id: notificationId,
-            userId,
         },
     });
 
@@ -205,19 +207,25 @@ const markNotificationAsReadIntoDB = async (
         throw new AppError(httpStatus.NOT_FOUND, 'Notification not found');
     }
 
-    const result = await prisma.notification.update({
+    return prisma.notification.update({
         where: {
             id: notificationId,
         },
-
         data: {
             isRead: true,
         },
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    role: true,
+                },
+            },
+        },
     });
-
-    return result;
 };
-
 // ======================================================
 // MARK ALL AS READ
 // ======================================================
