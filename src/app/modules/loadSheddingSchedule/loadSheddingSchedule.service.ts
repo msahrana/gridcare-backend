@@ -5,6 +5,7 @@ import { AppError } from '../../errors/AppError';
 
 import {
     ICreateLoadSheddingSchedulePayload,
+    ILoadSheddingScheduleQuery,
     IUpdateLoadSheddingSchedulePayload,
 } from './loadSheddingSchedule.interface';
 
@@ -74,68 +75,37 @@ const createLoadSheddingScheduleIntoDB = async (
     return result;
 };
 
-const getAllLoadSheddingSchedulesFromDB = async (query: any) => {
+const getAllLoadSheddingSchedulesFromDB = async (
+    query: ILoadSheddingScheduleQuery,
+) => {
     const page = Number(query.page) || 1;
     const limit = Number(query.limit) || 10;
     const skip = (page - 1) * limit;
-
     const searchTerm = query.searchTerm?.trim();
-
     const where: Prisma.LoadSheddingScheduleWhereInput = {
         deletedAt: null,
-
         ...(searchTerm && {
             OR: [
-                {
-                    title: {
-                        contains: searchTerm,
-                        mode: 'insensitive',
-                    },
-                },
-                {
-                    description: {
-                        contains: searchTerm,
-                        mode: 'insensitive',
-                    },
-                },
+                { title: { contains: searchTerm, mode: 'insensitive' } },
+                { description: { contains: searchTerm, mode: 'insensitive' } },
             ],
         }),
-
-        ...(query.areaId && {
-            areaId: query.areaId,
-        }),
-
-        ...(query.status && {
-            status: query.status,
-        }),
+        ...(query.areaId && { areaId: query.areaId }),
+        ...(query.status && { status: query.status }),
     };
-
     const [data, total] = await Promise.all([
         prisma.loadSheddingSchedule.findMany({
             where,
             skip,
             take: limit,
-            orderBy: {
-                startTime: 'asc',
-            },
-            include: {
-                area: true,
-            },
+            orderBy: { startTime: 'asc' },
+            include: { area: true },
         }),
-
-        prisma.loadSheddingSchedule.count({
-            where,
-        }),
+        prisma.loadSheddingSchedule.count({ where }),
     ]);
-
     return {
-        meta: {
-            page,
-            limit,
-            total,
-            totalPage: Math.ceil(total / limit),
-        },
         data,
+        meta: { page, limit, total, totalPages: Math.ceil(total / limit) },
     };
 };
 
@@ -223,13 +193,6 @@ const updateLoadSheddingScheduleIntoDB = async (
             ...(payload.endTime !== undefined && {
                 endTime: payload.endTime,
             }),
-
-            ...(payload.scheduleFee !== undefined && {
-                scheduleFee:
-                    payload.scheduleFee === null
-                        ? null
-                        : new Prisma.Decimal(payload.scheduleFee),
-            }),
         },
         include: {
             area: true,
@@ -243,7 +206,6 @@ const deleteLoadSheddingScheduleFromDB = async (id: string) => {
     const existingSchedule = await prisma.loadSheddingSchedule.findFirst({
         where: {
             id,
-            deletedAt: null,
         },
     });
 
@@ -254,13 +216,9 @@ const deleteLoadSheddingScheduleFromDB = async (id: string) => {
         );
     }
 
-    await prisma.loadSheddingSchedule.update({
+    await prisma.loadSheddingSchedule.delete({
         where: {
             id,
-        },
-        data: {
-            deletedAt: new Date(),
-            status: ScheduleStatus.CANCELLED,
         },
     });
 

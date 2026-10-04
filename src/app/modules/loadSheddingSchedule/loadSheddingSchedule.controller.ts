@@ -40,7 +40,7 @@ const getAllLoadSheddingSchedules = catchAsync(
             statusCode: httpStatus.OK,
             success: true,
             message: 'All Load Shedding Schedules Retrieved Successfully!',
-            data: result.data,
+            data: result,
         });
     },
 );
