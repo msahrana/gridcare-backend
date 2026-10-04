@@ -3,8 +3,10 @@ import { prisma } from '../../lib/prisma';
 import { AppError } from '../../errors/AppError';
 import {
     ICreateOutageReportPayload,
+    IOutageReportQuery,
     IUpdateOutageReportPayload,
 } from './outageReport.interface';
+import { Prisma } from '../../../generated/prisma/client';
 
 const createOutageReportIntoDB = async (
     reporterId: string,
@@ -58,19 +60,100 @@ const createOutageReportIntoDB = async (
     return result;
 };
 
-const getAllOutageReportsFromDB = async () => {
-    const result = await prisma.outageReport.findMany({
+const getAllOutageReportsFromDB = async (query: IOutageReportQuery) => {
+    const limit = query.limit ? Number(query.limit) : 10;
+    const page = query.page ? Number(query.page) : 1;
+    const skip = (page - 1) * limit;
+
+    const sortBy = query.sortBy || 'createdAt';
+    const sortOrder = query.sortOrder || 'desc';
+
+    const andConditions: Prisma.OutageReportWhereInput[] = [];
+
+    if (query.searchTerm) {
+        andConditions.push({
+            OR: [
+                {
+                    description: {
+                        contains: query.searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    reporter: {
+                        name: {
+                            contains: query.searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+                {
+                    reporter: {
+                        email: {
+                            contains: query.searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+                {
+                    area: {
+                        name: {
+                            contains: query.searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+                {
+                    area: {
+                        code: {
+                            contains: query.searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+                {
+                    outage: {
+                        title: {
+                            contains: query.searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+            ],
+        });
+    }
+
+    const allOutageReports = await prisma.outageReport.findMany({
+        where: {
+            AND: andConditions,
+        },
+        take: limit,
+        skip,
+        orderBy: {
+            [sortBy]: sortOrder,
+        },
         include: {
             reporter: true,
             area: true,
             outage: true,
         },
-        orderBy: {
-            createdAt: 'desc',
+    });
+
+    const totalOutageReportCount = await prisma.outageReport.count({
+        where: {
+            AND: andConditions,
         },
     });
 
-    return result;
+    return {
+        data: allOutageReports,
+        meta: {
+            page,
+            limit,
+            total: totalOutageReportCount,
+            totalPages: Math.ceil(totalOutageReportCount / limit),
+        },
+    };
 };
 
 const getSingleOutageReportFromDB = async (id: string) => {

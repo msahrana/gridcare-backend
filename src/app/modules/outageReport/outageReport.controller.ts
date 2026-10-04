@@ -29,7 +29,9 @@ const createOutageReport = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllOutageReports = catchAsync(async (req: Request, res: Response) => {
-    const result = await outageReportServices.getAllOutageReportsFromDB();
+    const result = await outageReportServices.getAllOutageReportsFromDB(
+        req.query,
+    );
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
