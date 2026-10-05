@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { restorationServices } from './restoration.service';
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
+import { RestorationStatus } from '../../../generated/prisma/enums';
 
 const startRestoration = catchAsync(async (req: Request, res: Response) => {
     const result = await restorationServices.startRestorationIntoDB(req.body);
@@ -47,7 +48,8 @@ const getAllRestorations = catchAsync(async (req: Request, res: Response) => {
     const result = await restorationServices.getAllRestorationsFromDB({
         page: Number(req.query.page),
         limit: Number(req.query.limit),
-        status: req.query.status as any,
+        searchTerm: req.query.searchTerm as string,
+        status: req.query.status as RestorationStatus | undefined,
         technicianId: req.query.technicianId as string,
         outageId: req.query.outageId as string,
     });

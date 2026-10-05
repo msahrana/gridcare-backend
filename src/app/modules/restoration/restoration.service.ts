@@ -12,6 +12,7 @@ import { AppError } from '../../errors/AppError';
 
 import {
     ICreateRestorationPayload,
+    IRestorationQuery,
     IUpdateRestorationPayload,
 } from './restoration.interface';
 
@@ -63,7 +64,7 @@ const startRestorationIntoDB = async (payload: ICreateRestorationPayload) => {
         // Check existing restoration
         // -----------------------------------------------------
 
-        const existingRestoration = await tx.restoration.findUnique({
+        const existingRestoration = await tx.restoration.findFirst({
             where: {
                 outageId,
             },
@@ -384,19 +385,62 @@ const getSingleRestorationFromDB = async (restorationId: string) => {
 // GET ALL RESTORATIONS
 // =========================================================
 
-const getAllRestorationsFromDB = async (params: {
-    page?: number;
-    limit?: number;
-    status?: RestorationStatus;
-    technicianId?: string;
-    outageId?: string;
-}) => {
+const getAllRestorationsFromDB = async (params: IRestorationQuery) => {
     const page = Number(params.page) || 1;
     const limit = Number(params.limit) || 10;
 
     const skip = (page - 1) * limit;
 
+    const searchTerm = params.searchTerm?.trim();
+
     const where: Prisma.RestorationWhereInput = {
+        ...(searchTerm && {
+            OR: [
+                {
+                    remarks: {
+                        contains: searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    outage: {
+                        title: {
+                            contains: searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+                {
+                    outage: {
+                        area: {
+                            name: {
+                                contains: searchTerm,
+                                mode: 'insensitive',
+                            },
+                        },
+                    },
+                },
+                {
+                    outage: {
+                        area: {
+                            code: {
+                                contains: searchTerm,
+                                mode: 'insensitive',
+                            },
+                        },
+                    },
+                },
+                {
+                    technician: {
+                        employeeId: {
+                            contains: searchTerm,
+                            mode: 'insensitive',
+                        },
+                    },
+                },
+            ],
+        }),
+
         ...(params.status && {
             status: params.status,
         }),
@@ -434,13 +478,13 @@ const getAllRestorationsFromDB = async (params: {
     ]);
 
     return {
+        data,
         meta: {
             page,
             limit,
             total,
             totalPage: Math.ceil(total / limit),
         },
-        data,
     };
 };
 

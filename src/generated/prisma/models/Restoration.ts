@@ -277,10 +277,10 @@ export type RestorationOrderByWithRelationInput = {
 
 export type RestorationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  outageId?: string
   AND?: Prisma.RestorationWhereInput | Prisma.RestorationWhereInput[]
   OR?: Prisma.RestorationWhereInput[]
   NOT?: Prisma.RestorationWhereInput | Prisma.RestorationWhereInput[]
+  outageId?: Prisma.StringFilter<"Restoration"> | string
   technicianId?: Prisma.StringNullableFilter<"Restoration"> | string | null
   startedAt?: Prisma.DateTimeNullableFilter<"Restoration"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"Restoration"> | Date | string | null
@@ -291,7 +291,7 @@ export type RestorationWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Restoration"> | Date | string
   outage?: Prisma.XOR<Prisma.OutageScalarRelationFilter, Prisma.OutageWhereInput>
   technician?: Prisma.XOR<Prisma.TechnicianNullableScalarRelationFilter, Prisma.TechnicianWhereInput> | null
-}, "id" | "outageId">
+}, "id">
 
 export type RestorationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -416,9 +416,14 @@ export type RestorationUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type RestorationNullableScalarRelationFilter = {
-  is?: Prisma.RestorationWhereInput | null
-  isNot?: Prisma.RestorationWhereInput | null
+export type RestorationListRelationFilter = {
+  every?: Prisma.RestorationWhereInput
+  some?: Prisma.RestorationWhereInput
+  none?: Prisma.RestorationWhereInput
+}
+
+export type RestorationOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type RestorationCountOrderByAggregateInput = {
@@ -468,46 +473,46 @@ export type RestorationSumOrderByAggregateInput = {
   duration?: Prisma.SortOrder
 }
 
-export type RestorationListRelationFilter = {
-  every?: Prisma.RestorationWhereInput
-  some?: Prisma.RestorationWhereInput
-  none?: Prisma.RestorationWhereInput
+export type RestorationCreateNestedManyWithoutOutageInput = {
+  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput> | Prisma.RestorationCreateWithoutOutageInput[] | Prisma.RestorationUncheckedCreateWithoutOutageInput[]
+  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput | Prisma.RestorationCreateOrConnectWithoutOutageInput[]
+  createMany?: Prisma.RestorationCreateManyOutageInputEnvelope
+  connect?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
 }
 
-export type RestorationOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type RestorationUncheckedCreateNestedManyWithoutOutageInput = {
+  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput> | Prisma.RestorationCreateWithoutOutageInput[] | Prisma.RestorationUncheckedCreateWithoutOutageInput[]
+  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput | Prisma.RestorationCreateOrConnectWithoutOutageInput[]
+  createMany?: Prisma.RestorationCreateManyOutageInputEnvelope
+  connect?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
 }
 
-export type RestorationCreateNestedOneWithoutOutageInput = {
-  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
-  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput
-  connect?: Prisma.RestorationWhereUniqueInput
+export type RestorationUpdateManyWithoutOutageNestedInput = {
+  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput> | Prisma.RestorationCreateWithoutOutageInput[] | Prisma.RestorationUncheckedCreateWithoutOutageInput[]
+  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput | Prisma.RestorationCreateOrConnectWithoutOutageInput[]
+  upsert?: Prisma.RestorationUpsertWithWhereUniqueWithoutOutageInput | Prisma.RestorationUpsertWithWhereUniqueWithoutOutageInput[]
+  createMany?: Prisma.RestorationCreateManyOutageInputEnvelope
+  set?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  disconnect?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  delete?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  connect?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  update?: Prisma.RestorationUpdateWithWhereUniqueWithoutOutageInput | Prisma.RestorationUpdateWithWhereUniqueWithoutOutageInput[]
+  updateMany?: Prisma.RestorationUpdateManyWithWhereWithoutOutageInput | Prisma.RestorationUpdateManyWithWhereWithoutOutageInput[]
+  deleteMany?: Prisma.RestorationScalarWhereInput | Prisma.RestorationScalarWhereInput[]
 }
 
-export type RestorationUncheckedCreateNestedOneWithoutOutageInput = {
-  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
-  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput
-  connect?: Prisma.RestorationWhereUniqueInput
-}
-
-export type RestorationUpdateOneWithoutOutageNestedInput = {
-  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
-  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput
-  upsert?: Prisma.RestorationUpsertWithoutOutageInput
-  disconnect?: Prisma.RestorationWhereInput | boolean
-  delete?: Prisma.RestorationWhereInput | boolean
-  connect?: Prisma.RestorationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RestorationUpdateToOneWithWhereWithoutOutageInput, Prisma.RestorationUpdateWithoutOutageInput>, Prisma.RestorationUncheckedUpdateWithoutOutageInput>
-}
-
-export type RestorationUncheckedUpdateOneWithoutOutageNestedInput = {
-  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
-  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput
-  upsert?: Prisma.RestorationUpsertWithoutOutageInput
-  disconnect?: Prisma.RestorationWhereInput | boolean
-  delete?: Prisma.RestorationWhereInput | boolean
-  connect?: Prisma.RestorationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RestorationUpdateToOneWithWhereWithoutOutageInput, Prisma.RestorationUpdateWithoutOutageInput>, Prisma.RestorationUncheckedUpdateWithoutOutageInput>
+export type RestorationUncheckedUpdateManyWithoutOutageNestedInput = {
+  create?: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput> | Prisma.RestorationCreateWithoutOutageInput[] | Prisma.RestorationUncheckedCreateWithoutOutageInput[]
+  connectOrCreate?: Prisma.RestorationCreateOrConnectWithoutOutageInput | Prisma.RestorationCreateOrConnectWithoutOutageInput[]
+  upsert?: Prisma.RestorationUpsertWithWhereUniqueWithoutOutageInput | Prisma.RestorationUpsertWithWhereUniqueWithoutOutageInput[]
+  createMany?: Prisma.RestorationCreateManyOutageInputEnvelope
+  set?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  disconnect?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  delete?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  connect?: Prisma.RestorationWhereUniqueInput | Prisma.RestorationWhereUniqueInput[]
+  update?: Prisma.RestorationUpdateWithWhereUniqueWithoutOutageInput | Prisma.RestorationUpdateWithWhereUniqueWithoutOutageInput[]
+  updateMany?: Prisma.RestorationUpdateManyWithWhereWithoutOutageInput | Prisma.RestorationUpdateManyWithWhereWithoutOutageInput[]
+  deleteMany?: Prisma.RestorationScalarWhereInput | Prisma.RestorationScalarWhereInput[]
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -593,39 +598,41 @@ export type RestorationCreateOrConnectWithoutOutageInput = {
   create: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
 }
 
-export type RestorationUpsertWithoutOutageInput = {
-  update: Prisma.XOR<Prisma.RestorationUpdateWithoutOutageInput, Prisma.RestorationUncheckedUpdateWithoutOutageInput>
-  create: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
-  where?: Prisma.RestorationWhereInput
+export type RestorationCreateManyOutageInputEnvelope = {
+  data: Prisma.RestorationCreateManyOutageInput | Prisma.RestorationCreateManyOutageInput[]
+  skipDuplicates?: boolean
 }
 
-export type RestorationUpdateToOneWithWhereWithoutOutageInput = {
-  where?: Prisma.RestorationWhereInput
+export type RestorationUpsertWithWhereUniqueWithoutOutageInput = {
+  where: Prisma.RestorationWhereUniqueInput
+  update: Prisma.XOR<Prisma.RestorationUpdateWithoutOutageInput, Prisma.RestorationUncheckedUpdateWithoutOutageInput>
+  create: Prisma.XOR<Prisma.RestorationCreateWithoutOutageInput, Prisma.RestorationUncheckedCreateWithoutOutageInput>
+}
+
+export type RestorationUpdateWithWhereUniqueWithoutOutageInput = {
+  where: Prisma.RestorationWhereUniqueInput
   data: Prisma.XOR<Prisma.RestorationUpdateWithoutOutageInput, Prisma.RestorationUncheckedUpdateWithoutOutageInput>
 }
 
-export type RestorationUpdateWithoutOutageInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  status?: Prisma.EnumRestorationStatusFieldUpdateOperationsInput | $Enums.RestorationStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  technician?: Prisma.TechnicianUpdateOneWithoutRestorationsNestedInput
+export type RestorationUpdateManyWithWhereWithoutOutageInput = {
+  where: Prisma.RestorationScalarWhereInput
+  data: Prisma.XOR<Prisma.RestorationUpdateManyMutationInput, Prisma.RestorationUncheckedUpdateManyWithoutOutageInput>
 }
 
-export type RestorationUncheckedUpdateWithoutOutageInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  status?: Prisma.EnumRestorationStatusFieldUpdateOperationsInput | $Enums.RestorationStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type RestorationScalarWhereInput = {
+  AND?: Prisma.RestorationScalarWhereInput | Prisma.RestorationScalarWhereInput[]
+  OR?: Prisma.RestorationScalarWhereInput[]
+  NOT?: Prisma.RestorationScalarWhereInput | Prisma.RestorationScalarWhereInput[]
+  id?: Prisma.StringFilter<"Restoration"> | string
+  outageId?: Prisma.StringFilter<"Restoration"> | string
+  technicianId?: Prisma.StringNullableFilter<"Restoration"> | string | null
+  startedAt?: Prisma.DateTimeNullableFilter<"Restoration"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"Restoration"> | Date | string | null
+  duration?: Prisma.IntNullableFilter<"Restoration"> | number | null
+  status?: Prisma.EnumRestorationStatusFilter<"Restoration"> | $Enums.RestorationStatus
+  remarks?: Prisma.StringNullableFilter<"Restoration"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Restoration"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Restoration"> | Date | string
 }
 
 export type RestorationCreateWithoutTechnicianInput = {
@@ -678,20 +685,52 @@ export type RestorationUpdateManyWithWhereWithoutTechnicianInput = {
   data: Prisma.XOR<Prisma.RestorationUpdateManyMutationInput, Prisma.RestorationUncheckedUpdateManyWithoutTechnicianInput>
 }
 
-export type RestorationScalarWhereInput = {
-  AND?: Prisma.RestorationScalarWhereInput | Prisma.RestorationScalarWhereInput[]
-  OR?: Prisma.RestorationScalarWhereInput[]
-  NOT?: Prisma.RestorationScalarWhereInput | Prisma.RestorationScalarWhereInput[]
-  id?: Prisma.StringFilter<"Restoration"> | string
-  outageId?: Prisma.StringFilter<"Restoration"> | string
-  technicianId?: Prisma.StringNullableFilter<"Restoration"> | string | null
-  startedAt?: Prisma.DateTimeNullableFilter<"Restoration"> | Date | string | null
-  completedAt?: Prisma.DateTimeNullableFilter<"Restoration"> | Date | string | null
-  duration?: Prisma.IntNullableFilter<"Restoration"> | number | null
-  status?: Prisma.EnumRestorationStatusFilter<"Restoration"> | $Enums.RestorationStatus
-  remarks?: Prisma.StringNullableFilter<"Restoration"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Restoration"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Restoration"> | Date | string
+export type RestorationCreateManyOutageInput = {
+  id?: string
+  technicianId?: string | null
+  startedAt?: Date | string | null
+  completedAt?: Date | string | null
+  duration?: number | null
+  status?: $Enums.RestorationStatus
+  remarks?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RestorationUpdateWithoutOutageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRestorationStatusFieldUpdateOperationsInput | $Enums.RestorationStatus
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  technician?: Prisma.TechnicianUpdateOneWithoutRestorationsNestedInput
+}
+
+export type RestorationUncheckedUpdateWithoutOutageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRestorationStatusFieldUpdateOperationsInput | $Enums.RestorationStatus
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type RestorationUncheckedUpdateManyWithoutOutageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumRestorationStatusFieldUpdateOperationsInput | $Enums.RestorationStatus
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RestorationCreateManyTechnicianInput = {

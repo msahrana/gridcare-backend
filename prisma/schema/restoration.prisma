@@ -1,11 +1,12 @@
+
 model Restoration {
   id            String   @id @default(uuid())
-  outageId      String   @unique
+  outageId      String
   technicianId  String?
 
   startedAt     DateTime?
   completedAt   DateTime?
-  duration      Int? // duration in minutes
+  duration      Int?
 
   status        RestorationStatus @default(IN_PROGRESS)
   remarks       String?
@@ -16,8 +17,9 @@ model Restoration {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  @@index([outageId])
   @@index([technicianId])
   @@index([status])
-  
+
   @@map("restorations")
 }
