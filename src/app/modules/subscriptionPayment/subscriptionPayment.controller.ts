@@ -1,10 +1,11 @@
 import httpStatus from 'http-status';
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+
 import config from '../../config';
-import { subscriptionPaymentServices } from './subscriptionPayment.service';
+import { AppError } from '../../errors/AppError';
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
-import { AppError } from '../../errors/AppError';
+import { subscriptionPaymentServices } from './subscriptionPayment.service';
 
 const createSubscriptionPayment = catchAsync(
     async (req: Request, res: Response): Promise<void> => {
@@ -46,7 +47,6 @@ const bkashCallback = catchAsync(
 
         if (!paymentID) {
             res.redirect(`${config.frontend_url}/subscription/payment-failed`);
-
             return;
         }
 
@@ -57,34 +57,22 @@ const bkashCallback = catchAsync(
                     callbackStatus,
                 );
 
-            let page = 'payment-pending';
+            const pageMap = {
+                COMPLETED: 'payment-success',
+                FAILED: 'payment-failed',
+                CANCELLED: 'payment-cancelled',
+                PENDING: 'payment-pending',
+            } as const;
 
-            switch (result.status) {
-                case 'COMPLETED':
-                    page = 'payment-success';
-                    break;
-
-                case 'FAILED':
-                    page = 'payment-failed';
-                    break;
-
-                case 'CANCELLED':
-                    page = 'payment-cancelled';
-                    break;
-
-                case 'PENDING':
-                default:
-                    page = 'payment-pending';
-                    break;
-            }
+            const page =
+                pageMap[result.status as keyof typeof pageMap] ??
+                'payment-pending';
 
             res.redirect(
                 `${config.frontend_url}/subscription/${page}?paymentId=${encodeURIComponent(
                     paymentID,
                 )}`,
             );
-
-            return;
         } catch (error) {
             console.error('bKash callback error:', error);
 
@@ -93,52 +81,14 @@ const bkashCallback = catchAsync(
                     paymentID,
                 )}`,
             );
-
-            return;
         }
-    },
-);
-
-const verifyBKashPayment = catchAsync(
-    async (req: Request, res: Response): Promise<void> => {
-        const userId = req.user?.id;
-
-        const { paymentId } = req.params;
-
-        if (!userId) {
-            throw new AppError(
-                httpStatus.UNAUTHORIZED,
-                'User authentication required',
-            );
-        }
-
-        if (!paymentId) {
-            throw new AppError(
-                httpStatus.BAD_REQUEST,
-                'Payment ID is required',
-            );
-        }
-
-        const result =
-            await subscriptionPaymentServices.verifyBKashPaymentIntoDB(
-                userId,
-                paymentId as string,
-            );
-
-        sendResponse(res, {
-            statusCode: httpStatus.OK,
-            success: true,
-            message: 'Payment verification completed',
-            data: result,
-        });
     },
 );
 
 const getSingleSubscriptionPayment = catchAsync(
     async (req: Request, res: Response): Promise<void> => {
         const userId = req.user?.id;
-
-        const { paymentId } = req.params;
+        const paymentId = req.params.paymentId;
 
         if (!userId) {
             throw new AppError(
@@ -147,16 +97,13 @@ const getSingleSubscriptionPayment = catchAsync(
             );
         }
 
-        if (!paymentId) {
-            throw new AppError(
-                httpStatus.BAD_REQUEST,
-                'Payment ID is required',
-            );
+        if (typeof paymentId !== 'string' || !paymentId) {
+            throw new AppError(httpStatus.BAD_REQUEST, 'Invalid payment ID');
         }
 
         const result =
             await subscriptionPaymentServices.getSingleSubscriptionPaymentIntoDB(
-                paymentId as string,
+                paymentId,
                 userId,
             );
 
@@ -190,8 +137,8 @@ const getMySubscriptionPayments = catchAsync(
             statusCode: httpStatus.OK,
             success: true,
             message: 'My subscription payments retrieved successfully',
-
             data: result.data,
+            meta: result.meta,
         });
     },
 );
@@ -199,7 +146,6 @@ const getMySubscriptionPayments = catchAsync(
 export const subscriptionPaymentControllers = {
     createSubscriptionPayment,
     bkashCallback,
-    verifyBKashPayment,
     getSingleSubscriptionPayment,
     getMySubscriptionPayments,
 };

@@ -56,9 +56,7 @@ const createAuditLogIntoDB = async (
 
 const getAllAuditLogsFromDB = async (query: any) => {
     const page = query.page ? Number(query.page) : 1;
-
     const limit = query.limit ? Number(query.limit) : 10;
-
     const skip = (page - 1) * limit;
 
     const searchTerm = query.searchTerm?.trim();
@@ -132,14 +130,13 @@ const getAllAuditLogsFromDB = async (query: any) => {
     ]);
 
     return {
+        data: logs,
         meta: {
             page,
             limit,
             total,
-            totalPage: Math.ceil(total / limit),
+            totalPages: Math.ceil(total / limit),
         },
-
-        data: logs,
     };
 };
 

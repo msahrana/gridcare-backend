@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { PaymentGateway } from '../../../generated/prisma/enums';
 
 export const createSubscriptionPaymentValidationSchema = z.object({
-    subscriptionId: z.string().uuid('Invalid subscription ID'),
+    planId: z.string().uuid('Invalid plan ID'),
 
     paymentGateway: z.nativeEnum(PaymentGateway).default(PaymentGateway.BKASH),
 });

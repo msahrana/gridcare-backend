@@ -1,55 +1,24 @@
 import httpStatus from 'http-status';
+
 import { Prisma } from '../../../generated/prisma/browser';
 import {
     PaymentGateway,
     PaymentStatus,
     SubscriptionStatus,
 } from '../../../generated/prisma/enums';
-import { prisma } from '../../lib/prisma';
-import { AppError } from '../../errors/AppError';
+
 import config from '../../config';
+import { AppError } from '../../errors/AppError';
 import { getBKashIdToken } from '../../lib/bkash';
+import { prisma } from '../../lib/prisma';
 
 import {
+    BKashStatus,
+    IBKashCreateResponse,
+    IBKashPaymentResponse,
     ICreateSubscriptionPaymentPayload,
     IQuery,
 } from './subscriptionPayment.interface';
-
-interface IBKashCreateResponse {
-    paymentID?: string;
-    bkashURL?: string;
-    paymentURL?: string;
-    callbackURL?: string;
-    amount?: string;
-    intent?: string;
-    currency?: string;
-    paymentCreateTime?: string;
-    transactionStatus?: string;
-    merchantInvoiceNumber?: string;
-    statusCode?: string;
-    statusMessage?: string;
-    errorCode?: string;
-    errorMessage?: string;
-}
-
-interface IBKashPaymentResponse {
-    paymentID?: string;
-    trxID?: string;
-    transactionStatus?: string;
-    amount?: string;
-    currency?: string;
-    intent?: string;
-    merchantInvoiceNumber?: string;
-    paymentCreateTime?: string;
-    paymentExecuteTime?: string;
-    statusCode?: string;
-    statusMessage?: string;
-    errorCode?: string;
-    errorMessage?: string;
-    verificationStatus?: string;
-}
-
-type BKashStatus = 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'PENDING' | 'UNKNOWN';
 
 const toJson = (data: unknown): Prisma.InputJsonValue => {
     return JSON.parse(JSON.stringify(data)) as Prisma.InputJsonValue;
@@ -62,9 +31,7 @@ const generateMerchantInvoiceNumber = (): string => {
 };
 
 const normalizeBKashStatus = (status?: string): BKashStatus => {
-    const normalized = status?.trim().toUpperCase();
-
-    switch (normalized) {
+    switch (status?.trim().toUpperCase()) {
         case 'COMPLETED':
         case 'SUCCESS':
             return 'COMPLETED';
@@ -101,7 +68,7 @@ const parseBKashResponse = async (
 ): Promise<IBKashPaymentResponse> => {
     const text = await response.text();
 
-    let data: IBKashPaymentResponse;
+    let data: IBKashPaymentResponse = {};
 
     try {
         data = text ? (JSON.parse(text) as IBKashPaymentResponse) : {};
@@ -152,9 +119,7 @@ const createBKashPayment = async (payload: {
         `${config.bkash_base_url}/tokenized/checkout/create`,
         {
             method: 'POST',
-
             headers: getBKashHeaders(token),
-
             body: JSON.stringify({
                 mode: '0011',
                 payerReference: payload.payerReference,
@@ -167,9 +132,7 @@ const createBKashPayment = async (payload: {
         },
     );
 
-    const data = await parseBKashResponse(response);
-
-    return data;
+    return parseBKashResponse(response);
 };
 
 const executeBKashPayment = async (
@@ -251,7 +214,6 @@ const activateSubscriptionAfterPayment = async (
             where: {
                 id: paymentId,
             },
-
             include: {
                 subscription: {
                     include: {
@@ -268,29 +230,30 @@ const activateSubscriptionAfterPayment = async (
             );
         }
 
-        /* Idempotency */
+        // Idempotency
         if (payment.status === PaymentStatus.PAID) {
             return payment;
         }
 
-        if (!payment.subscription) {
+        const subscription = payment.subscription;
+
+        if (!subscription) {
             throw new AppError(httpStatus.NOT_FOUND, 'Subscription not found');
         }
 
-        const subscription = payment.subscription;
+        const plan = subscription.plan;
 
-        if (!subscription.plan) {
+        if (!plan) {
             throw new AppError(
                 httpStatus.NOT_FOUND,
                 'Subscription plan not found',
             );
         }
 
+        // Verify amount
         const gatewayAmount = Number(gatewayResponse.amount);
-
         const localAmount = Number(payment.amount);
 
-        /* Amount verification */
         if (Number.isNaN(gatewayAmount) || gatewayAmount !== localAmount) {
             throw new AppError(
                 httpStatus.BAD_GATEWAY,
@@ -298,7 +261,7 @@ const activateSubscriptionAfterPayment = async (
             );
         }
 
-        /* Merchant invoice verification */
+        // Verify merchant invoice
         if (
             gatewayResponse.merchantInvoiceNumber &&
             gatewayResponse.merchantInvoiceNumber !==
@@ -313,21 +276,16 @@ const activateSubscriptionAfterPayment = async (
         const now = new Date();
 
         const endDate = new Date(now);
-
-        endDate.setDate(endDate.getDate() + subscription.plan.durationDays);
+        endDate.setDate(endDate.getDate() + plan.durationDays);
 
         const updatedPayment = await tx.subscriptionPayment.update({
             where: {
                 id: payment.id,
             },
-
             data: {
                 status: PaymentStatus.PAID,
-
                 bkashTrxId: gatewayResponse.trxID ?? payment.bkashTrxId,
-
                 paidAt: now,
-
                 gatewayResponse: toJson(gatewayResponse),
             },
         });
@@ -336,12 +294,9 @@ const activateSubscriptionAfterPayment = async (
             where: {
                 id: subscription.id,
             },
-
             data: {
                 status: SubscriptionStatus.ACTIVE,
-
                 startDate: now,
-
                 endDate,
             },
         });
@@ -359,19 +314,14 @@ const updateLocalPaymentStatus = async (
         where: {
             id: paymentId,
         },
-
         data: {
             status,
-
             gatewayResponse: gatewayResponse
                 ? toJson(gatewayResponse)
                 : undefined,
-
-            ...(status === PaymentStatus.PAID
-                ? {
-                      paidAt: new Date(),
-                  }
-                : {}),
+            ...(status === PaymentStatus.PAID && {
+                paidAt: new Date(),
+            }),
         },
     });
 };
@@ -384,30 +334,45 @@ const processBKashResult = async (
 
     switch (status) {
         case 'COMPLETED':
-            return activateSubscriptionAfterPayment(paymentId, result);
+            return {
+                status,
+                payment: await activateSubscriptionAfterPayment(
+                    paymentId,
+                    result,
+                ),
+            };
 
         case 'FAILED':
-            return updateLocalPaymentStatus(
-                paymentId,
-                PaymentStatus.FAILED,
-                result,
-            );
+            return {
+                status,
+                payment: await updateLocalPaymentStatus(
+                    paymentId,
+                    PaymentStatus.FAILED,
+                    result,
+                ),
+            };
 
         case 'CANCELLED':
-            return updateLocalPaymentStatus(
-                paymentId,
-                PaymentStatus.CANCELLED,
-                result,
-            );
+            return {
+                status,
+                payment: await updateLocalPaymentStatus(
+                    paymentId,
+                    PaymentStatus.CANCELLED,
+                    result,
+                ),
+            };
 
         case 'PENDING':
         case 'UNKNOWN':
         default:
-            return updateLocalPaymentStatus(
-                paymentId,
-                PaymentStatus.PENDING,
-                result,
-            );
+            return {
+                status: 'PENDING' as const,
+                payment: await updateLocalPaymentStatus(
+                    paymentId,
+                    PaymentStatus.PENDING,
+                    result,
+                ),
+            };
     }
 };
 
@@ -417,7 +382,6 @@ const createSubscriptionPaymentIntoDB = async (
 ) => {
     const paymentGateway = payload.paymentGateway ?? PaymentGateway.BKASH;
 
-    /* Currently only bKash is implemented */
     if (paymentGateway !== PaymentGateway.BKASH) {
         throw new AppError(
             httpStatus.BAD_REQUEST,
@@ -430,7 +394,6 @@ const createSubscriptionPaymentIntoDB = async (
             id: payload.subscriptionId,
             userId,
         },
-
         include: {
             plan: true,
         },
@@ -440,24 +403,24 @@ const createSubscriptionPaymentIntoDB = async (
         throw new AppError(httpStatus.NOT_FOUND, 'Subscription not found');
     }
 
-    if (!subscription.plan) {
+    const plan = subscription.plan;
+
+    if (!plan) {
         throw new AppError(httpStatus.NOT_FOUND, 'Subscription plan not found');
     }
 
-    if (subscription.plan.status && subscription.plan.status !== 'ACTIVE') {
+    if (plan.status !== 'ACTIVE') {
         throw new AppError(
             httpStatus.BAD_REQUEST,
             'Subscription plan is not active',
         );
     }
 
-    /* Prevent duplicate successful payment */
+    // Prevent duplicate successful payment
     const paidPayment = await prisma.subscriptionPayment.findFirst({
         where: {
-            subscriptionId: payload.subscriptionId,
-
+            subscriptionId: subscription.id,
             userId,
-
             status: PaymentStatus.PAID,
         },
     });
@@ -469,49 +432,36 @@ const createSubscriptionPaymentIntoDB = async (
         );
     }
 
-    /* Return existing pending payment */
+    // Reuse existing pending bKash payment
     const existingPayment = await prisma.subscriptionPayment.findFirst({
         where: {
-            subscriptionId: payload.subscriptionId,
-
+            subscriptionId: subscription.id,
             userId,
-
             status: PaymentStatus.PENDING,
-
             paymentGateway: PaymentGateway.BKASH,
         },
     });
 
-    if (existingPayment && existingPayment.bkashPaymentId) {
-        const checkoutURL = getCheckoutURL(existingPayment.gatewayResponse);
-
+    if (existingPayment?.bkashPaymentId) {
         return {
             payment: existingPayment,
             paymentId: existingPayment.bkashPaymentId,
-            bkashURL: checkoutURL,
+            bkashURL: getCheckoutURL(existingPayment.gatewayResponse),
             reused: true,
         };
     }
 
     const merchantInvoiceNumber = generateMerchantInvoiceNumber();
 
-    /*
-     * Create local payment first.
-     */
+    // Create local payment first
     const payment = await prisma.subscriptionPayment.create({
         data: {
             userId,
-
             subscriptionId: subscription.id,
-
-            amount: subscription.plan.price,
-
+            amount: plan.price,
             currency: 'BDT',
-
             paymentGateway: PaymentGateway.BKASH,
-
             status: PaymentStatus.PENDING,
-
             merchantInvoiceNumber,
         },
     });
@@ -520,12 +470,9 @@ const createSubscriptionPaymentIntoDB = async (
         const callbackURL = `${config.backend_url}/api/v1/subscription-payment/bkash/callback`;
 
         const bkashResponse = await createBKashPayment({
-            amount: String(subscription.plan.price),
-
+            amount: String(plan.price),
             merchantInvoiceNumber,
-
             callbackURL,
-
             payerReference: userId,
         });
 
@@ -536,44 +483,37 @@ const createSubscriptionPaymentIntoDB = async (
             );
         }
 
+        const bkashURL =
+            bkashResponse.bkashURL ?? bkashResponse.paymentURL ?? null;
+
+        if (!bkashURL) {
+            throw new AppError(
+                httpStatus.BAD_GATEWAY,
+                'bKash checkout URL was not returned',
+            );
+        }
+
         const updatedPayment = await prisma.subscriptionPayment.update({
             where: {
                 id: payment.id,
             },
-
             data: {
                 bkashPaymentId: bkashResponse.paymentID,
-
                 gatewayResponse: toJson(bkashResponse),
             },
         });
 
         return {
-            payment: {
-                ...payment,
-
-                bkashPaymentId: bkashResponse.paymentID,
-
-                gatewayResponse: bkashResponse,
-            },
-
+            payment: updatedPayment,
             paymentId: bkashResponse.paymentID,
-
-            bkashURL:
-                bkashResponse.bkashURL ?? bkashResponse.paymentURL ?? null,
-
+            bkashURL,
             reused: false,
         };
     } catch (error) {
-        /*
-         * bKash create failed, so local pending
-         * record should not remain pending.
-         */
         await prisma.subscriptionPayment.update({
             where: {
                 id: payment.id,
             },
-
             data: {
                 status: PaymentStatus.FAILED,
             },
@@ -600,59 +540,47 @@ const handleBKashCallbackIntoDB = async (
         );
     }
 
+    // Idempotency
     if (payment.status === PaymentStatus.PAID) {
         return {
-            status: 'COMPLETED',
+            status: 'COMPLETED' as const,
             payment,
         };
     }
 
     const normalizedCallbackStatus = normalizeBKashStatus(callbackStatus);
 
-    /*
-     * If customer cancelled from bKash page.
-     */
+    // Customer cancelled payment
     if (normalizedCallbackStatus === 'CANCELLED') {
-        const updated = await updateLocalPaymentStatus(
-            payment.id,
-            PaymentStatus.CANCELLED,
-            {
-                callbackStatus,
-                paymentID,
-            },
-        );
-
         return {
-            status: 'CANCELLED',
-            payment: updated,
+            status: 'CANCELLED' as const,
+            payment: await updateLocalPaymentStatus(
+                payment.id,
+                PaymentStatus.CANCELLED,
+                {
+                    callbackStatus,
+                    paymentID,
+                },
+            ),
         };
     }
 
-    /*
-     * If bKash explicitly reports failure.
-     */
+    // bKash explicitly reported failure
     if (normalizedCallbackStatus === 'FAILED') {
-        const updated = await updateLocalPaymentStatus(
-            payment.id,
-            PaymentStatus.FAILED,
-            {
-                callbackStatus,
-                paymentID,
-            },
-        );
-
         return {
-            status: 'FAILED',
-            payment: updated,
+            status: 'FAILED' as const,
+            payment: await updateLocalPaymentStatus(
+                payment.id,
+                PaymentStatus.FAILED,
+                {
+                    callbackStatus,
+                    paymentID,
+                },
+            ),
         };
     }
 
-    /*
-     * IMPORTANT:
-     *
-     * bKash tokenized checkout requires EXECUTE
-     * after successful customer checkout.
-     */
+    // Execute payment after successful checkout
     try {
         const executeResult = await executeBKashPayment(paymentID);
 
@@ -660,37 +588,8 @@ const handleBKashCallbackIntoDB = async (
             executeResult.transactionStatus,
         );
 
-        if (executeStatus === 'COMPLETED') {
-            const activated = await processBKashResult(
-                payment.id,
-                executeResult,
-            );
-
-            return {
-                status: 'COMPLETED',
-                payment: activated,
-            };
-        }
-
-        if (executeStatus === 'FAILED') {
-            const failed = await processBKashResult(payment.id, executeResult);
-
-            return {
-                status: 'FAILED',
-                payment: failed,
-            };
-        }
-
-        if (executeStatus === 'CANCELLED') {
-            const cancelled = await processBKashResult(
-                payment.id,
-                executeResult,
-            );
-
-            return {
-                status: 'CANCELLED',
-                payment: cancelled,
-            };
+        if (executeStatus !== 'PENDING' && executeStatus !== 'UNKNOWN') {
+            return processBKashResult(payment.id, executeResult);
         }
     } catch (error) {
         console.error(
@@ -699,166 +598,69 @@ const handleBKashCallbackIntoDB = async (
         );
     }
 
-    /*
-     * Query payment as fallback / verification.
-     */
+    // Query payment as fallback
     const queryResult = await queryBKashPayment(paymentID);
 
-    const queryStatus = normalizeBKashStatus(queryResult.transactionStatus);
-
-    if (queryStatus === 'COMPLETED') {
-        const activated = await processBKashResult(payment.id, queryResult);
-
-        return {
-            status: 'COMPLETED',
-            payment: activated,
-        };
-    }
-
-    if (queryStatus === 'FAILED') {
-        const failed = await processBKashResult(payment.id, queryResult);
-
-        return {
-            status: 'FAILED',
-            payment: failed,
-        };
-    }
-
-    if (queryStatus === 'CANCELLED') {
-        const cancelled = await processBKashResult(payment.id, queryResult);
-
-        return {
-            status: 'CANCELLED',
-            payment: cancelled,
-        };
-    }
-
-    const pending = await processBKashResult(payment.id, queryResult);
-
-    return {
-        status: 'PENDING',
-        payment: pending,
-    };
+    return processBKashResult(payment.id, queryResult);
 };
 
-const verifyBKashPaymentIntoDB = async (userId: string, paymentID: string) => {
-    // 🔍 DEBUG: এই user-এর সব subscription payments দেখুন
-    const allPayments = await prisma.subscriptionPayment.findMany({
-        where: {
-            userId,
-        },
-        select: {
-            id: true,
-            userId: true,
-            merchantInvoiceNumber: true,
-            bkashPaymentId: true,
-            status: true,
-            createdAt: true,
-        },
-    });
-
-    console.log('USER PAYMENTS:', allPayments);
-
-    // 🔍 এখন নির্দিষ্ট bKash payment খুঁজুন
-    const payment = await prisma.subscriptionPayment.findFirst({
-        where: {
-            userId,
-            bkashPaymentId: paymentID,
-        },
-    });
-
-   
-
-    if (!payment) {
-        throw new AppError(httpStatus.NOT_FOUND, 'Payment not found');
-    }
-
-    if (payment.status === PaymentStatus.PAID) {
-        return {
-            status: 'COMPLETED',
-            payment,
-        };
-    }
-
-    // বাকি আপনার existing verification code...
-
-    let gatewayResult = await queryBKashPayment(paymentID);
-
-    let status = normalizeBKashStatus(gatewayResult.transactionStatus);
-
-    if (status === 'PENDING') {
-        try {
-            const executeResult = await executeBKashPayment(paymentID);
-
-            gatewayResult = executeResult;
-
-            status = normalizeBKashStatus(executeResult.transactionStatus);
-        } catch (error) {
-            console.error(
-                'bKash execute during verification:',
-                error instanceof Error ? error.message : error,
-            );
-
-            gatewayResult = await queryBKashPayment(paymentID);
-
-            status = normalizeBKashStatus(gatewayResult.transactionStatus);
-        }
-    }
-
-    const processed = await processBKashResult(payment.id, gatewayResult);
-
-    return {
-        status,
-        payment: processed,
-    };
-};
-
-const getSingleSubscriptionPaymentIntoDB = async (
-    paymentId: string,
-    userId?: string,
-) => {
-    const payment = await prisma.subscriptionPayment.findFirst({
-        where: {
-            id: paymentId,
-
-            ...(userId
-                ? {
-                      userId,
-                  }
-                : {}),
-        },
-
-        include: {
-            subscription: {
-                include: {
-                    plan: true,
-                },
-            },
-        },
-    });
-
-    if (!payment) {
-        throw new AppError(
-            httpStatus.NOT_FOUND,
-            'Subscription payment not found',
-        );
-    }
-
-    return payment;
-};
-
-const getMySubscriptionPaymentsIntoDB = async (
-    userId: string,
+const buildPaymentWhere = (
+    userId: string | undefined,
     query: IQuery,
-) => {
+): Prisma.SubscriptionPaymentWhereInput => {
+    const search = query.search?.trim();
+
+    return {
+        ...(userId && {
+            userId,
+        }),
+
+        ...(query.status && {
+            status: query.status,
+        }),
+
+        ...(query.paymentGateway && {
+            paymentGateway: query.paymentGateway,
+        }),
+
+        ...(search && {
+            OR: [
+                {
+                    merchantInvoiceNumber: {
+                        contains: search,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    bkashPaymentId: {
+                        contains: search,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    bkashTrxId: {
+                        contains: search,
+                        mode: 'insensitive',
+                    },
+                },
+            ],
+        }),
+    };
+};
+
+const getPagination = (query: IQuery) => {
     const page = Math.max(Number(query.page) || 1, 1);
 
     const limit = Math.min(Math.max(Number(query.limit) || 10, 1), 100);
 
-    const skip = (page - 1) * limit;
+    return {
+        page,
+        limit,
+        skip: (page - 1) * limit,
+    };
+};
 
-    const search = query.search?.trim();
-
+const getSort = (query: IQuery) => {
     const allowedSortFields = [
         'createdAt',
         'updatedAt',
@@ -874,59 +676,26 @@ const getMySubscriptionPaymentsIntoDB = async (
 
     const sortOrder = query.sortOrder === 'asc' ? 'asc' : 'desc';
 
-    const where: Prisma.SubscriptionPaymentWhereInput = {
-        userId,
+    return {
+        [sortBy]: sortOrder,
+    } as Prisma.SubscriptionPaymentOrderByWithRelationInput;
+};
 
-        ...(query.status
-            ? {
-                  status: query.status,
-              }
-            : {}),
+const getMySubscriptionPaymentsIntoDB = async (
+    userId: string,
+    query: IQuery,
+) => {
+    const { page, limit, skip } = getPagination(query);
 
-        ...(query.paymentGateway
-            ? {
-                  paymentGateway: query.paymentGateway,
-              }
-            : {}),
-
-        ...(search
-            ? {
-                  OR: [
-                      {
-                          merchantInvoiceNumber: {
-                              contains: search,
-                              mode: 'insensitive',
-                          },
-                      },
-                      {
-                          bkashPaymentId: {
-                              contains: search,
-                              mode: 'insensitive',
-                          },
-                      },
-                      {
-                          bkashTrxId: {
-                              contains: search,
-                              mode: 'insensitive',
-                          },
-                      },
-                  ],
-              }
-            : {}),
-    };
+    const where = buildPaymentWhere(userId, query);
+    const orderBy = getSort(query);
 
     const [data, total] = await Promise.all([
         prisma.subscriptionPayment.findMany({
             where,
-
             skip,
-
             take: limit,
-
-            orderBy: {
-                [sortBy]: sortOrder,
-            },
-
+            orderBy,
             include: {
                 subscription: {
                     include: {
@@ -946,96 +715,30 @@ const getMySubscriptionPaymentsIntoDB = async (
             page,
             limit,
             total,
-
-            totalPage: Math.ceil(total / limit),
+            totalPages: Math.ceil(total / limit),
         },
-
         data,
     };
 };
 
 const getAllSubscriptionPaymentsIntoDB = async (query: IQuery) => {
-    const page = Math.max(Number(query.page) || 1, 1);
+    const { page, limit, skip } = getPagination(query);
 
-    const limit = Math.min(Math.max(Number(query.limit) || 10, 1), 100);
-
-    const skip = (page - 1) * limit;
-
-    const search = query.search?.trim();
-
-    const allowedSortFields = [
-        'createdAt',
-        'updatedAt',
-        'amount',
-        'paidAt',
-        'status',
-    ];
-
-    const sortBy =
-        query.sortBy && allowedSortFields.includes(query.sortBy)
-            ? query.sortBy
-            : 'createdAt';
-
-    const sortOrder = query.sortOrder === 'asc' ? 'asc' : 'desc';
-
-    const where: Prisma.SubscriptionPaymentWhereInput = {
-        ...(query.status
-            ? {
-                  status: query.status,
-              }
-            : {}),
-
-        ...(query.paymentGateway
-            ? {
-                  paymentGateway: query.paymentGateway,
-              }
-            : {}),
-
-        ...(search
-            ? {
-                  OR: [
-                      {
-                          merchantInvoiceNumber: {
-                              contains: search,
-                              mode: 'insensitive',
-                          },
-                      },
-                      {
-                          bkashPaymentId: {
-                              contains: search,
-                              mode: 'insensitive',
-                          },
-                      },
-                      {
-                          bkashTrxId: {
-                              contains: search,
-                              mode: 'insensitive',
-                          },
-                      },
-                  ],
-              }
-            : {}),
-    };
+    const where = buildPaymentWhere(undefined, query);
+    const orderBy = getSort(query);
 
     const [data, total] = await Promise.all([
         prisma.subscriptionPayment.findMany({
             where,
-
             skip,
-
             take: limit,
-
-            orderBy: {
-                [sortBy]: sortOrder,
-            },
-
+            orderBy,
             include: {
                 subscription: {
                     include: {
                         plan: true,
                     },
                 },
-
                 user: {
                     select: {
                         id: true,
@@ -1056,18 +759,45 @@ const getAllSubscriptionPaymentsIntoDB = async (query: IQuery) => {
             page,
             limit,
             total,
-
             totalPage: Math.ceil(total / limit),
         },
-
         data,
     };
+};
+
+const getSingleSubscriptionPaymentIntoDB = async (
+    paymentId: string,
+    userId?: string,
+) => {
+    const payment = await prisma.subscriptionPayment.findFirst({
+        where: {
+            id: paymentId,
+            ...(userId && {
+                userId,
+            }),
+        },
+        include: {
+            subscription: {
+                include: {
+                    plan: true,
+                },
+            },
+        },
+    });
+
+    if (!payment) {
+        throw new AppError(
+            httpStatus.NOT_FOUND,
+            'Subscription payment not found',
+        );
+    }
+
+    return payment;
 };
 
 export const subscriptionPaymentServices = {
     createSubscriptionPaymentIntoDB,
     handleBKashCallbackIntoDB,
-    verifyBKashPaymentIntoDB,
     getSingleSubscriptionPaymentIntoDB,
     getMySubscriptionPaymentsIntoDB,
     getAllSubscriptionPaymentsIntoDB,

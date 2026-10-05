@@ -40,8 +40,8 @@ model Subscription {
   // Timestamps
   // =========================
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([planId])
