@@ -13,6 +13,7 @@ export interface IUpdateUserRolePayload {
 export interface IAuditLogQuery {
     page?: number;
     limit?: number;
+    searchTerm?: string;
     action?: string;
     entity?: string;
     entityId?: string;

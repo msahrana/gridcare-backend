@@ -2,6 +2,8 @@ import httpStatus from 'http-status';
 import { AppError } from '../../errors/AppError';
 import { prisma } from '../../lib/prisma';
 import { ICreateAuditLogPayload } from './auditLog.interface';
+import { IAuditLogQuery } from '../admin/admin.interface';
+import { Prisma } from '../../../generated/prisma/client';
 
 // ======================================================
 // CREATE AUDIT LOG
@@ -18,6 +20,12 @@ const createAuditLogIntoDB = async (
         where: {
             id: actorId,
         },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+        },
     });
 
     if (!actor) {
@@ -30,9 +38,9 @@ const createAuditLogIntoDB = async (
             action,
             entity,
             entityId,
-            oldValue: oldValue as any,
-            newValue: newValue as any,
-            ipAddress,
+            oldValue: oldValue ?? undefined,
+            newValue: newValue ?? undefined,
+            ipAddress: ipAddress ?? undefined,
         },
 
         include: {
@@ -54,16 +62,17 @@ const createAuditLogIntoDB = async (
 // GET ALL AUDIT LOGS
 // ======================================================
 
-const getAllAuditLogsFromDB = async (query: any) => {
+const getAllAuditLogsFromDB = async (query: IAuditLogQuery) => {
     const page = query.page ? Number(query.page) : 1;
     const limit = query.limit ? Number(query.limit) : 10;
+
     const skip = (page - 1) * limit;
 
+    const where: Prisma.AuditLogWhereInput = {};
+
+    // Search by action or entity
     const searchTerm = query.searchTerm?.trim();
 
-    const where: any = {};
-
-    // Search
     if (searchTerm) {
         where.OR = [
             {
@@ -81,9 +90,9 @@ const getAllAuditLogsFromDB = async (query: any) => {
         ];
     }
 
-    // Actor filter
-    if (query.actorId) {
-        where.actorId = query.actorId;
+    // Action filter
+    if (query.action) {
+        where.action = query.action;
     }
 
     // Entity filter
@@ -96,15 +105,27 @@ const getAllAuditLogsFromDB = async (query: any) => {
         where.entityId = query.entityId;
     }
 
-    // Action filter
-    if (query.action) {
-        where.action = query.action;
+    // Actor filter
+    if (query.actorId) {
+        where.actorId = query.actorId;
+    }
+
+    // Date filter
+    if (query.startDate || query.endDate) {
+        where.createdAt = {};
+
+        if (query.startDate) {
+            where.createdAt.gte = new Date(query.startDate);
+        }
+
+        if (query.endDate) {
+            where.createdAt.lte = new Date(query.endDate);
+        }
     }
 
     const [logs, total] = await Promise.all([
         prisma.auditLog.findMany({
             where,
-
             skip,
             take: limit,
 
