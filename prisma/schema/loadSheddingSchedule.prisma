@@ -11,7 +11,7 @@ model LoadSheddingSchedule {
 
   status      ScheduleStatus @default(DRAFT)
 
-  createdById String
+  createdById String?
 
   area Area @relation(fields: [areaId], references: [id])
 

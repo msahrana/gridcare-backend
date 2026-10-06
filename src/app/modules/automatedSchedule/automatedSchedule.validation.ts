@@ -29,6 +29,4 @@ export const generateScheduleValidationSchema = z.object({
         .string()
         .max(1000, 'Description cannot exceed 1000 characters')
         .optional(),
-
-    createdById: z.string().uuid('Invalid creator ID'),
 });

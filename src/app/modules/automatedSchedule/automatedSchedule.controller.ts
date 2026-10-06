@@ -3,9 +3,11 @@ import { Request, Response } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import { automatedScheduleServices } from './automatedSchedule.service';
+import { ScheduleStatus } from '../../../generated/prisma/enums';
 
 const generateSchedules = catchAsync(async (req: Request, res: Response) => {
     const result = await automatedScheduleServices.generateSchedulesIntoDB(
+        req.user!.id,
         req.body,
     );
 
@@ -21,8 +23,9 @@ const getSchedules = catchAsync(async (req: Request, res: Response) => {
     const result = await automatedScheduleServices.getGeneratedSchedulesFromDB({
         page: Number(req.query.page),
         limit: Number(req.query.limit),
+        searchTerm: req.query.searchTerm as string,
         areaId: req.query.areaId as string,
-        status: req.query.status as string,
+        status: req.query.status as ScheduleStatus,
         startDate: req.query.startDate as string,
         endDate: req.query.endDate as string,
     });
@@ -31,7 +34,7 @@ const getSchedules = catchAsync(async (req: Request, res: Response) => {
         statusCode: httpStatus.OK,
         success: true,
         message: 'Automated schedules retrieved successfully',
-        data: result.data,
+        data: result,
     });
 });
 

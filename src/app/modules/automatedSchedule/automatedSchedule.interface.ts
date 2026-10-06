@@ -1,3 +1,5 @@
+import { ScheduleStatus } from "../../../generated/prisma/enums";
+
 export interface IGenerateSchedulePayload {
     areaIds: string[];
     date: string;
@@ -22,8 +24,9 @@ export interface IGeneratedSchedule {
 export interface IAutomatedScheduleQuery {
     page?: number;
     limit?: number;
+    searchTerm?: string;
     areaId?: string;
-    status?: string;
+    status?: ScheduleStatus;
     startDate?: string;
     endDate?: string;
 }

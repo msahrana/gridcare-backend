@@ -45,7 +45,10 @@ const validateScheduleTime = (startTime: Date, endTime: Date) => {
     }
 };
 
-const generateSchedulesIntoDB = async (payload: IGenerateSchedulePayload) => {
+const generateSchedulesIntoDB = async (
+    createdById: string,
+    payload: IGenerateSchedulePayload,
+) => {
     const {
         areaIds,
         date,
@@ -53,7 +56,6 @@ const generateSchedulesIntoDB = async (payload: IGenerateSchedulePayload) => {
         endTime: end,
         title,
         description,
-        createdById,
     } = payload;
 
     const startDateTime = createDateTime(date, start);
@@ -193,13 +195,49 @@ const generateSchedulesIntoDB = async (payload: IGenerateSchedulePayload) => {
 
 const getGeneratedSchedulesFromDB = async (query: IAutomatedScheduleQuery) => {
     const page = Math.max(Number(query.page) || 1, 1);
-
     const limit = Math.min(Math.max(Number(query.limit) || 10, 1), 100);
 
     const skip = (page - 1) * limit;
 
+    const searchTerm = query.searchTerm?.trim();
+
     const where = {
         deletedAt: null,
+
+        ...(searchTerm && {
+            OR: [
+                {
+                    title: {
+                        contains: searchTerm,
+                        mode: 'insensitive' as const,
+                    },
+                },
+                {
+                    description: {
+                        contains: searchTerm,
+                        mode: 'insensitive' as const,
+                    },
+                },
+                {
+                    area: {
+                        OR: [
+                            {
+                                name: {
+                                    contains: searchTerm,
+                                    mode: 'insensitive' as const,
+                                },
+                            },
+                            {
+                                code: {
+                                    contains: searchTerm,
+                                    mode: 'insensitive' as const,
+                                },
+                            },
+                        ],
+                    },
+                },
+            ],
+        }),
 
         ...(query.areaId && {
             areaId: query.areaId,
@@ -223,11 +261,9 @@ const getGeneratedSchedulesFromDB = async (query: IAutomatedScheduleQuery) => {
             where,
             skip,
             take: limit,
-
             orderBy: {
                 startTime: 'desc',
             },
-
             include: {
                 area: {
                     select: {
@@ -245,14 +281,13 @@ const getGeneratedSchedulesFromDB = async (query: IAutomatedScheduleQuery) => {
     ]);
 
     return {
+        data,
         meta: {
             page,
             limit,
             total,
-            totalPage: Math.ceil(total / limit),
+            totalPages: Math.ceil(total / limit),
         },
-
-        data,
     };
 };
 

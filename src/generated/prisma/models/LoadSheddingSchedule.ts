@@ -191,7 +191,7 @@ export type LoadSheddingScheduleGroupByOutputType = {
   startTime: Date
   endTime: Date
   status: $Enums.ScheduleStatus
-  createdById: string
+  createdById: string | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -226,7 +226,7 @@ export type LoadSheddingScheduleWhereInput = {
   startTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   endTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFilter<"LoadSheddingSchedule"> | string
+  createdById?: Prisma.StringNullableFilter<"LoadSheddingSchedule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -241,7 +241,7 @@ export type LoadSheddingScheduleOrderByWithRelationInput = {
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -259,7 +259,7 @@ export type LoadSheddingScheduleWhereUniqueInput = Prisma.AtLeast<{
   startTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   endTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFilter<"LoadSheddingSchedule"> | string
+  createdById?: Prisma.StringNullableFilter<"LoadSheddingSchedule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -274,7 +274,7 @@ export type LoadSheddingScheduleOrderByWithAggregationInput = {
   startTime?: Prisma.SortOrder
   endTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -294,7 +294,7 @@ export type LoadSheddingScheduleScalarWhereWithAggregatesInput = {
   startTime?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   endTime?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusWithAggregatesFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
-  createdById?: Prisma.StringWithAggregatesFilter<"LoadSheddingSchedule"> | string
+  createdById?: Prisma.StringNullableWithAggregatesFilter<"LoadSheddingSchedule"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -307,7 +307,7 @@ export type LoadSheddingScheduleCreateInput = {
   startTime: Date | string
   endTime: Date | string
   status?: $Enums.ScheduleStatus
-  createdById: string
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -322,7 +322,7 @@ export type LoadSheddingScheduleUncheckedCreateInput = {
   startTime: Date | string
   endTime: Date | string
   status?: $Enums.ScheduleStatus
-  createdById: string
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -335,7 +335,7 @@ export type LoadSheddingScheduleUpdateInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -350,7 +350,7 @@ export type LoadSheddingScheduleUncheckedUpdateInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -364,7 +364,7 @@ export type LoadSheddingScheduleCreateManyInput = {
   startTime: Date | string
   endTime: Date | string
   status?: $Enums.ScheduleStatus
-  createdById: string
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -377,7 +377,7 @@ export type LoadSheddingScheduleUpdateManyMutationInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -391,7 +391,7 @@ export type LoadSheddingScheduleUncheckedUpdateManyInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -502,7 +502,7 @@ export type LoadSheddingScheduleCreateWithoutAreaInput = {
   startTime: Date | string
   endTime: Date | string
   status?: $Enums.ScheduleStatus
-  createdById: string
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -515,7 +515,7 @@ export type LoadSheddingScheduleUncheckedCreateWithoutAreaInput = {
   startTime: Date | string
   endTime: Date | string
   status?: $Enums.ScheduleStatus
-  createdById: string
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -558,7 +558,7 @@ export type LoadSheddingScheduleScalarWhereInput = {
   startTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   endTime?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   status?: Prisma.EnumScheduleStatusFilter<"LoadSheddingSchedule"> | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFilter<"LoadSheddingSchedule"> | string
+  createdById?: Prisma.StringNullableFilter<"LoadSheddingSchedule"> | string | null
   createdAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LoadSheddingSchedule"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"LoadSheddingSchedule"> | Date | string | null
@@ -571,7 +571,7 @@ export type LoadSheddingScheduleCreateManyAreaInput = {
   startTime: Date | string
   endTime: Date | string
   status?: $Enums.ScheduleStatus
-  createdById: string
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -584,7 +584,7 @@ export type LoadSheddingScheduleUpdateWithoutAreaInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -597,7 +597,7 @@ export type LoadSheddingScheduleUncheckedUpdateWithoutAreaInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -610,7 +610,7 @@ export type LoadSheddingScheduleUncheckedUpdateManyWithoutAreaInput = {
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumScheduleStatusFieldUpdateOperationsInput | $Enums.ScheduleStatus
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -701,7 +701,7 @@ export type $LoadSheddingSchedulePayload<ExtArgs extends runtime.Types.Extension
     startTime: Date
     endTime: Date
     status: $Enums.ScheduleStatus
-    createdById: string
+    createdById: string | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
