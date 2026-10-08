@@ -18,7 +18,16 @@ router.get('/outage/:outageId', outageReportControllers.getReportsByOutage);
 
 router.get('/area/:areaId', outageReportControllers.getReportsByArea);
 
-router.get('/', outageReportControllers.getAllOutageReports);
+router.get(
+    '/',
+    auth(
+        UserRole.TECHNICIAN,
+        UserRole.ADMIN,
+        UserRole.OPERATOR,
+        UserRole.CUSTOMER,
+    ),
+    outageReportControllers.getAllOutageReports,
+);
 
 router.get('/:id', outageReportControllers.getSingleOutageReport);
 
