@@ -58,7 +58,8 @@ const bkashCallback = catchAsync(
                 );
 
             const pageMap = {
-                COMPLETED: 'payment-success',
+                // COMPLETED: 'payment-success',
+                COMPLETED: 'customer',
                 FAILED: 'payment-failed',
                 CANCELLED: 'payment-cancelled',
                 PENDING: 'payment-pending',
@@ -68,8 +69,13 @@ const bkashCallback = catchAsync(
                 pageMap[result.status as keyof typeof pageMap] ??
                 'payment-pending';
 
+            // res.redirect(
+            //     `${config.frontend_url}/subscription/${page}?paymentId=${encodeURIComponent(
+            //         paymentID,
+            //     )}`,
+            // );
             res.redirect(
-                `${config.frontend_url}/subscription/${page}?paymentId=${encodeURIComponent(
+                `${config.frontend_url}/upcoming-load-shedding-schedules/${page}?paymentId=${encodeURIComponent(
                     paymentID,
                 )}`,
             );

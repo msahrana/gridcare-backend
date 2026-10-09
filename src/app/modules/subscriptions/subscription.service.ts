@@ -302,7 +302,7 @@ const createSubscriptionIntoDB = async (
             planId: plan.id,
             startDate: null,
             endDate: null,
-            status: SubscriptionStatus.PENDING,
+            status: SubscriptionStatus.ACTIVE,
         },
 
         include: {

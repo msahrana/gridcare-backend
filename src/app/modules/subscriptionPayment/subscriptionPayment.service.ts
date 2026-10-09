@@ -467,7 +467,7 @@ const createSubscriptionPaymentIntoDB = async (
     });
 
     try {
-        const callbackURL = `${config.backend_url}/api/v1/subscription-payment/bkash/callback`;
+        const callbackURL = `${config.backend_url}/api/v1/subscription-payments/bkash/callback`;
 
         const bkashResponse = await createBKashPayment({
             amount: String(plan.price),

@@ -599,6 +599,10 @@ const forgotPasswordIntoDB = async (payload: IForgotPasswordPayload) => {
 
     const otp = crypto.randomInt(100000, 1000000).toString();
 
+    if (config.node_env === 'development') {
+        console.log(`[dev] ${email} : ${otp}`);
+    }
+
     const key = `forgot-password-otp:${isUserExist.email}`;
 
     const expirationSeconds = 5 * 60; // 5 min
