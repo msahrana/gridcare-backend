@@ -33,7 +33,15 @@ export const globalErrorHandler: ErrorRequestHandler = (
     // =====================================================
 
     if (config.node_env === 'development') {
-        console.error('Global Error Handler:', err);
+        if (err instanceof AppError) {
+            if (err.statusCode >= 500) {
+                console.error('Global Error Handler:', err);
+            } else {
+                console.warn(`[HTTP ${err.statusCode}] ${err.message}`);
+            }
+        } else {
+            console.error('Global Error Handler:', err);
+        }
     }
 
     let statusCode: number = httpStatus.INTERNAL_SERVER_ERROR;

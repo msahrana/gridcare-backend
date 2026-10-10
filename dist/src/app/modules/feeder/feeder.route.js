@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.feederRoutes = void 0;
+const express_1 = require("express");
+const enums_1 = require("../../../generated/prisma/enums");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const feeder_controller_1 = require("./feeder.controller");
+const feeder_validation_1 = require("./feeder.validation");
+const router = (0, express_1.Router)();
+router.post('/', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(feeder_validation_1.createFeederValidationSchema), feeder_controller_1.feederControllers.createFeeder);
+router.get('/', (0, checkAuth_1.auth)(), feeder_controller_1.feederControllers.getAllFeeders);
+router.get('/:id', (0, checkAuth_1.auth)(), feeder_controller_1.feederControllers.getSingleFeeder);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(feeder_validation_1.updateFeederValidationSchema), feeder_controller_1.feederControllers.updateFeeder);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), feeder_controller_1.feederControllers.deleteFeeder);
+exports.feederRoutes = router;

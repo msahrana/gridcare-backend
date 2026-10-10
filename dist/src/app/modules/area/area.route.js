@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.areaRoutes = void 0;
+const express_1 = __importDefault(require("express"));
+const validateRequest_1 = require("../../middleware/validateRequest");
+const area_controller_1 = require("./area.controller");
+const area_validation_1 = require("./area.validation");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = express_1.default.Router();
+router.post('/', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(area_validation_1.AreaValidation.createAreaSchema), area_controller_1.areaControllers.createArea);
+router.get('/search', area_controller_1.areaControllers.searchAreas);
+router.get('/', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(area_validation_1.AreaValidation.areaQuerySchema), area_controller_1.areaControllers.getAllAreas);
+router.get('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), area_controller_1.areaControllers.getAreaById);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(area_validation_1.AreaValidation.updateAreaSchema), area_controller_1.areaControllers.updateArea);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), area_controller_1.areaControllers.deleteArea);
+exports.areaRoutes = router;

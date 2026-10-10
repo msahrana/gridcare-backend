@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.automatedScheduleRoutes = void 0;
+const express_1 = require("express");
+const automatedSchedule_controller_1 = require("./automatedSchedule.controller");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const automatedSchedule_validation_1 = require("./automatedSchedule.validation");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = (0, express_1.Router)();
+router.post('/generate', (0, checkAuth_1.auth)(enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(automatedSchedule_validation_1.generateScheduleValidationSchema), automatedSchedule_controller_1.automatedScheduleControllers.generateSchedules);
+router.get('/', (0, checkAuth_1.auth)(enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), automatedSchedule_controller_1.automatedScheduleControllers.getSchedules);
+router.get('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), automatedSchedule_controller_1.automatedScheduleControllers.getSingleSchedule);
+router.patch('/:id/publish', (0, checkAuth_1.auth)(enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), automatedSchedule_controller_1.automatedScheduleControllers.publishSchedule);
+router.patch('/:id/cancel', (0, checkAuth_1.auth)(enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), automatedSchedule_controller_1.automatedScheduleControllers.cancelSchedule);
+exports.automatedScheduleRoutes = router;

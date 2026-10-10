@@ -268,7 +268,26 @@
                             }
                         },
                         "url": {
-                            "raw": ""
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/google",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "5000",
+                            "path": ["api", "v1", "auth", "google"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "User Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/logout",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "5000",
+                            "path": ["api", "v1", "auth", "logout"]
                         }
                     },
                     "response": []
@@ -308,11 +327,21 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones",
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
-                            "path": ["api", "v1", "zones"]
+                            "path": ["api", "v1", "zones"],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -474,11 +503,21 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations",
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
-                            "path": ["api", "v1", "substations"]
+                            "path": ["api", "v1", "substations"],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -587,11 +626,21 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/feeders",
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/feeders?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
-                            "path": ["api", "v1", "feeders"]
+                            "path": ["api", "v1", "feeders"],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -695,7 +744,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas/1638f9ea-004c-46b7-9e5c-c96485eedd63",
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas/7a7368b5-dd3b-4d17-bd1c-4cbb094e79e2",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -703,7 +752,7 @@
                                 "api",
                                 "v1",
                                 "areas",
-                                "1638f9ea-004c-46b7-9e5c-c96485eedd63"
+                                "7a7368b5-dd3b-4d17-bd1c-4cbb094e79e2"
                             ]
                         }
                     },
@@ -1317,7 +1366,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/all-technician",
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/all-technician?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1326,6 +1375,21 @@
                                 "v1",
                                 "technicians",
                                 "all-technician"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                },
+                                {
+                                    "key": "verificationStatus",
+                                    "value": "APPROVED",
+                                    "disabled": true
+                                }
                             ]
                         }
                     },
@@ -1396,6 +1460,36 @@
                         }
                     },
                     "response": []
+                },
+                {
+                    "name": "Approve Technician",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/approve-technician?page=1&limit=10",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "5000",
+                            "path": [
+                                "api",
+                                "v1",
+                                "technicians",
+                                "approve-technician"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
                 }
             ]
         },
@@ -1409,7 +1503,7 @@
                         "header": [],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\r\n  \"areaId\": \"1638f9ea-004c-46b7-9e5c-c96485eedd63\",\r\n  \"title\": \"Scheduled Load Shedding - Rangpur Sadar\",\r\n  \"description\": \"Planned power interruption for maintenance and network load management.\",\r\n  \"startTime\": \"2026-09-05T10:00:00.000Z\",\r\n  \"endTime\": \"2026-09-05T12:00:00.000Z\",\r\n  \"scheduleFee\": 150\r\n}",
+                            "raw": "{\r\n  \"areaId\": \"1638f9ea-004c-46b7-9e5c-c96485eedd63\",\r\n  \"title\": \"Scheduled Load Shedding - Rangpur Sadar\",\r\n  \"description\": \"Planned power interruption for maintenance and network load management.\",\r\n  \"startTime\": \"2026-09-05T10:00:00.000Z\",\r\n  \"endTime\": \"2026-09-05T12:00:00.000Z\"\r\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
@@ -1874,7 +1968,7 @@
                         "header": [],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\r\n  \"subscriptionId\": \"6932d38a-658a-4942-b44d-d1d3c55b9225\",\r\n  \"paymentGateway\": \"BKASH\"\r\n}",
+                            "raw": "{\r\n  \"subscriptionId\": \"c92bb415-5e6d-4d66-8b72-0454ce4486f0\",\r\n  \"paymentGateway\": \"BKASH\"\r\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
@@ -2054,7 +2148,7 @@
                         "header": [],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\r\n  \"planId\": \"81a7d0aa-89cd-40af-942e-85d165ff5545c\"\r\n}",
+                            "raw": "{\r\n  \"planId\": \"d4361aa1-31a8-4ccb-99ae-6ee9ed5cc252\"\r\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"

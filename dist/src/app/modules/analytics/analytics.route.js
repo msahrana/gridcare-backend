@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.analyticsRoutes = void 0;
+const express_1 = require("express");
+const analytics_controller_1 = require("./analytics.controller");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = (0, express_1.Router)();
+router.get('/overview', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), analytics_controller_1.analyticsControllers.getOverviewAnalytics);
+router.get('/outages', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), analytics_controller_1.analyticsControllers.getOutageAnalytics);
+exports.analyticsRoutes = router;

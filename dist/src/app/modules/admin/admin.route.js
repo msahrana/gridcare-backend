@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminRoutes = void 0;
+const express_1 = require("express");
+const enums_1 = require("../../../generated/prisma/enums");
+const admin_validation_1 = require("./admin.validation");
+const admin_controller_1 = require("./admin.controller");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const router = (0, express_1.Router)();
+router.get('/users', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN), admin_controller_1.adminControllers.getAllUsers);
+router.patch('/users/:id/role', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(admin_validation_1.updateUserRoleValidationSchema), admin_controller_1.adminControllers.updateUserRole);
+router.get('/dashboard-stats', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN), admin_controller_1.adminControllers.getDashboardStats);
+router.get('/audit-logs', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN), admin_controller_1.adminControllers.getAuditLogs);
+exports.adminRoutes = router;

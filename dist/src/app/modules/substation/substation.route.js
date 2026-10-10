@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.substationRoutes = void 0;
+const express_1 = require("express");
+const enums_1 = require("../../../generated/prisma/enums");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const substation_controller_1 = require("./substation.controller");
+const substation_validation_1 = require("./substation.validation");
+const router = (0, express_1.Router)();
+router.post('/', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(substation_validation_1.createSubstationValidationSchema), substation_controller_1.substationControllers.createSubstation);
+router.get('/', (0, checkAuth_1.auth)(), substation_controller_1.substationControllers.getAllSubstations);
+router.get('/:id', (0, checkAuth_1.auth)(), substation_controller_1.substationControllers.getSingleSubstation);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(substation_validation_1.updateSubstationValidationSchema), substation_controller_1.substationControllers.updateSubstation);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), substation_controller_1.substationControllers.deleteSubstation);
+exports.substationRoutes = router;

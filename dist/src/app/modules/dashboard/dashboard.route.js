@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.dashboardRoutes = void 0;
+const express_1 = require("express");
+const dashboard_controller_1 = require("./dashboard.controller");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = (0, express_1.Router)();
+router.get('/admin', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN), dashboard_controller_1.dashboardControllers.getAdminDashboard);
+router.get('/operator', (0, checkAuth_1.auth)(enums_1.UserRole.OPERATOR), dashboard_controller_1.dashboardControllers.getOperatorDashboard);
+router.get('/technician/:technicianId', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), dashboard_controller_1.dashboardControllers.getTechnicianDashboard);
+exports.dashboardRoutes = router;

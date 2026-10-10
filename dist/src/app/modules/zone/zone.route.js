@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.zoneRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const enums_1 = require("../../../generated/prisma/enums");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const zone_validation_1 = require("./zone.validation");
+const zone_controller_1 = require("./zone.controller");
+const router = (0, express_1.Router)();
+router.post('/', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(zone_validation_1.createZoneValidationSchema), zone_controller_1.zoneControllers.createZone);
+router.get('/', (0, checkAuth_1.auth)(), zone_controller_1.zoneControllers.getAllZones);
+router.get('/:id', (0, checkAuth_1.auth)(), zone_controller_1.zoneControllers.getSingleZone);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(zone_validation_1.updateZoneValidationSchema), zone_controller_1.zoneControllers.updateZone);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), zone_controller_1.zoneControllers.deleteZone);
+exports.zoneRoutes = router;

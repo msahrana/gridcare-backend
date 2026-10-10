@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.outageReportRoutes = void 0;
+const express_1 = __importDefault(require("express"));
+const outageReport_controller_1 = require("./outageReport.controller");
+const outageReport_validation_1 = require("./outageReport.validation");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = express_1.default.Router();
+router.post('/', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(outageReport_validation_1.OutageReportValidation.createOutageReportSchema), outageReport_controller_1.outageReportControllers.createOutageReport);
+router.get('/outage/:outageId', outageReport_controller_1.outageReportControllers.getReportsByOutage);
+router.get('/area/:areaId', outageReport_controller_1.outageReportControllers.getReportsByArea);
+router.get('/', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR, enums_1.UserRole.CUSTOMER), outageReport_controller_1.outageReportControllers.getAllOutageReports);
+router.get('/:id', outageReport_controller_1.outageReportControllers.getSingleOutageReport);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(outageReport_validation_1.OutageReportValidation.updateOutageReportSchema), outageReport_controller_1.outageReportControllers.updateOutageReport);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), outageReport_controller_1.outageReportControllers.deleteOutageReport);
+exports.outageReportRoutes = router;

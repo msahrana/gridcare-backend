@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.outageAssignmentRoutes = void 0;
+const express_1 = __importDefault(require("express"));
+const outageAssignment_controller_1 = require("./outageAssignment.controller");
+const outageAssignment_validation_1 = require("./outageAssignment.validation");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const enums_1 = require("../../../generated/prisma/enums");
+const router = express_1.default.Router();
+router.post('/', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(outageAssignment_validation_1.OutageAssignmentValidation.createOutageAssignmentValidationSchema), outageAssignment_controller_1.outageAssignmentControllers.createOutageAssignment);
+router.get('/my-assignments', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN), outageAssignment_controller_1.outageAssignmentControllers.getMyAssignments);
+router.get('/outage/:outageId', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), outageAssignment_controller_1.outageAssignmentControllers.getAssignmentsByOutage);
+router.get('/technician/:technicianId', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), outageAssignment_controller_1.outageAssignmentControllers.getAssignmentsByTechnician);
+router.get('/', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), outageAssignment_controller_1.outageAssignmentControllers.getAllOutageAssignments);
+router.get('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), outageAssignment_controller_1.outageAssignmentControllers.getSingleOutageAssignment);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), (0, validateRequest_1.validateRequest)(outageAssignment_validation_1.OutageAssignmentValidation.updateOutageAssignmentValidationSchema), outageAssignment_controller_1.outageAssignmentControllers.updateOutageAssignment);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.ADMIN, enums_1.UserRole.OPERATOR), outageAssignment_controller_1.outageAssignmentControllers.deleteOutageAssignment);
+exports.outageAssignmentRoutes = router;

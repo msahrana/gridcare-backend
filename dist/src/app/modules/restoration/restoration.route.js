@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.restorationRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middleware/checkAuth");
+const validateRequest_1 = require("../../middleware/validateRequest");
+const enums_1 = require("../../../generated/prisma/enums");
+const restoration_validation_1 = require("./restoration.validation");
+const restoration_controller_1 = require("./restoration.controller");
+const router = (0, express_1.Router)();
+router.post('/start', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(restoration_validation_1.createRestorationValidationSchema), restoration_controller_1.restorationControllers.startRestoration);
+router.patch('/:id/complete', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(restoration_validation_1.updateRestorationValidationSchema), restoration_controller_1.restorationControllers.completeRestoration);
+router.patch('/:id/cancel', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(restoration_validation_1.updateRestorationValidationSchema), restoration_controller_1.restorationControllers.cancelRestoration);
+router.get('/', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), restoration_controller_1.restorationControllers.getAllRestorations);
+router.get('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), restoration_controller_1.restorationControllers.getSingleRestoration);
+router.patch('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.TECHNICIAN, enums_1.UserRole.OPERATOR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(restoration_validation_1.updateRestorationValidationSchema), restoration_controller_1.restorationControllers.updateRestoration);
+router.delete('/:id', (0, checkAuth_1.auth)(enums_1.UserRole.ADMIN), restoration_controller_1.restorationControllers.deleteRestoration);
+exports.restorationRoutes = router;

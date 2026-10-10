@@ -250,14 +250,23 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
 });
 
 const logout = catchAsync(async (req: Request, res: Response) => {
-    res.clearCookie('accessToken');
+    const cookieOptions = {
+        httpOnly: true,
+        secure: config.node_env === 'development' ? false : true,
+        sameSite:
+            config.node_env === 'development'
+                ? ('lax' as const)
+                : ('none' as const),
+        path: '/',
+    };
 
-    res.clearCookie('refreshToken');
+    res.clearCookie('accessToken', cookieOptions);
+    res.clearCookie('refreshToken', cookieOptions);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'User Logged out Successfully!',
+        message: 'User logged out successfully!',
         data: null,
     });
 });
