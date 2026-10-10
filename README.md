@@ -1222,7 +1222,7 @@ https://gridcare-backend.vercel.app
 API:
 
 ```text
-https://gridcare-backend.vercel.app/api/v1
+https://gridcare-backend.vercel.app
 ```
 
 ---

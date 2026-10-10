@@ -75,7 +75,7 @@ const bkashCallback = catchAsync(
             //     )}`,
             // );
             res.redirect(
-                `${config.frontend_url}/upcoming-load-shedding-schedules/${page}?paymentId=${encodeURIComponent(
+                `${config.frontend_url}/${page}/upcoming-load-shedding-schedules?paymentId=${encodeURIComponent(
                     paymentID,
                 )}`,
             );

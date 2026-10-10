@@ -50,7 +50,7 @@ const bkashCallback = (0, catchAsync_1.default)(async (req, res) => {
         //         paymentID,
         //     )}`,
         // );
-        res.redirect(`${config_1.default.frontend_url}/upcoming-load-shedding-schedules/${page}?paymentId=${encodeURIComponent(paymentID)}`);
+        res.redirect(`${config_1.default.frontend_url}/${page}/upcoming-load-shedding-schedules?paymentId=${encodeURIComponent(paymentID)}`);
     }
     catch (error) {
         console.error('bKash callback error:', error);

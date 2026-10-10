@@ -463,6 +463,7 @@ const createSubscriptionPaymentIntoDB = async (
             paymentGateway: PaymentGateway.BKASH,
             status: PaymentStatus.PENDING,
             merchantInvoiceNumber,
+            
         },
     });
 

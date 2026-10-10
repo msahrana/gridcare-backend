@@ -24,7 +24,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/register",
+                            "raw": "https://gridcare-backend.vercel.app/auth/register",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -48,7 +48,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/verify-email",
+                            "raw": "https://gridcare-backend.vercel.app/auth/verify-email",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -72,7 +72,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/login",
+                            "raw": "https://gridcare-backend.vercel.app/auth/login",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -87,7 +87,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/me",
+                            "raw": "https://gridcare-backend.vercel.app/auth/me",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -102,7 +102,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/all-users",
+                            "raw": "https://gridcare-backend.vercel.app/auth/all-users",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -117,7 +117,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/user/9e7d78e8-483a-41fb-858e-1797f3457d53",
+                            "raw": "https://gridcare-backend.vercel.app/auth/user/9e7d78e8-483a-41fb-858e-1797f3457d53",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -147,7 +147,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/my-profile",
+                            "raw": "https://gridcare-backend.vercel.app/auth/my-profile",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -171,7 +171,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/change-password",
+                            "raw": "https://gridcare-backend.vercel.app/auth/change-password",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -195,7 +195,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/forgot-password",
+                            "raw": "https://gridcare-backend.vercel.app/auth/forgot-password",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -219,7 +219,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/reset-password",
+                            "raw": "https://gridcare-backend.vercel.app/auth/reset-password",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -244,7 +244,7 @@
                             ]
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/profile-image",
+                            "raw": "https://gridcare-backend.vercel.app/auth/profile-image",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -268,7 +268,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/google",
+                            "raw": "https://gridcare-backend.vercel.app/auth/google",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -283,7 +283,7 @@
                         "method": "POST",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/logout",
+                            "raw": "https://gridcare-backend.vercel.app/auth/logout",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -312,7 +312,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones",
+                            "raw": "https://gridcare-backend.vercel.app/zones",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -327,7 +327,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones?page=1&limit=10",
+                            "raw": "https://gridcare-backend.vercel.app/zones?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -352,7 +352,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones/e5be6edb-2de2-4da1-bb2f-2ceb172e7f74",
+                            "raw": "https://gridcare-backend.vercel.app/zones/e5be6edb-2de2-4da1-bb2f-2ceb172e7f74",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -381,7 +381,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones/5fb4936e-61d5-45e8-887e-af87df3c2de2",
+                            "raw": "https://gridcare-backend.vercel.app/zones/5fb4936e-61d5-45e8-887e-af87df3c2de2",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -401,7 +401,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/zones/e2ab204d-56f1-4d62-889a-ce833c68928e",
+                            "raw": "https://gridcare-backend.vercel.app/zones/e2ab204d-56f1-4d62-889a-ce833c68928e",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -435,7 +435,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/login",
+                            "raw": "https://gridcare-backend.vercel.app/auth/login",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -459,7 +459,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/login",
+                            "raw": "https://gridcare-backend.vercel.app/auth/login",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -488,7 +488,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations",
+                            "raw": "https://gridcare-backend.vercel.app/substations",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -503,7 +503,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations?page=1&limit=10",
+                            "raw": "https://gridcare-backend.vercel.app/substations?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -528,7 +528,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations/adf865b8-3dfa-4da6-8988-2230bcaa9e33",
+                            "raw": "https://gridcare-backend.vercel.app/substations/adf865b8-3dfa-4da6-8988-2230bcaa9e33",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -557,7 +557,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations/adf865b8-3dfa-4da6-8988-2230bcaa9e33",
+                            "raw": "https://gridcare-backend.vercel.app/substations/adf865b8-3dfa-4da6-8988-2230bcaa9e33",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -577,7 +577,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/substations/51579984-4f03-4c8d-be87-92d987b75066",
+                            "raw": "https://gridcare-backend.vercel.app/substations/51579984-4f03-4c8d-be87-92d987b75066",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -611,7 +611,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/feeders",
+                            "raw": "https://gridcare-backend.vercel.app/feeders",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -626,7 +626,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/feeders?page=1&limit=10",
+                            "raw": "https://gridcare-backend.vercel.app/feeders?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -651,7 +651,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/feeders/13313360-064d-411a-ada4-8f739b967a95",
+                            "raw": "https://gridcare-backend.vercel.app/feeders/13313360-064d-411a-ada4-8f739b967a95",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -680,7 +680,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/feeders/13313360-064d-411a-ada4-8f739b967a95",
+                            "raw": "https://gridcare-backend.vercel.app/feeders/13313360-064d-411a-ada4-8f739b967a95",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -714,7 +714,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas",
+                            "raw": "https://gridcare-backend.vercel.app/areas",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -729,7 +729,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas",
+                            "raw": "https://gridcare-backend.vercel.app/areas",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -744,7 +744,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas/7a7368b5-dd3b-4d17-bd1c-4cbb094e79e2",
+                            "raw": "https://gridcare-backend.vercel.app/areas/7a7368b5-dd3b-4d17-bd1c-4cbb094e79e2",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -773,7 +773,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas/1638f9ea-004c-46b7-9e5c-c96485eedd63",
+                            "raw": "https://gridcare-backend.vercel.app/areas/1638f9ea-004c-46b7-9e5c-c96485eedd63",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -793,7 +793,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/areas/search?q=Rangpur",
+                            "raw": "https://gridcare-backend.vercel.app/areas/search?q=Rangpur",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -828,7 +828,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages",
+                            "raw": "https://gridcare-backend.vercel.app/outages",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -843,7 +843,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages",
+                            "raw": "https://gridcare-backend.vercel.app/outages",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -858,7 +858,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages/9c3cc1b3-4747-4f5d-bdc2-e2416d73b1f1",
+                            "raw": "https://gridcare-backend.vercel.app/outages/9c3cc1b3-4747-4f5d-bdc2-e2416d73b1f1",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -878,7 +878,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages/area/f8f4a4a2-0177-4f2c-ae48-b30c8de7ded9",
+                            "raw": "https://gridcare-backend.vercel.app/outages/area/f8f4a4a2-0177-4f2c-ae48-b30c8de7ded9",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -899,7 +899,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages/search?search=transformer&status=VERIFIED&priority=HIGH",
+                            "raw": "https://gridcare-backend.vercel.app/outages/search?search=transformer&status=VERIFIED&priority=HIGH",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -928,7 +928,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages/active",
+                            "raw": "https://gridcare-backend.vercel.app/outages/active",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -952,7 +952,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages/e6099e81-4a78-4538-93b0-5f62363ff8b7",
+                            "raw": "https://gridcare-backend.vercel.app/outages/e6099e81-4a78-4538-93b0-5f62363ff8b7",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -972,7 +972,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outages/id",
+                            "raw": "https://gridcare-backend.vercel.app/outages/id",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1001,7 +1001,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1016,7 +1016,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1031,7 +1031,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports/3f78ebb8-42bc-4c1e-a241-b1350233fbb3",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports/3f78ebb8-42bc-4c1e-a241-b1350233fbb3",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1051,7 +1051,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports/outage/0f214e7a-7a37-4882-bb1a-249697376811",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports/outage/0f214e7a-7a37-4882-bb1a-249697376811",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1072,7 +1072,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports/area/be8e284f-a77c-49e5-9ca3-46c7945faaa3",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports/area/be8e284f-a77c-49e5-9ca3-46c7945faaa3",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1102,7 +1102,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports/282b922a-fb98-4817-9dc4-3dee0b48b15f",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports/282b922a-fb98-4817-9dc4-3dee0b48b15f",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1122,7 +1122,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageReports/ee8b2ba3-584f-4744-97de-cddad5d43ed5",
+                            "raw": "https://gridcare-backend.vercel.app/outageReports/ee8b2ba3-584f-4744-97de-cddad5d43ed5",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1156,7 +1156,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1171,7 +1171,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1186,7 +1186,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments/2d145f52-97c6-4866-8137-afa93040ae3c",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments/2d145f52-97c6-4866-8137-afa93040ae3c",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1215,7 +1215,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments/2d145f52-97c6-4866-8137-afa93040ae3c",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments/2d145f52-97c6-4866-8137-afa93040ae3c",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1235,7 +1235,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments/4b201012-d83c-4194-bef7-08e57ebaa0da",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments/4b201012-d83c-4194-bef7-08e57ebaa0da",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1255,7 +1255,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments/technician/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments/technician/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1276,7 +1276,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments/outage/3753734b-4590-4e5d-a09d-abcba4fcc70a",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments/outage/3753734b-4590-4e5d-a09d-abcba4fcc70a",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1297,7 +1297,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/outageAssignments/my-assignments",
+                            "raw": "https://gridcare-backend.vercel.app/outageAssignments/my-assignments",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1346,7 +1346,7 @@
                             ]
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/apply-as-technician",
+                            "raw": "https://gridcare-backend.vercel.app/technicians/apply-as-technician",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1366,7 +1366,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/all-technician?page=1&limit=10",
+                            "raw": "https://gridcare-backend.vercel.app/technicians/all-technician?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1401,7 +1401,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/public/all-technician",
+                            "raw": "https://gridcare-backend.vercel.app/technicians/public/all-technician",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1422,7 +1422,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/public/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
+                            "raw": "https://gridcare-backend.vercel.app/technicians/public/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1452,7 +1452,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/auth/login",
+                            "raw": "https://gridcare-backend.vercel.app/auth/login",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1467,7 +1467,7 @@
                         "method": "POST",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/technicians/approve-technician?page=1&limit=10",
+                            "raw": "https://gridcare-backend.vercel.app/technicians/approve-technician?page=1&limit=10",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1511,7 +1511,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1526,7 +1526,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1541,7 +1541,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/f249354e-382f-40d6-a318-d752793b38f5",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/f249354e-382f-40d6-a318-d752793b38f5",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1570,7 +1570,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1590,7 +1590,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/publish",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/publish",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1611,7 +1611,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/activate",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/activate",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1632,7 +1632,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/complete",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/a6054922-5315-45da-b165-39ba0b57b509/complete",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1653,7 +1653,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/6536fe23-facb-4c72-87c9-2f1952463594/cancel",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/6536fe23-facb-4c72-87c9-2f1952463594/cancel",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1674,7 +1674,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/ece6228b-6892-46d6-a178-cbf5aa538a24",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/ece6228b-6892-46d6-a178-cbf5aa538a24",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1694,7 +1694,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/load-shedding-schedules/upcoming",
+                            "raw": "https://gridcare-backend.vercel.app/load-shedding-schedules/upcoming",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1728,7 +1728,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications",
+                            "raw": "https://gridcare-backend.vercel.app/notifications",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1743,7 +1743,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications/my",
+                            "raw": "https://gridcare-backend.vercel.app/notifications/my",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1758,7 +1758,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications/my/unread",
+                            "raw": "https://gridcare-backend.vercel.app/notifications/my/unread",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1779,7 +1779,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications/my/read-all",
+                            "raw": "https://gridcare-backend.vercel.app/notifications/my/read-all",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1800,7 +1800,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications/c6dc8428-1ac4-4b77-8c84-337604b2a977/read",
+                            "raw": "https://gridcare-backend.vercel.app/notifications/c6dc8428-1ac4-4b77-8c84-337604b2a977/read",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1821,7 +1821,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications",
+                            "raw": "https://gridcare-backend.vercel.app/notifications",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1836,7 +1836,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/notifications/c6dc8428-1ac4-4b77-8c84-337604b2a977",
+                            "raw": "https://gridcare-backend.vercel.app/notifications/c6dc8428-1ac4-4b77-8c84-337604b2a977",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1870,7 +1870,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/audit-logs",
+                            "raw": "https://gridcare-backend.vercel.app/audit-logs",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1885,7 +1885,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/audit-logs",
+                            "raw": "https://gridcare-backend.vercel.app/audit-logs",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1900,7 +1900,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/audit-logs/6a0bc12c-cdcb-4615-9c1f-8cdeccf6d8e6",
+                            "raw": "https://gridcare-backend.vercel.app/audit-logs/6a0bc12c-cdcb-4615-9c1f-8cdeccf6d8e6",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1920,7 +1920,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/audit-logs/entity/4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29",
+                            "raw": "https://gridcare-backend.vercel.app/audit-logs/entity/4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1941,7 +1941,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/audit-logs/entity/4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29",
+                            "raw": "https://gridcare-backend.vercel.app/audit-logs/entity/4bee99ba-c2d7-41e0-b6f4-82bcbeeaca29",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1976,7 +1976,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscription-payments/create",
+                            "raw": "https://gridcare-backend.vercel.app/subscription-payments/create",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -1996,7 +1996,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscription-payments/verify/TR0011YwKaYwB1788695587162",
+                            "raw": "https://gridcare-backend.vercel.app/subscription-payments/verify/TR0011YwKaYwB1788695587162",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2017,7 +2017,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscription-payments/my",
+                            "raw": "https://gridcare-backend.vercel.app/subscription-payments/my",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2032,7 +2032,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscription-payments/11520877-e2df-49eb-9962-a9e2c39eb493",
+                            "raw": "https://gridcare-backend.vercel.app/subscription-payments/11520877-e2df-49eb-9962-a9e2c39eb493",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2066,7 +2066,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/plans",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/plans",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2081,7 +2081,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/plans",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/plans",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2096,7 +2096,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/plans/b294dd10-3bed-4355-9c68-ce916285feec",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/plans/b294dd10-3bed-4355-9c68-ce916285feec",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2126,7 +2126,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/plans/b294dd10-3bed-4355-9c68-ce916285feec",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/plans/b294dd10-3bed-4355-9c68-ce916285feec",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2156,7 +2156,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2171,7 +2171,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/my-subscription",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/my-subscription",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2191,7 +2191,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/history",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/history",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2206,7 +2206,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/subscriptions/6932d38a-658a-4942-b44d-d1d3c55b9225/cancel",
+                            "raw": "https://gridcare-backend.vercel.app/subscriptions/6932d38a-658a-4942-b44d-d1d3c55b9225/cancel",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2241,7 +2241,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/restorations/start",
+                            "raw": "https://gridcare-backend.vercel.app/restorations/start",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2256,7 +2256,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14/complete",
+                            "raw": "https://gridcare-backend.vercel.app/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14/complete",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2277,7 +2277,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/restorations/8730cc1d-ad89-4b18-bfd7-6fbd50b88bc2/cancel",
+                            "raw": "https://gridcare-backend.vercel.app/restorations/8730cc1d-ad89-4b18-bfd7-6fbd50b88bc2/cancel",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2298,7 +2298,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/restorations",
+                            "raw": "https://gridcare-backend.vercel.app/restorations",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2313,7 +2313,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14",
+                            "raw": "https://gridcare-backend.vercel.app/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2333,7 +2333,7 @@
                         "method": "DELETE",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14",
+                            "raw": "https://gridcare-backend.vercel.app/restorations/0d989b81-df4f-4984-942f-acf3a1e1ae14",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2367,7 +2367,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/analytics/overview",
+                            "raw": "https://gridcare-backend.vercel.app/analytics/overview",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2382,7 +2382,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/analytics/outages",
+                            "raw": "https://gridcare-backend.vercel.app/analytics/outages",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2402,7 +2402,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/dashboard/admin",
+                            "raw": "https://gridcare-backend.vercel.app/dashboard/admin",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2417,7 +2417,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/dashboard/operator",
+                            "raw": "https://gridcare-backend.vercel.app/dashboard/operator",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2432,7 +2432,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/dashboard/technician/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
+                            "raw": "https://gridcare-backend.vercel.app/dashboard/technician/95784ab4-5d1a-44e9-81d5-22331e57fc5f",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2467,7 +2467,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/automated-schedules/generate",
+                            "raw": "https://gridcare-backend.vercel.app/automated-schedules/generate",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2487,7 +2487,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/automated-schedules",
+                            "raw": "https://gridcare-backend.vercel.app/automated-schedules",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2502,7 +2502,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/automated-schedules/22b4d1f5-f41e-467d-8539-c3d7667a9940",
+                            "raw": "https://gridcare-backend.vercel.app/automated-schedules/22b4d1f5-f41e-467d-8539-c3d7667a9940",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2522,7 +2522,7 @@
                         "method": "PATCH",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/automated-schedules/22b4d1f5-f41e-467d-8539-c3d7667a9940/publish",
+                            "raw": "https://gridcare-backend.vercel.app/automated-schedules/22b4d1f5-f41e-467d-8539-c3d7667a9940/publish",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2548,7 +2548,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/admin/users",
+                            "raw": "https://gridcare-backend.vercel.app/admin/users",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2572,7 +2572,7 @@
                             }
                         },
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/admin/users/45247640-04ee-4ea7-a3e8-b3259d767b0b/role",
+                            "raw": "https://gridcare-backend.vercel.app/admin/users/45247640-04ee-4ea7-a3e8-b3259d767b0b/role",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2594,7 +2594,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/admin/dashboard-stats",
+                            "raw": "https://gridcare-backend.vercel.app/admin/dashboard-stats",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
@@ -2609,7 +2609,7 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "https://gridcare-backend.vercel.app/api/v1/admin/audit-logs",
+                            "raw": "https://gridcare-backend.vercel.app/admin/audit-logs",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "5000",
